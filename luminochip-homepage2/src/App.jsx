@@ -379,7 +379,11 @@ function MapSection() {
         </div>
         <div className="lg:col-span-2">
           <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.664049524649!2d128.38167247443442!3d36.1016766332434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565c14f3c98f86f%3A0x7d86ec9530bbd04a!2z7ZWc65287Iuc6re466eI67C466as7KeA7Iud7IKw7JeF7IS87YSw!5e0!3m2!1sko!2skr!4v1758028511981!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe
+              title="map"
+              className="h-full w-full"
+              src="https://www.google.com/maps?q=경상북도%20구미시%20공단동%20260-10%20한라시그마벨리%209층%20919호&output=embed"
+              loading="lazy"
             />
           </div>
         </div>
