@@ -139,7 +139,9 @@ function Hero() {
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
         {/* 배경이 클릭을 막지 않도록 처리 */}
       <div className="absolute inset-0 -z-10 opacity-30 pointer-events-none" style={{backgroundImage: "radial-gradient(600px 200px at 10% 10%, rgba(16,185,129,0.25), transparent), radial-gradient(600px 200px at 90% 0%, rgba(34,211,238,0.2), transparent)"}} />
+        {/* 콘텐츠: 배경보다 위로 */}
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
+        {/* ...왼쪽 칼럼(버튼 포함)... */}
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
             <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
@@ -151,10 +153,19 @@ function Hero() {
             ESC 플레이트 초미세 홀(≤50µm)·사파이어/쿼츠/알루미나·SiC 정밀 가공, AMAT/LAM/NOVELLUS 등 장비 호환 부품 생산까지 원스톱으로 지원합니다.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-          <a
-            href="#inquiry"
-            className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20"
-          >
+         <a
+  href="#inquiry"
+  onClick={(e) => {
+    e.preventDefault();
+    const el = document.getElementById("inquiry");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    // (선택) 주소창에 #inquiry 남기고 싶으면:
+    // history.replaceState(null, "", "#inquiry");
+  }}
+  className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20 cursor-pointer"
+>
+  <Send className="h-4 w-4" /> 견적 문의하기
+</a>
             <Send className="h-4 w-4" /> 견적 문의하기
           </a>
             
