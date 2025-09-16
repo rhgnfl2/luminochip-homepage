@@ -150,9 +150,22 @@ function Hero() {
             ESC 플레이트 초미세 홀(≤50µm)·사파이어/쿼츠/알루미나·SiC 정밀 가공, AMAT/LAM/NOVELLUS 등 장비 호환 부품 생산까지 원스톱으로 지원합니다.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#inquiry" className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20">
-              <Send className="h-4 w-4" /> 견적 문의하기
-            </a>
+          <a
+          href="#inquiry"
+          onClick={(e) => {
+            e.preventDefault(); // 기본 해시 이동 막기
+            const el = document.getElementById("inquiry");
+            if (el) {
+               el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+             // (선택) 주소창에 #inquiry 남기려면 아래 코드 추가:
+            // history.replaceState(null, "", "#inquiry");
+            }}
+            className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20"
+          >
+             <Send className="h-4 w-4" /> 견적 문의하기
+          </a>
+
             <a href="#products" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 px-4 py-2 text-zinc-200 hover:bg-white/5">
               <ArrowRight className="h-4 w-4" /> 제품 바로보기
             </a>
@@ -185,7 +198,7 @@ function Hero() {
 
 function Section({ id, icon: Icon, title, subtitle, children }) {
   return (
-    <section id={id} className="border-t border-white/10 bg-zinc-950">
+    <section id={id} className="border-t border-white/10 bg-zinc-950 scroll-mt-24">
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6">
         <div className="mb-8 flex items-center gap-3">
           {Icon && <Icon className="h-6 w-6 text-emerald-300" />}
