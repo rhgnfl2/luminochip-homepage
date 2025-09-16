@@ -82,8 +82,8 @@ const COMPANY = {
   regno: "사업자등록번호: 000-00-00000 (예시)",
   tel: "031-000-0000",
   email: "info@luminocheap.example",
-  address_ko: "경기 화성시 동탄대로 636-3 C동 205호",
-  address_en: "C-205, 636-3 Dongtan-daero, Hwaseong-si, Gyeonggi-do, Republic of Korea",
+  address_ko: "경상북도 구미시 공단동 260-10 한라시그마벨리 9층 919호 (기술 영업사무소)",
+  address_en: "212, 1gongdan-ro, Gumi-si, Gyeongsangbuk-do, Republic of Korea",
 };
 
 function useScrollTop(threshold = 240) {
