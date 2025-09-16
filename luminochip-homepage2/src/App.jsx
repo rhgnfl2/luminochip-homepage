@@ -137,8 +137,9 @@ function Header() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
-      <div className="absolute inset-0 -z-0 opacity-30" style={{backgroundImage: "radial-gradient(600px 200px at 10% 10%, rgba(16,185,129,0.25), transparent), radial-gradient(600px 200px at 90% 0%, rgba(34,211,238,0.2), transparent)"}} />
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
+        {/* 배경이 클릭을 막지 않도록 처리 */}
+      <div className="absolute inset-0 -z-10 opacity-30 pointer-events-none" style={{backgroundImage: "radial-gradient(600px 200px at 10% 10%, rgba(16,185,129,0.25), transparent), radial-gradient(600px 200px at 90% 0%, rgba(34,211,238,0.2), transparent)"}} />
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
             <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
@@ -151,21 +152,12 @@ function Hero() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
           <a
-          href="#inquiry"
-          onClick={(e) => {
-            e.preventDefault(); // 기본 해시 이동 막기
-            const el = document.getElementById("inquiry");
-            if (el) {
-               el.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-             // (선택) 주소창에 #inquiry 남기려면 아래 코드 추가:
-            // history.replaceState(null, "", "#inquiry");
-            }}
+            href="#inquiry"
             className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20"
           >
-             <Send className="h-4 w-4" /> 견적 문의하기
+            <Send className="h-4 w-4" /> 견적 문의하기
           </a>
-
+            
             <a href="#products" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 px-4 py-2 text-zinc-200 hover:bg-white/5">
               <ArrowRight className="h-4 w-4" /> 제품 바로보기
             </a>
