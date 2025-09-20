@@ -153,7 +153,7 @@ function Hero() {
             <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
-            초정밀 Laser·Sapphire 가공으로{" "}
+            초정밀 LASER·SAPPHIRE 가공으로{" "}
             <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>
             을 높입니다.
           </h1>
