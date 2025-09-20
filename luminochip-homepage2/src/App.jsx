@@ -134,47 +134,61 @@ function Header() {
   );
 }
 
-function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
-        {/* 배경이 클릭을 막지 않도록 처리 */}
-      <div className="absolute inset-0 -z-10 opacity-30 pointer-events-none" style={{backgroundImage: "radial-gradient(600px 200px at 10% 10%, rgba(16,185,129,0.25), transparent), radial-gradient(600px 200px at 90% 0%, rgba(34,211,238,0.2), transparent)"}} />
-        {/* 콘텐츠: 배경보다 위로 */}
+      {/* 배경: 클릭 막지 않도록 pointer-events-none */}
+      <div
+        className="absolute inset-0 -z-10 opacity-30 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(600px 200px at 10% 10%, rgba(16,185,129,0.25), transparent), radial-gradient(600px 200px at 90% 0%, rgba(34,211,238,0.2), transparent)",
+        }}
+      />
+      {/* 콘텐츠 */}
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
-        {/* ...왼쪽 칼럼(버튼 포함)... */}
+        {/* 왼쪽 칼럼 */}
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
             <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
-            초정밀 Laser·Sapphire 가공으로 <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>을 높입니다.
+            초정밀 Laser·Sapphire 가공으로{" "}
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>
+            을 높입니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
             ESC 플레이트 초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
             회사는 현재 경북 구미시로 이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과 초정밀 레이저 가공 위주로 재편중에 있습니다.
             26년 상반기까지 임가공 장비와 라인 구축을 준비중에 있습니다.
           </p>
+
+          {/* CTA 버튼들 */}
           <div className="mt-6 flex flex-wrap gap-3">
-          </a>
-  href="#inquiry"
-  onClick={(e) => {
-    e.preventDefault();
-    const el = document.getElementById("inquiry");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    // (선택) 주소창에 #inquiry 남기고 싶으면:
-    // history.replaceState(null, "", "#inquiry");
-  }}
-  className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20 cursor-pointer"
->
-  <Send className="h-4 w-4" /> 견적 문의하기
-</a>
-            <Send className="h-4 w-4" /> 견적 문의하기
-          </a>
-            
-            <a href="#products" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 px-4 py-2 text-zinc-200 hover:bg-white/5">
+            {/* 견적 문의하기: 부드러운 스크롤 */}
+            <a
+              href="#inquiry"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("inquiry");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                // 필요 시 해시를 주소에 남기려면:
+                // history.replaceState(null, "", "#inquiry");
+              }}
+              className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20"
+            >
+              <Send className="h-4 w-4" /> 견적 문의하기
+            </a>
+
+            {/* 제품 바로보기 */}
+            <a
+              href="#products"
+              className="inline-flex items-center gap-2 rounded-2xl border border-white/10 px-4 py-2 text-zinc-200 hover:bg-white/5"
+            >
               <ArrowRight className="h-4 w-4" /> 제품 바로보기
             </a>
           </div>
+
+          {/* 기능 3컬럼 */}
           <div className="mt-8 grid grid-cols-3 gap-4 text-sm text-zinc-300">
             <div className="rounded-2xl border border-white/10 p-4">
               <Factory className="mb-2 h-5 w-5 text-emerald-300" /> 세라믹/투명재 가공
@@ -187,6 +201,8 @@ function Hero() {
             </div>
           </div>
         </div>
+
+        {/* 오른쪽 데코 패널 */}
         <div className="relative h-72 w-full md:h-[440px]">
           <div className="absolute inset-0 rounded-3xl border border-white/10 bg-[conic-gradient(at_30%_10%,#10b98111,transparent_30%,#22d3ee11_60%,transparent)] shadow-2xl" />
           <div className="absolute inset-4 rounded-3xl border border-white/10 bg-zinc-900/60" />
