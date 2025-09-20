@@ -163,32 +163,35 @@ function Hero() {
             26년 상반기까지 임가공 장비와 라인 구축을 준비중에 있습니다.
           </p>
 
-          {/* CTA 버튼들 */}
-          <div className="mt-6 flex flex-wrap gap-3">
-            {/* 견적 문의하기: 부드러운 스크롤 */}
-            <a
-              href="#inquiry"
-              onClick={(e) => {
-                e.preventDefault();
-                const el = document.getElementById("inquiry");
-                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-                // 필요 시 해시를 주소에 남기려면:
-                // history.replaceState(null, "", "#inquiry");
-              }}
-              className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20"
-            >
-              <Send className="h-4 w-4" /> 견적 문의하기
-            </a>
+{/* CTA 버튼들 */}
+<div className="mt-6 flex flex-wrap gap-3">
+  {/* 견적 문의하기: 부드러운 스크롤 */}
+  <a
+    href="#inquiry"
+    onClick={(e) => {
+      e.preventDefault();
+      const el = document.getElementById("inquiry");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }}
+    className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20"
+  >
+    <Send className="h-4 w-4" /> 견적 문의하기
+  </a>
 
-            {/* 제품 바로보기 */}
-            <a
-              href="#products"
-              className="inline-flex items-center gap-2 rounded-2xl border border-white/10 px-4 py-2 text-zinc-200 hover:bg-white/5"
-            >
-              <ArrowRight className="h-4 w-4" /> 제품 바로보기
-            </a>
-          </div>
-
+  {/* 제품 바로보기: 부드러운 스크롤 */}
+  <a
+    href="#products"
+    onClick={(e) => {
+      e.preventDefault();
+      const el = document.getElementById("products");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }}
+    className="inline-flex items-center gap-2 rounded-2xl border border-white/10 px-4 py-2 text-zinc-200 hover:bg-white/5"
+  >
+    <ArrowRight className="h-4 w-4" /> 제품 바로보기
+  </a>
+</div>
+          
           {/* 기능 3컬럼 */}
           <div className="mt-8 grid grid-cols-3 gap-4 text-sm text-zinc-300">
             <div className="rounded-2xl border border-white/10 p-4">
