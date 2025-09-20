@@ -155,7 +155,7 @@ function Hero() {
             26년 상반기까지 임가공 장비와 라인 구축을 준비중에 있습니다.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-         <a
+          </a>
   href="#inquiry"
   onClick={(e) => {
     e.preventDefault();
