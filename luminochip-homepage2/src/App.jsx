@@ -316,7 +316,7 @@ function Materials() {
 
 function Clients() {
   return (
-    <Section id="clients" icon={Factory} title="보유 장비" subtitle="초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공을 위한 최적의 장비를 보유하고 있습니다./.">
+    <Section id="clients" icon={Factory} title="보유 장비" subtitle="초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공을 위한 최적의 장비를 보유하고 있습니다.">
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
         {CLIENTS.map((c) => (
           <div key={c.name} className="flex h-24 items-center justify-center rounded-2xl border border-white/10 bg-zinc-900/40">
