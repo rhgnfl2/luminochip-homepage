@@ -3,7 +3,7 @@ import { Menu, X, Mail, MapPin, Phone, Factory, Boxes, Shield, FileText, Buildin
 
 /**
  * 루미노칩(사용자 회사)용 원페이지 기업 사이트 템플릿
- * - 참고 사이트 구조 반영: 회사소개 / 제품소개 / 물성표 / 주요 거래처 / 인증서 / 견적문의 / 오시는 길
+ * - 참고 사이트 구조 반영: 회사소개 / 제품소개 / 물성표 / 보유 장비 / 인증서 / 견적문의 / 오시는 길
  * - 기술스택: React + TailwindCSS
  * - 아이콘: lucide-react
  * - 정적 배포형(HTML로 빌드 가능). 폼은 mailto 기반.
@@ -13,7 +13,7 @@ const NAV_ITEMS = [
   { id: "about", label: "회사소개" },
   { id: "products", label: "제품소개" },
   { id: "materials", label: "물성표" },
-  { id: "clients", label: "주요 거래처" },
+  { id: "clients", label: "보유 장비" },
   { id: "certs", label: "인증서" },
   { id: "inquiry", label: "견적문의" },
   { id: "map", label: "오시는 길" },
@@ -71,8 +71,7 @@ const CLIENTS = [
 
 const CERTS = [
   { title: "ISO 9001", no: "QMS-XXXX", issuer: "KAB" },
-  { title: "벤처기업확인", no: "VC-XXXX", issuer: "중소벤처기업부" },
-  { title: "기업부설연구소", no: "RND-XXXX", issuer: "KOITA" },
+  
 ];
 
 const COMPANY = {
@@ -147,10 +146,12 @@ function Hero() {
             <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
-            초정밀 레이저·세라믹 가공으로 <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>을 높입니다.
+            초정밀 Laser·Sapphire 가공으로 <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>을 높입니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
-            ESC 플레이트 초미세 홀(≤50µm)·사파이어/쿼츠/알루미나·SiC 정밀 가공, AMAT/LAM/NOVELLUS 등 장비 호환 부품 생산까지 원스톱으로 지원합니다.
+            ESC 플레이트 초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
+            회사는 현재 경북 구미시로 이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과 초정밀 레이저 가공 위주로 재편중에 있습니다.
+            26년 상반기까지 임가공 장비와 라인 구축을 준비중에 있습니다.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
          <a
@@ -293,7 +294,7 @@ function Materials() {
 
 function Clients() {
   return (
-    <Section id="clients" icon={Factory} title="주요 거래처" subtitle="국내외 반도체/디스플레이 제조사 및 장비사와 협력합니다.">
+    <Section id="clients" icon={Factory} title="보유 장비" subtitle="초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공을 위한 최적의 장비를 보유하고 있습니다./.">
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
         {CLIENTS.map((c) => (
           <div key={c.name} className="flex h-24 items-center justify-center rounded-2xl border border-white/10 bg-zinc-900/40">
