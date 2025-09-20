@@ -334,6 +334,11 @@ function Certs() {
             <div className="mb-3 aspect-[4/3] rounded-xl border border-white/10 bg-zinc-800/60" />
             <div className="text-white">{c.title}</div>
             <div className="text-sm text-zinc-300">{c.no} · {c.issuer}</div>
+            {c.status && (
+              <div className="mt-1 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1 text-xs text-emerald-300">
+                {c.status}
+              </div>
+            )}
           </div>
         ))}
       </div>
