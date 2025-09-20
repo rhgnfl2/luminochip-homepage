@@ -70,7 +70,8 @@ const CLIENTS = [
 ];
 
 const CERTS = [
-  { title: "ISO 9001", no: "QMS-XXXX", issuer: "KAB" ,  note: 컨설팅 중 },
+  { title: "ISO 9001", no: "QMS-XXXX", issuer: "KAB" },
+  컨설팅 중
   
   
 ];
