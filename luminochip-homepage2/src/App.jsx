@@ -134,6 +134,7 @@ function Header() {
   );
 }
 
+function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
       {/* 배경: 클릭 막지 않도록 pointer-events-none */}
@@ -215,6 +216,7 @@ function Header() {
       </div>
     </section>
   );
+}
 
 
 function Section({ id, icon: Icon, title, subtitle, children }) {
