@@ -84,6 +84,7 @@ const COMPANY = {
   email: "luminochip@naver.com",
   address_ko: "경상북도 구미시 공단동 260-10 한라시그마벨리 9층 919호 (기술 영업사무소)",
   address_en: "212, 1gongdan-ro, Gumi-si, Gyeongsangbuk-do, Republic of Korea",
+  ceo: "대표자: 김윤성",
 };
 
 function useScrollTop(threshold = 240) {
