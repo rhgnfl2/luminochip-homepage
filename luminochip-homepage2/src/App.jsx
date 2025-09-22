@@ -206,21 +206,22 @@ function Hero() {
           </div>
         </div>
 
-{/* 오른쪽 데코 패널 → 단일 동영상 */}
+{/* 오른쪽 데코 패널 → 단일 동영상 (덮는 레이어 전부 제거) */}
 <div className="relative h-72 w-full md:h-[440px]">
   <video
-    className="absolute inset-0 h-full w-full rounded-3xl border border-white/10 object-cover shadow-2xl"
+    className="absolute inset-0 h-full w-full rounded-3xl border border-white/10 object-cover shadow-2xl z-10"
     autoPlay
     loop
     muted
     playsInline
-    poster="/videos/hero-poster.jpg"   // 선택: 첫 프레임/로딩용 썸네일
+    preload="metadata"
+    // poster="/videos/hero-poster.jpg"   // 선택
+    onCanPlay={(e) => e.currentTarget.play().catch(()=>{})}
   >
     <source src="/videos/hero.mp4" type="video/mp4" />
+    {/* <source src="/videos/hero.webm" type="video/webm" />  // 선택 */}
     브라우저가 동영상을 지원하지 않습니다.
   </video>
-  {/* 선택: 약간 어둡게 하고 싶으면 오버레이 추가 */}
-  {/* <div className="absolute inset-0 rounded-3xl bg-black/20 pointer-events-none" /> */}
 </div>
       </div>
     </section>
