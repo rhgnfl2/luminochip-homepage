@@ -206,16 +206,22 @@ function Hero() {
           </div>
         </div>
 
-        {/* 오른쪽 데코 패널 */}
-        <div className="relative h-72 w-full md:h-[440px]">
-          <div className="absolute inset-0 rounded-3xl border border-white/10 bg-[conic-gradient(at_30%_10%,#10b98111,transparent_30%,#22d3ee11_60%,transparent)] shadow-2xl" />
-          <div className="absolute inset-4 rounded-3xl border border-white/10 bg-zinc-900/60" />
-          <div className="absolute inset-8 grid grid-cols-3 gap-3 p-2">
-            {[...Array(9)].map((_, i) => (
-              <div key={i} className="rounded-xl border border-white/10 bg-zinc-800/60" />
-            ))}
-          </div>
-        </div>
+{/* 오른쪽 데코 패널 → 단일 동영상 */}
+<div className="relative h-72 w-full md:h-[440px]">
+  <video
+    className="absolute inset-0 h-full w-full rounded-3xl border border-white/10 object-cover shadow-2xl"
+    autoPlay
+    loop
+    muted
+    playsInline
+    poster="/videos/hero-poster.jpg"   // 선택: 첫 프레임/로딩용 썸네일
+  >
+    <source src="/videos/hero.mp4" type="video/mp4" />
+    브라우저가 동영상을 지원하지 않습니다.
+  </video>
+  {/* 선택: 약간 어둡게 하고 싶으면 오버레이 추가 */}
+  {/* <div className="absolute inset-0 rounded-3xl bg-black/20 pointer-events-none" /> */}
+</div>
       </div>
     </section>
   );
