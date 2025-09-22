@@ -404,6 +404,7 @@ function Inquiry() {
           <div className="mt-2 flex items-center gap-3 text-zinc-300"><Phone className="h-4 w-4 text-emerald-300" /> {COMPANY.tel}</div>
           <div className="mt-1 flex items-center gap-3 text-zinc-300"><Mail className="h-4 w-4 text-emerald-300" /> {COMPANY.email}</div>
           <div className="mt-1 flex items-center gap-3 text-zinc-300"><MapPin className="h-4 w-4 text-emerald-300" /> {COMPANY.address_ko}</div>
+          <div className="mt-1 flex items-center gap-3 text-zinc-300"><User className="h-4 w-4 text-emerald-300" /> {COMPANY.ceo}</div>
           <p className="mt-4 text-sm text-zinc-400">※ 도면(PDF/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.</p>
         </div>
       </div>
