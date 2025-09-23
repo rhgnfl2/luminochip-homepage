@@ -294,8 +294,7 @@ function About() {
           <h4 className="mb-2 font-semibold text-white">핵심역량</h4>
           <ul className="list-disc pl-5 text-zinc-300">
             <li>초미세 홀(≤50µm) 가공 및 배열 최적화</li>
-            <li>사파이어/쿼츠/알루미나/SiC 등 소재 가공</li>
-            <li>AMAT/LAM/NOVELLUS 등 장비 호환 부품</li>
+            <li>Sapphire/Quartz/Ceramic/SiC 정밀 가공</li>
           </ul>
         </div>
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
