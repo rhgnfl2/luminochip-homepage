@@ -206,12 +206,11 @@ function Hero() {
           </div>
         </div>
 
-{/* 오른쪽 패널: 동영상 크게(2/3) + PNG 2장(1/3) */}
+{/* 오른쪽 패널: 동영상 1/2 + 이미지 1/2 */}
 <div className="relative w-full md:h-[560px]">
-  {/* 3열: 왼쪽 2칸(영상), 오른쪽 1칸(이미지 스택) */}
-  <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 md:grid-rows-2">
-    {/* 동영상: 데스크톱에서 2칸+2행 전체 차지 */}
-    <div className="relative md:col-span-2 md:row-span-2">
+  <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
+    {/* 동영상: 좌측 전체 */}
+    <div className="relative md:row-span-2">
       <video
         className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
         autoPlay
@@ -224,25 +223,22 @@ function Hero() {
       </video>
     </div>
 
-    {/* PNG 이미지 #1 (우측 상단) */}
+    {/* PNG 이미지 #1 */}
     <img
       src="/images/hero-1.png"
       alt="LuminoChip sample 1"
-      className="h-48 w-full rounded-2xl border border-white/10 object-cover md:h-full"
-      loading="lazy"
-      decoding="async"
+      className="h-64 w-full rounded-2xl border border-white/10 object-cover md:h-full"
     />
 
-    {/* PNG 이미지 #2 (우측 하단) */}
+    {/* PNG 이미지 #2 */}
     <img
       src="/images/hero-2.png"
       alt="LuminoChip sample 2"
-      className="h-48 w-full rounded-2xl border border-white/10 object-cover md:h-full"
-      loading="lazy"
-      decoding="async"
+      className="h-64 w-full rounded-2xl border border-white/10 object-cover md:h-full"
     />
   </div>
 </div>
+        
 </div>
 </section>
   );
