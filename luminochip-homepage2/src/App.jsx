@@ -79,7 +79,7 @@ const COMPANY = {
   name: "루미노칩 (LuminoChip)",
   tagline_ko: "투명하고 정밀한 가공으로 신뢰받는 파트너",
   tagline_en: "Trusted micro‑machining partner for semiconductors",
-  regno: "사업자등록번호: 329-01-036422",
+  regno: "사업자등록번호: 329-01-03642",
   tel: "010-4698-9493",
   email: "luminochip@naver.com",
   address_ko: "경상북도 구미시 공단동 260-10 한라시그마벨리 9층 919호 (기술 영업사무소)",
@@ -101,14 +101,8 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-900/70 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
-        <a href="#top" className="flex items-center gap-3">
-  <div className="h-9 w-9 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-400 flex items-center justify-center overflow-hidden">
-    <img
-      src="/images/logo-v2.png"
-      alt="LuminoChip Logo"
-      className="h-7 w-7 object-contain"
-    />
-  </div>
+       <a href="#top" className="flex items-center gap-3">
+  <div className="h-9 w-9 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-400" />
   <div>
     <div className="text-sm tracking-wider text-zinc-300">{COMPANY.tagline_en}</div>
     <div className="text-lg font-semibold text-white">{COMPANY.name}</div>
