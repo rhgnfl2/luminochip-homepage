@@ -79,7 +79,7 @@ const COMPANY = {
   name: "루미노칩 (LuminoChip)",
   tagline_ko: "투명하고 정밀한 가공으로 신뢰받는 파트너",
   tagline_en: "Trusted micro‑machining partner for semiconductors",
-  regno: "사업자등록번호: 329-01-03642",
+  regno: "사업자등록번호: 329-01-036422",
   tel: "010-4698-9493",
   email: "luminochip@naver.com",
   address_ko: "경상북도 구미시 공단동 260-10 한라시그마벨리 9층 919호 (기술 영업사무소)",
