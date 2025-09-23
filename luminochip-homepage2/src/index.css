@@ -3,3 +3,8 @@
 @tailwind utilities;
 
 html, body, #root { height: 100%; }
+
+/* 부드러운 스크롤 */
+html {
+  scroll-behavior: smooth;
+}
