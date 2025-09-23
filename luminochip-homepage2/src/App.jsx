@@ -102,16 +102,18 @@ function Header() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-900/70 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <a href="#top" className="flex items-center gap-3">
-  <img
-    src="/images/logo.png"
-    alt="LuminoChip Logo"
-    className="h-9 w-9 rounded-2xl object-contain"
-  />
+  <div className="h-9 w-9 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-400 flex items-center justify-center overflow-hidden">
+    <img
+      src="/images/logo.png"
+      alt="LuminoChip Logo"
+      className="h-7 w-7 object-contain"
+    />
+  </div>
   <div>
     <div className="text-sm tracking-wider text-zinc-300">{COMPANY.tagline_en}</div>
     <div className="text-lg font-semibold text-white">{COMPANY.name}</div>
-          </div>
-        </a>
+  </div>
+</a>
         <nav className="hidden gap-6 md:flex">
           {NAV_ITEMS.map((n) => (
             <a key={n.id} href={`#${n.id}`} className="text-sm text-zinc-200 hover:text-white">
