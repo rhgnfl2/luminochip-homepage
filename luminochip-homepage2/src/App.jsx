@@ -242,7 +242,8 @@ function Hero() {
     />
   </div>
 </div>
-    </section>
+</div>
+</section>
   );
 }
 
