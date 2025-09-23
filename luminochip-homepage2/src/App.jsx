@@ -223,7 +223,7 @@ function Hero() {
       </video>
     </div>
 
-    {/* PNG 이미지 #1 */}
+    {/* png 이미지 #1 */}
     <img
       src="/images/hero-1.png"
       alt="LuminoChip sample 1"
@@ -232,7 +232,7 @@ function Hero() {
       decoding="async"
     />
 
-    {/* PNG 이미지 #2 */}
+    {/* png 이미지 #2 */}
     <img
       src="/images/hero-2.png"
       alt="LuminoChip sample 2"
