@@ -104,7 +104,7 @@ function Header() {
         <a href="#top" className="flex items-center gap-3">
   <div className="h-9 w-9 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-400 flex items-center justify-center overflow-hidden">
     <img
-      src="/images/logo.png"
+      src="/images/logo-v2.png"
       alt="LuminoChip Logo"
       className="h-7 w-7 object-contain"
     />
