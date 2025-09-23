@@ -206,24 +206,42 @@ function Hero() {
           </div>
         </div>
 
-{/* 오른쪽 데코 패널 → 단일 동영상 (덮는 레이어 전부 제거) */}
-<div className="relative h-72 w-full md:h-[440px]">
-  <video
-    className="absolute inset-0 h-full w-full rounded-3xl border border-white/10 object-cover shadow-2xl z-10"
-    autoPlay
-    loop
-    muted
-    playsInline
-    preload="metadata"
-    // poster="/videos/hero-poster.jpg"   // 선택
-    onCanPlay={(e) => e.currentTarget.play().catch(()=>{})}
-  >
-    <source src="/videos/hero.mp4" type="video/mp4" />
-    {/* <source src="/videos/hero.webm" type="video/webm" />  // 선택 */}
-    브라우저가 동영상을 지원하지 않습니다.
-  </video>
+{/* 오른쪽 패널: (좌) 동영상 / (우) PNG 이미지 2장 */}
+<div className="relative w-full md:h-[440px]">
+  <div className="grid gap-3 grid-cols-1 md:grid-cols-2 md:grid-rows-2 h-full">
+    {/* 동영상 */}
+    <div className="relative aspect-[16/9] md:row-span-2">
+      <video
+        className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    {/* PNG 이미지 #1 */}
+    <img
+      src="/images/hero-1.png"
+      alt="LuminoChip sample 1"
+      className="h-40 w-full rounded-2xl border border-white/10 object-cover md:h-full"
+      loading="lazy"
+      decoding="async"
+    />
+
+    {/* PNG 이미지 #2 */}
+    <img
+      src="/images/hero-2.png"
+      alt="LuminoChip sample 2"
+      className="h-40 w-full rounded-2xl border border-white/10 object-cover md:h-full"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
 </div>
-      </div>
     </section>
   );
 }
