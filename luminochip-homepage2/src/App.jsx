@@ -207,29 +207,38 @@ function Hero() {
         </div>
 
 {/* 오른쪽 패널: 동영상 1/2 + 이미지 1/2 */}
-<div className="relative w-full h-[320px] md:h-[560px]"> {/* ← 모바일 기본 높이 추가 */}
+<div className="relative w-full aspect-video md:h-[560px]">
   <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
     {/* 동영상: 좌측 전체 */}
     <div className="relative md:row-span-2">
-      <div className="absolute inset-0">
-        <video
-          className="h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          // controls // ← 필요 시 잠깐 켜서 재생 여부 확인
-          onError={(e) => console.warn('video error', e)}
-          poster="/images/hero-poster.jpg" // 선택: 초기 로딩 썸네일
-        >
-          {/* 우선 MP4(H.264/AAC), 가능하면 WebM 추가 */}
-          <source src="/videos/hero.mp4" type="video/mp4" />
-          <source src="/videos/hero.webm" type="video/webm" />
-          {/* 폴백 텍스트 */}
-          당신의 브라우저는 HTML5 동영상을 지원하지 않습니다.
-        </video>
-      </div>
+      {/* 클릭 폴백용 오버레이 버튼 */}
+      <button
+        aria-label="Play video"
+        className="pointer-events-auto absolute inset-0 z-10 hidden items-center justify-center md:flex"
+        onClick={() => {
+          const v = document.getElementById('heroVideo');
+          if (v) { v.muted = true; v.play().catch(()=>{}); }
+        }}
+      >
+        {/* 모바일에선 자동재생이 되면 버튼이 뒤에 가려집니다. md 이상에서만 보이도록 */}
+      </button>
+
+      <video
+        id="heroVideo"
+        className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        poster="/images/hero-poster.jpg"
+        onPlay={(e)=>{ /* 재생되면 오버레이 숨기기 옵션 필요 시 */ }}
+        onError={(e)=>console.warn('video error', e)}
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+        <source src="/videos/hero.webm" type="video/webm" />
+        브라우저가 HTML5 동영상을 지원하지 않습니다.
+      </video>
     </div>
 
     {/* PNG 이미지 #1 */}
@@ -247,7 +256,6 @@ function Hero() {
     />
   </div>
 </div>
-
         
 </div>
 </section>
