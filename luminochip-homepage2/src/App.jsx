@@ -207,20 +207,29 @@ function Hero() {
         </div>
 
 {/* 오른쪽 패널: 동영상 1/2 + 이미지 1/2 */}
-<div className="relative w-full md:h-[560px]">
+<div className="relative w-full h-[320px] md:h-[560px]"> {/* ← 모바일 기본 높이 추가 */}
   <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
     {/* 동영상: 좌측 전체 */}
     <div className="relative md:row-span-2">
-      <video
-        className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
+      <div className="absolute inset-0">
+        <video
+          className="h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          // controls // ← 필요 시 잠깐 켜서 재생 여부 확인
+          onError={(e) => console.warn('video error', e)}
+          poster="/images/hero-poster.jpg" // 선택: 초기 로딩 썸네일
+        >
+          {/* 우선 MP4(H.264/AAC), 가능하면 WebM 추가 */}
+          <source src="/videos/hero.mp4" type="video/mp4" />
+          <source src="/videos/hero.webm" type="video/webm" />
+          {/* 폴백 텍스트 */}
+          당신의 브라우저는 HTML5 동영상을 지원하지 않습니다.
+        </video>
+      </div>
     </div>
 
     {/* PNG 이미지 #1 */}
@@ -238,6 +247,7 @@ function Hero() {
     />
   </div>
 </div>
+
         
 </div>
 </section>
