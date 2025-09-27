@@ -358,7 +358,6 @@ function Products() {
   );
 }
 
-export default Products;
 
 function About() {
   return (
