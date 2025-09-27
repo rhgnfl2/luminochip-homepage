@@ -134,7 +134,7 @@ function Header() {
             <a
               key={n.id}
               href={`#${n.id}`}
-              className="text-sm text-zinc-200 hover:text-white"
+              className="text-1g text-zinc-200 hover:text-white"
             >
               {n.label}
             </a>
