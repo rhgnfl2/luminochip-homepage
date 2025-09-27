@@ -19,6 +19,9 @@ const NAV_ITEMS = [
   { id: "map", label: "오시는 길" },
 ];
 
+import React, { useState } from "react";
+import { Boxes, ArrowRight, X } from "lucide-react";
+
 const PRODUCTS = [
   {
     name: "ESC PLATE MICRO HOLE",
@@ -55,6 +58,9 @@ const PRODUCTS = [
     img: "/images/RTP EDGE RING.png",
   },
 ];
+
+const PLACEHOLDER = "/images/placeholder.png";
+
 
 const MATERIALS = [
   { name: "Quartz(쿼츠)", cte: "~0.55 ppm/K", temp: "20–400°C", note: "열변형 낮음, 고온 투명 재료" },
@@ -283,8 +289,15 @@ function Section({ id, icon: Icon, title, subtitle, children }) {
 }
 
 function Products() {
+  const [selectedImg, setSelectedImg] = useState(null);
+
+  const handleImgError = (e) => {
+    e.currentTarget.onerror = null;
+    e.currentTarget.src = PLACEHOLDER;
+  };
+
   return (
-    <Section id="products" icon={Boxes} title="제품소개" >
+    <Section id="products" icon={Boxes} title="제품소개">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {PRODUCTS.map((p) => (
           <div
@@ -292,17 +305,26 @@ function Products() {
             className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 transition hover:bg-zinc-900"
           >
             {/* 이미지 영역 */}
-            <div className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10">
+            <div
+              className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800 cursor-pointer"
+              onClick={() => setSelectedImg(p.img)}
+            >
               <img
-                src={p.img}
+                src={p.img || PLACEHOLDER}
                 alt={p.name}
-                className="h-full w-full object-cover transition group-hover:scale-105"
+                loading="lazy"
+                onError={handleImgError}
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
 
             <h3 className="text-lg font-medium text-white">{p.name}</h3>
             <div className="mt-1 text-sm text-emerald-300">{p.mat}</div>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-300">{p.desc}</p>
+            {p.desc && (
+              <p className="mt-2 text-sm leading-relaxed text-zinc-300">
+                {p.desc}
+              </p>
+            )}
           </div>
         ))}
       </div>
@@ -315,9 +337,30 @@ function Products() {
           필요한 품목 리스트 보내기 <ArrowRight className="h-4 w-4" />
         </a>
       </div>
+
+      {/* 모달 (팝업) */}
+      {selectedImg && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+          <div className="relative max-w-4xl max-h-[90vh]">
+            <button
+              onClick={() => setSelectedImg(null)}
+              className="absolute -top-10 right-0 text-white hover:text-emerald-300"
+            >
+              <X className="h-8 w-8" />
+            </button>
+            <img
+              src={selectedImg}
+              alt="제품 이미지"
+              className="max-h-[90vh] w-auto rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
+      )}
     </Section>
   );
 }
+
+export default Products;
 
 function About() {
   return (
