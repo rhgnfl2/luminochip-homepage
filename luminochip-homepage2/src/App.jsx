@@ -21,34 +21,32 @@ const NAV_ITEMS = [
 
 const PRODUCTS = [
   {
-    name: "AMAT 0200-01009 NOZZLE",
-    mat: "Al₂O₃ (Alumina)",
-    desc: "반도체 장비용 노즐, 4-HOLES 60° BAFFLE",
-  },
-  {
-    name: "LAM Wafer Lift Pin 300mm",
-    mat: "SUS / Ceramics",
-    desc: "웨이퍼 리프트 핀(300mm 공정 호환)",
-  },
-  {
-    name: "NOVELLUS Fork Assy",
-    mat: "Al₂O₃ / SiC",
-    desc: "CVD/PECVD 대응 포크 어셈블리",
-  },
-  {
-    name: "ESC Micro-hole Plate",
-    mat: "Al₂O₃ / Sapphire",
+    name: "ESC PLATE MICRO HOLE",
+    mat: "Al₂O₃ (Alumina) / Porus",
     desc: "초미세 홀(≤50µm) 배열 가공 ESC 플레이트",
   },
   {
-    name: "Quartz Ring",
-    mat: "Quartz",
-    desc: "플라즈마/고온 공정용 쿼츠 링",
+    name: "SAPPHIRE WINDOW",
+    mat: "SAPPHIRE / QUARTZ",
+    desc: "WIEW PORT, LASER MARKING",
   },
   {
-    name: "Sapphire Window",
-    mat: "Sapphire",
-    desc: "고강도 투명 창, 스캐너/뷰포트용",
+    name: "SAPPHIRE SLEM",
+    mat: "SAPPHIRE",
+  },
+  {
+    name: "SAPPHIRE LIFT PIN",
+    mat: "SAPPHIRE",
+  },
+  {
+    name: "SAPPHIRE NOZZLE",
+    mat: "SAPPHIRE",
+    desc: "ACCESSORIES NOZZLE",
+  },
+  {
+    name: "RTP EDGE RING",
+    mat: "SiC",
+    desc: "SiC RING 산화막 / 열처리",
   },
 ];
 
