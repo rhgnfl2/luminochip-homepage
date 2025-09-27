@@ -33,11 +33,6 @@ const PRODUCTS = [
     img: "/images/SAPPHIRE WINDOW.jpg",
   },
   {
-    name: "SAPPHIRE SLEM",
-    mat: "SAPPHIRE",
-    img: "/images/SAPPHIRE SLEM.png",
-  },
-  {
     name: "SAPPHIRE LIFT PIN",
     mat: "SAPPHIRE",
     img: "/images/SAPPHIRE LIFT PIN.jpg",
@@ -47,12 +42,6 @@ const PRODUCTS = [
     mat: "SAPPHIRE",
     desc: "ACCESSORIES NOZZLE",
     img: "/images/SAPPHIRE NOZZLE.png",
-  },
-  {
-    name: "RTP EDGE RING",
-    mat: "SiC",
-    desc: "SiC RING 산화막 / 열처리",
-    img: "/images/RTP EDGE RING.png",
   },
 ];
 
@@ -68,12 +57,12 @@ const MATERIALS = [
 ];
 
 const CLIENTS = [
-  { name: "Laser Marking Machine", img: "/images/레이져마킹기.png" },
+  { name: "Nanosecond Laser Marking Machine", img: "/images/Nanosecond.png" },
+  { name: "Picosecond Laser Marking Machine", img: "/images/Picosecond.png" },
   { name: "1500x Optical Microscope", img: "/images/광학현미경.png" },
-  { name: "Polishing Machine", img: "/images/POLISHING MACHINE.png" },
+  { name: "Polishing Machine", img: "/images/POLISHING MACHINE2.png" },
   { name: "Surface Roughness Tester", img: "/images/표면조도기.png" },
   { name: "Micro Vickers Tester", img: "/images/마이크로 비커스.png" },
-  { name: "Mounting Press Machine", img: "/images/마운팅프레스.png" },
 ];
 
 const CERTS = [
