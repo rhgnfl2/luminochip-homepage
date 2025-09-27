@@ -19,8 +19,6 @@ const NAV_ITEMS = [
   { id: "map", label: "오시는 길" },
 ];
 
-import React, { useState } from "react";
-import { Boxes, ArrowRight, X } from "lucide-react";
 
 const PRODUCTS = [
   {
