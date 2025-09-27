@@ -24,29 +24,35 @@ const PRODUCTS = [
     name: "ESC PLATE MICRO HOLE",
     mat: "Al₂O₃ (Alumina) / Porus",
     desc: "초미세 홀(≤50µm) 배열 가공 ESC 플레이트",
+    img: "/images/ESC PLATE MICRO HOLE.png",
   },
   {
     name: "SAPPHIRE WINDOW",
     mat: "SAPPHIRE / QUARTZ",
     desc: "WIEW PORT, LASER MARKING",
+    img: "/images/SAPPHIRE WINDOW.jpg",
   },
   {
     name: "SAPPHIRE SLEM",
     mat: "SAPPHIRE",
+    img: "/images/SAPPHIRE SLEM.png",
   },
   {
     name: "SAPPHIRE LIFT PIN",
     mat: "SAPPHIRE",
+    img: "/images/SAPPHIRE LIFT PIN.jpg",
   },
   {
     name: "SAPPHIRE NOZZLE",
     mat: "SAPPHIRE",
     desc: "ACCESSORIES NOZZLE",
+    img: "/images/SAPPHIRE NOZZLE.png",
   },
   {
     name: "RTP EDGE RING",
     mat: "SiC",
     desc: "SiC RING 산화막 / 열처리",
+    img: "/images/RTP EDGE RING.png",
   },
 ];
 
@@ -278,19 +284,34 @@ function Section({ id, icon: Icon, title, subtitle, children }) {
 
 function Products() {
   return (
-    <Section id="products" icon={Boxes} title="제품소개" subtitle="AMAT / LAM / NOVELLUS 등 장비 호환 부품과 ESC·쿼츠·사파이어·SiC 정밀 가공품을 공급합니다.">
+    <Section id="products" icon={Boxes} title="제품소개" >
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {PRODUCTS.map((p) => (
-          <div key={p.name} className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 transition hover:bg-zinc-900">
-            <div className="mb-3 aspect-[4/3] w-full rounded-xl border border-white/10 bg-gradient-to-br from-zinc-800 to-zinc-900" />
+          <div
+            key={p.name}
+            className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 transition hover:bg-zinc-900"
+          >
+            {/* 이미지 영역 */}
+            <div className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10">
+              <img
+                src={p.img}
+                alt={p.name}
+                className="h-full w-full object-cover transition group-hover:scale-105"
+              />
+            </div>
+
             <h3 className="text-lg font-medium text-white">{p.name}</h3>
             <div className="mt-1 text-sm text-emerald-300">{p.mat}</div>
             <p className="mt-2 text-sm leading-relaxed text-zinc-300">{p.desc}</p>
           </div>
         ))}
       </div>
+
       <div className="mt-6 text-right">
-        <a href="#inquiry" className="inline-flex items-center gap-2 text-sm text-emerald-300 hover:underline">
+        <a
+          href="#inquiry"
+          className="inline-flex items-center gap-2 text-sm text-emerald-300 hover:underline"
+        >
           필요한 품목 리스트 보내기 <ArrowRight className="h-4 w-4" />
         </a>
       </div>
