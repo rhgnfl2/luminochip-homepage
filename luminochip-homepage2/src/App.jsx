@@ -3,7 +3,7 @@ import { Menu, X, Mail, MapPin, Phone, Factory, Boxes, Shield, FileText, Buildin
 
 /**
  * 루미노칩(사용자 회사)용 원페이지 기업 사이트 템플릿
- * - 참고 사이트 구조 반영: 회사소개 / 제품소개 / 물성표 / 보유 장비 / 인증서 / 견적문의 / 오시는 길
+ * - 참고 사이트 구조 반영: 회사소개 / 제품소개 / 물성표 / 보유장비 / 인증서 / 견적문의 / 오시는 길
  * - 기술스택: React + TailwindCSS
  * - 아이콘: lucide-react
  * - 정적 배포형(HTML로 빌드 가능). 폼은 mailto 기반.
@@ -13,7 +13,7 @@ const NAV_ITEMS = [
   { id: "about", label: "회사소개" },
   { id: "products", label: "제품소개" },
   { id: "materials", label: "물성표" },
-  { id: "clients", label: "보유 장비" },
+  { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
   { id: "inquiry", label: "견적문의" },
   { id: "map", label: "오시는 길" },
@@ -440,7 +440,7 @@ function Materials() {
 
 function Clients() {
   return (
-    <Section id="clients" icon={Factory} title="보유 장비" subtitle="초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공을 위한 최적의 장비를 보유하고 있습니다.">
+    <Section id="clients" icon={Factory} title="보유장비" subtitle="초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공을 위한 최적의 장비를 보유하고 있습니다.">
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
         {CLIENTS.map((c) => (
           <div key={c.name} className="flex h-24 items-center justify-center rounded-2xl border border-white/10 bg-zinc-900/40">
