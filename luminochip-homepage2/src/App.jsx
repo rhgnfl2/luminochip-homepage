@@ -78,7 +78,13 @@ const CLIENTS = [
 ];
 
 const CERTS = [
-  { title: "ISO 9001", no: "QMS-XXXX", issuer: "KAB", status: "현재 컨설팅 중 입니다" }
+  {
+    title: "ISO 9001",
+    no: "QMS-XXXX",
+    issuer: "KAB",
+    status: "현재 컨설팅 중 입니다",
+    img: "/images/ISO9001.png" // 여기에 이미지 경로 추가
+  }
 
   
 ];
