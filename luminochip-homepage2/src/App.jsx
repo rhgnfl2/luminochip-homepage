@@ -121,7 +121,7 @@ function Header() {
           <img
             src="/images/logo.png"         // public/images/logo.png 경로에 로고 파일 넣기
             alt="Luminochip Logo"
-            className="h-9 w-9 rounded-2xl object-cover"
+            className="h-14 w-14 rounded-2xl object-cover"
           />
           <div>
             <div className="text-sm tracking-wider text-zinc-300">{COMPANY.tagline_en}</div>
