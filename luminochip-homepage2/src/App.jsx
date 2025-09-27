@@ -22,9 +22,8 @@ const NAV_ITEMS = [
 
 const PRODUCTS = [
   {
-    name: "ESC PLATE MICRO HOLE",
+    name: "초미세 HOLE(≤50µm)",
     mat: "Al₂O₃ (Alumina) / Porus",
-    desc: "초미세 홀(≤50µm) 배열 가공 ESC 플레이트",
     img: "/images/ESC PLATE MICRO HOLE.png",
   },
   {
@@ -197,7 +196,7 @@ function Hero() {
             을 높입니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
-            ESC 플레이트 초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
+            초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
             회사는 현재 경북 구미시로 이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과 초정밀 레이저 가공 위주로 재편중에 있습니다.
             26년 상반기까지 임가공 장비와 라인 구축을 준비중에 있습니다.
           </p>
@@ -401,7 +400,7 @@ function About() {
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
           <h4 className="mb-2 font-semibold text-white">핵심역량</h4>
           <ul className="list-disc pl-5 text-zinc-300">
-            <li>초미세 홀(≤50µm) 가공 및 배열 최적화</li>
+            <li>초미세 HOLE(≤50µm) 가공 및 배열 최적화</li>
             <li>Sapphire/Quartz/Ceramic/SiC 정밀 가공</li>
           </ul>
         </div>
@@ -457,7 +456,7 @@ function Clients() {
       id="clients"
       icon={Factory}
       title="보유장비"
-      subtitle="초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공을 위한 최적의 장비를 보유하고 있습니다."
+      subtitle="초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공을 위한 최적의 장비를 보유하고 있습니다."
     >
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {CLIENTS.map((c) => (
