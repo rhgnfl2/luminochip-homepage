@@ -106,32 +106,57 @@ function useScrollTop(threshold = 240) {
 
 function Header() {
   const [open, setOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-900/70 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
+        {/* 로고 + 회사명 */}
         <a href="#top" className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-400" />
+          <img
+            src="/images/logo.png"         // public/images/logo.png 경로에 로고 파일 넣기
+            alt="Luminochip Logo"
+            className="h-9 w-9 rounded-2xl object-cover"
+          />
           <div>
             <div className="text-sm tracking-wider text-zinc-300">{COMPANY.tagline_en}</div>
             <div className="text-lg font-semibold text-white">{COMPANY.name}</div>
           </div>
         </a>
+
+        {/* 데스크탑 네비게이션 */}
         <nav className="hidden gap-6 md:flex">
           {NAV_ITEMS.map((n) => (
-            <a key={n.id} href={`#${n.id}`} className="text-sm text-zinc-200 hover:text-white">
+            <a
+              key={n.id}
+              href={`#${n.id}`}
+              className="text-sm text-zinc-200 hover:text-white"
+            >
               {n.label}
             </a>
           ))}
         </nav>
-        <button className="md:hidden" onClick={() => setOpen((v) => !v)} aria-label="toggle menu">
+
+        {/* 모바일 메뉴 버튼 */}
+        <button
+          className="md:hidden"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="toggle menu"
+        >
           {open ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
         </button>
       </div>
+
+      {/* 모바일 메뉴 */}
       {open && (
         <div className="border-t border-white/10 bg-zinc-900 md:hidden">
           <div className="mx-auto grid max-w-7xl gap-2 px-4 py-3">
             {NAV_ITEMS.map((n) => (
-              <a key={n.id} href={`#${n.id}`} className="rounded-lg px-2 py-2 text-zinc-100 hover:bg-white/5" onClick={() => setOpen(false)}>
+              <a
+                key={n.id}
+                href={`#${n.id}`}
+                className="rounded-lg px-2 py-2 text-zinc-100 hover:bg-white/5"
+                onClick={() => setOpen(false)}
+              >
                 {n.label}
               </a>
             ))}
