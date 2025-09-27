@@ -69,12 +69,12 @@ const MATERIALS = [
 ];
 
 const CLIENTS = [
-  { name: "SK hynix", init: "H" },
-  { name: "LAM Research", init: "L" },
-  { name: "Applied Materials", init: "A" },
-  { name: "Novellus", init: "N" },
-  { name: "Samsung", init: "S" },
-  { name: "TEL", init: "T" },
+  { name: "Laser Marking Machine", img: "/images/레이져마킹기.png" },
+  { name: "1500x Optical Microscope", img: "/images/광학현미경.png" },
+  { name: "Polishing Machine", img: "/images/POLISHING MACHINE.png" },
+  { name: "Surface Roughness Tester", img: "/images/표면조도기.png" },
+  { name: "Micro Vickers Tester", img: "/images/마이크로 비커스.png" },
+  { name: "Mounting Press Machine", img: "/images/마운팅프레스.png" },
 ];
 
 const CERTS = [
@@ -439,15 +439,58 @@ function Materials() {
 }
 
 function Clients() {
+  const [selectedImg, setSelectedImg] = useState(null);
+
+  const handleImgError = (e) => {
+    e.currentTarget.onerror = null;
+    e.currentTarget.src = PLACEHOLDER;
+  };
+
   return (
-    <Section id="clients" icon={Factory} title="보유장비" subtitle="초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공을 위한 최적의 장비를 보유하고 있습니다.">
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
+    <Section
+      id="clients"
+      icon={Factory}
+      title="보유장비"
+      subtitle="초미세 홀(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공을 위한 최적의 장비를 보유하고 있습니다."
+    >
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {CLIENTS.map((c) => (
-          <div key={c.name} className="flex h-24 items-center justify-center rounded-2xl border border-white/10 bg-zinc-900/40">
-            <span className="text-lg font-semibold text-zinc-200">{c.name}</span>
+          <div
+            key={c.name}
+            className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 cursor-pointer hover:bg-zinc-900"
+            onClick={() => setSelectedImg(c.img)}
+          >
+            <div className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800">
+              <img
+                src={c.img || PLACEHOLDER}
+                alt={c.name}
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                onError={handleImgError}
+              />
+            </div>
+            <h3 className="text-lg font-medium text-white">{c.name}</h3>
           </div>
         ))}
       </div>
+
+      {/* 모달 */}
+      {selectedImg && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+          <div className="relative max-w-4xl max-h-[90vh]">
+            <button
+              onClick={() => setSelectedImg(null)}
+              className="absolute -top-10 right-0 text-white hover:text-emerald-300"
+            >
+              <X className="h-8 w-8" />
+            </button>
+            <img
+              src={selectedImg}
+              alt="장비 이미지"
+              className="max-h-[90vh] w-auto rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
+      )}
     </Section>
   );
 }
