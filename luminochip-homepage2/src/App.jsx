@@ -29,7 +29,7 @@ const PRODUCTS = [
   {
     name: "SAPPHIRE WINDOW",
     mat: "SAPPHIRE / QUARTZ",
-    desc: "WIEW PORT, LASER MARKING",
+    desc: "VIEW PORT, LASER MARKING",
     img: "/images/SAPPHIRE WINDOW.jpg",
   },
   {
