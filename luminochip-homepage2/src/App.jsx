@@ -283,24 +283,21 @@ function Hero() {
               )}
             </div>
 
-          {/* PNG 이미지 #1 */}
-<div className="h-64 md:h-full w-full rounded-2xl border border-white/10 bg-zinc-900 flex items-center justify-center">
-  <img
-    src="/images/hero-1.png"
-    alt="LuminoChip sample 1"
-    className="max-h-full max-w-full object-contain"
-    loading="lazy"
-  />
-</div>
+        {/* PNG 이미지 #1 */}
+<img
+  src="/images/hero-1.png"
+  alt="LuminoChip sample 1"
+  className="h-64 w-full rounded-2xl border border-white/10 object-cover md:h-full bg-zinc-900"
+  loading="lazy"
+/>
 
 {/* PNG 이미지 #2 */}
-<div className="h-64 md:h-full w-full rounded-2xl border border-white/10 bg-zinc-900 flex items-center justify-center">
-  <img
-    src="/images/hero-2.png"
-    alt="LuminoChip sample 2"
-    className="max-h-full max-w-full object-contain"
-    loading="lazy"
-  />
+<img
+  src="/images/hero-2.png"
+  alt="LuminoChip sample 2"
+  className="h-64 w-full rounded-2xl border border-white/10 object-cover md:h-full bg-zinc-900"
+  loading="lazy"
+/>
 </div>
         </div>
       </div>
