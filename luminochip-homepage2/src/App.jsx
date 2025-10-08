@@ -284,7 +284,7 @@ function Hero() {
             </div>
 
 {/* PNG 이미지 #1 */}
-<div className="h-64 md:h-full w-full rounded-2xl border border-white/10 bg-zinc-900 flex items-center justify-center">
+<div className="h-64 md:h-full w-full rounded-2xl border border-white/10 bg-zinc-900 flex items-center justify-center p-2">
   <img
     src="/images/hero-1.png"
     alt="LuminoChip sample 1"
@@ -294,7 +294,7 @@ function Hero() {
 </div>
 
 {/* PNG 이미지 #2 */}
-<div className="h-64 md:h-full w-full rounded-2xl border border-white/10 bg-zinc-900 flex items-center justify-center">
+<div className="h-64 md:h-full w-full rounded-2xl border border-white/10 bg-zinc-900 flex items-center justify-center p-2">
   <img
     src="/images/hero-2.png"
     alt="LuminoChip sample 2"
