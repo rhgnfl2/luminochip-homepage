@@ -244,67 +244,63 @@ function Hero() {
           </div>
         </div>
 
-        {/* 오른쪽 패널: 동영상 1/2 + 이미지 1/2 */}
-        <div className="relative w-full aspect-video md:h-[560px]">
-          <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
-            {/* 동영상: 좌측 전체 */}
-            <div className="relative md:row-span-2">
-              <video
-                ref={videoRef}
-                className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
-                loop
-                playsInline
-                preload="metadata"
-                poster="/images/hero-poster.jpg"
-              >
-                <source src="/videos/hero.mp4" type="video/mp4" />
-                <source src="/videos/hero.webm" type="video/webm" />
-                브라우저가 HTML5 동영상을 지원하지 않습니다.
-              </video>
+        {/* 오른쪽 패널: 동영상 1/3 + 이미지 2/3 */}
+<div className="relative w-full md:h-[560px]">
+  <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
+    {/* 동영상: 왼쪽 1칸(1/3) */}
+    <div className="relative md:col-span-1">
+      <video
+        ref={videoRef}
+        className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
+        loop
+        playsInline
+        preload="metadata"
+        poster="/images/hero-poster.jpg"
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+        <source src="/videos/hero.webm" type="video/webm" />
+        브라우저가 HTML5 동영상을 지원하지 않습니다.
+      </video>
 
-              {/* ▶ 재생 버튼 오버레이 */}
-              {!isPlaying && ready && (
-                <button
-                  type="button"
-                  onClick={handlePlay}
-                  className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
-                  aria-label="동영상 재생"
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      handlePlay();
-                    }
-                  }}
-                >
-                  <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
-                    ▶ 재생
-                  </span>
-                </button>
-              )}
-            </div>
+      {/* ▶ 재생 버튼 오버레이 */}
+      {!isPlaying && ready && (
+        <button
+          type="button"
+          onClick={handlePlay}
+          className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
+          aria-label="동영상 재생"
+        >
+          <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
+            ▶ 재생
+          </span>
+        </button>
+      )}
+    </div>
 
-{/* PNG 이미지 #1 */}
-<div className="h-64 md:h-full w-full overflow-hidden rounded-2xl border border-white/10">
-  <img
-    src="/images/hero-1.png"
-    alt="LuminoChip sample 1"
-    className="h-full w-full object-cover object-center"
-    loading="lazy"
-  />
-</div>
-
-{/* PNG 이미지 #2 */}
-<div className="h-64 md:h-full w-full overflow-hidden rounded-2xl border border-white/10">
-  <img
-    src="/images/hero-2.png"
-    alt="LuminoChip sample 2"
-    className="h-full w-full object-cover object-center"
-    loading="lazy"
-  />
-</div>
-</div>
-        </div>
+    {/* 이미지: 오른쪽 2칸(2/3) — 세로로 2장 */}
+    <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
+      {/* PNG 이미지 #1 */}
+      <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
+        <img
+          src="/images/hero-1.png"
+          alt="LuminoChip sample 1"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          loading="lazy"
+        />
       </div>
+
+      {/* PNG 이미지 #2 */}
+      <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
+        <img
+          src="/images/hero-2.png"
+          alt="LuminoChip sample 2"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</div>
     </section>
   );
 }
