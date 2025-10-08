@@ -583,7 +583,7 @@ function MapSection() {
 <iframe
   title="map"
   className="block h-full w-full"
-  src="https://www.google.com/maps/embed?pb=..."
+  src="https://www.google.com/maps?q=36.1016766,128.3816725&hl=ko&z=18&output=embed"
   style={{ border: 0 }}
   loading="lazy"
   referrerPolicy="no-referrer-when-downgrade"
