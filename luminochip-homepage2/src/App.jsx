@@ -578,15 +578,17 @@ function MapSection() {
         </div>
         <div className="lg:col-span-2">
           <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10">
-            <iframe
-              title="map"
-              className="block h-full w-full"       {/* ✅ 핵심 */}
-              src="https://www.google.com/maps/embed?pb=..."
-              style={{ border: 0 }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
+            
+{/* ✅ 핵심: w/h 고정 삭제 + 꽉 채우기 */}
+<iframe
+  title="map"
+  className="block h-full w-full"
+  src="https://www.google.com/maps/embed?pb=..."
+  style={{ border: 0 }}
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+  allowFullScreen
+/>
           </div>
         </div>
       </div>
