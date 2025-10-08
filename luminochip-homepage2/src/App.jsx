@@ -244,22 +244,99 @@ function Hero() {
         {/* 모바일에선 자동재생이 되면 버튼이 뒤에 가려집니다. md 이상에서만 보이도록 */}
       </button>
 
-      <video
-        id="heroVideo"
-        className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        poster="/images/hero-poster.jpg"
-        onPlay={(e)=>{ /* 재생되면 오버레이 숨기기 옵션 필요 시 */ }}
-        onError={(e)=>console.warn('video error', e)}
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-        <source src="/videos/hero.webm" type="video/webm" />
-        브라우저가 HTML5 동영상을 지원하지 않습니다.
-      </video>
+      import React, { useRef, useState, useEffect } from "react";
+      import { CheckCircle, ArrowRight, Send } from "lucide-react";
+
+function Hero() {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.addEventListener("canplay", () => setReady(true));
+    v.addEventListener("play", () => setIsPlaying(true));
+    v.addEventListener("pause", () => setIsPlaying(false));
+  }, []);
+
+  const handlePlay = async () => {
+    const v = videoRef.current;
+    if (!v) return;
+    try {
+      v.muted = false;       // 🔈 소리 켜기
+      v.controls = true;     // 🎛 컨트롤 표시
+      await v.play();        // ▶ 클릭 시 재생
+    } catch (err) {
+      console.warn("play failed:", err);
+    }
+  };
+
+  return (
+    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
+      {/* 왼쪽 설명부는 기존 그대로 */}
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
+            <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
+          </div>
+          <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
+            초정밀 LASER·SAPPHIRE 가공으로{" "}
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              공정 신뢰성
+            </span>
+            을 높입니다.
+          </h1>
+          <p className="mt-4 max-w-prose text-zinc-300">
+            초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href="#inquiry" className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20">
+              <Send className="h-4 w-4" /> 견적 문의하기
+            </a>
+            <a href="#products" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 px-4 py-2 text-zinc-200 hover:bg-white/5">
+              <ArrowRight className="h-4 w-4" /> 제품 바로보기
+            </a>
+          </div>
+        </div>
+
+        {/* 🔽 오른쪽 비디오 부분 */}
+        <div className="relative w-full aspect-video md:h-[560px]">
+          <div className="relative h-full w-full">
+            <video
+              ref={videoRef}
+              className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
+              // ✅ 자동재생 제거
+              loop
+              playsInline
+              preload="metadata"
+              poster="/images/hero-poster.jpg"
+            >
+              <source src="/videos/hero.mp4" type="video/mp4" />
+              <source src="/videos/hero.webm" type="video/webm" />
+              브라우저가 HTML5 동영상을 지원하지 않습니다.
+            </video>
+
+            {/* ▶ 재생 버튼 오버레이 */}
+            {!isPlaying && ready && (
+              <button
+                onClick={handlePlay}
+                className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
+              >
+                <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
+                  ▶ 재생
+                </span>
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Hero;
+
     </div>
 
     {/* PNG 이미지 #1 */}
