@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { Menu, X, Mail, MapPin, Phone, Factory, Boxes, Shield, FileText, Building2, Wrench, ArrowRight, Send, ChevronUp, CheckCircle } from "lucide-react";
 
 /**
@@ -156,6 +156,39 @@ function Header() {
 }
 
 function Hero() {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const onCanPlay = () => setReady(true);
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    v.addEventListener("canplay", onCanPlay);
+    v.addEventListener("play", onPlay);
+    v.addEventListener("pause", onPause);
+    return () => {
+      v.removeEventListener("canplay", onCanPlay);
+      v.removeEventListener("play", onPlay);
+      v.removeEventListener("pause", onPause);
+    };
+  }, []);
+
+  const handlePlay = async () => {
+    const v = videoRef.current;
+    if (!v) return;
+    try {
+      v.muted = false;       // 소리 켬(원하면 true로 유지)
+      v.controls = true;     // 컨트롤 표시
+      await v.play();        // 클릭 시 재생
+    } catch (err) {
+      console.warn("play failed:", err);
+      v.controls = true;
+    }
+  };
+  
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
       {/* 배경: 클릭 막지 않도록 pointer-events-none */}
@@ -227,50 +260,45 @@ function Hero() {
           </div>
         </div>
 
-{/* 오른쪽 패널: 동영상 1/2 + 이미지 1/2 */}
+
+ {/* 오른쪽 패널: 동영상 1/2 + 이미지 1/2 */}
 <div className="relative w-full aspect-video md:h-[560px]">
   <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
     {/* 동영상: 좌측 전체 */}
     <div className="relative md:row-span-2">
-      {/* 클릭 폴백용 오버레이 버튼 */}
-      <button
-        aria-label="Play video"
-        className="pointer-events-auto absolute inset-0 z-10 hidden items-center justify-center md:flex"
-        onClick={() => {
-          const v = document.getElementById('heroVideo');
-          if (v) { v.muted = true; v.play().catch(()=>{}); }
-        }}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
+        loop
+        playsInline
+        preload="metadata"
+        poster="/images/hero-poster.jpg"
       >
-        {/* 모바일에선 자동재생이 되면 버튼이 뒤에 가려집니다. md 이상에서만 보이도록 */}
-      </button>
+        <source src="/videos/hero.mp4" type="video/mp4" />
+        <source src="/videos/hero.webm" type="video/webm" />
+        브라우저가 HTML5 동영상을 지원하지 않습니다.
+      </video>
 
-      import React, { useRef, useState, useEffect } from "react";
-      import { CheckCircle, ArrowRight, Send } from "lucide-react";
-
-function Hero() {
-  const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.addEventListener("canplay", () => setReady(true));
-    v.addEventListener("play", () => setIsPlaying(true));
-    v.addEventListener("pause", () => setIsPlaying(false));
-  }, []);
-
-  const handlePlay = async () => {
-    const v = videoRef.current;
-    if (!v) return;
-    try {
-      v.muted = false;       // 🔈 소리 켜기
-      v.controls = true;     // 🎛 컨트롤 표시
-      await v.play();        // ▶ 클릭 시 재생
-    } catch (err) {
-      console.warn("play failed:", err);
-    }
-  };
+      {/* ▶ 재생 버튼 오버레이 */}
+      {!isPlaying && ready && (
+        <button
+          type="button"
+          onClick={handlePlay}
+          className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
+          aria-label="동영상 재생"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handlePlay();
+            }
+          }}
+        >
+          <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
+            ▶ 재생
+          </span>
+        </button>
+      )}
+    </div>       
 
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
@@ -334,8 +362,6 @@ function Hero() {
     </section>
   );
 }
-
-export default Hero;
 
     </div>
 
