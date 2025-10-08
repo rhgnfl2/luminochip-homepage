@@ -583,7 +583,7 @@ function MapSection() {
 <iframe
   title="map"
   className="block h-full w-full"
-  src="https://www.google.com/maps?q=36.1016766,128.3816725&hl=ko&z=18&output=embed"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.664049524649!2d128.38167247443442!3d36.1016766332434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565c14f3c98f86f%3A0x7d86ec9530bbd04a!2z7ZWc65287Iuc6re466eI67C466as7KeA7Iud7IKw7JeF7IS87YSw!5e0!3m2!1sko!2skr!4v1758028726441!5m2!1sko!2skr"
   style={{ border: 0 }}
   loading="lazy"
   referrerPolicy="no-referrer-when-downgrade"
