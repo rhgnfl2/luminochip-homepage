@@ -164,7 +164,7 @@ function Hero() {
     const v = videoRef.current;
     if (!v) return;
     try {
-      v.muted = false;       // 소리 켬(원하면 true로 유지)
+      v.muted = false;       // 소리 켬
       v.controls = true;     // 컨트롤 표시
       await v.play();        // 클릭 시 재생
     } catch (err) {
@@ -175,7 +175,7 @@ function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
-      {/* 배경: 클릭 막지 않도록 pointer-events-none */}
+      {/* 배경 */}
       <div
         className="absolute inset-0 -z-10 opacity-30 pointer-events-none"
         style={{
@@ -183,7 +183,8 @@ function Hero() {
             "radial-gradient(600px 200px at 10% 10%, rgba(16,185,129,0.25), transparent), radial-gradient(600px 200px at 90% 0%, rgba(34,211,238,0.2), transparent)",
         }}
       />
-      {/* 콘텐츠 */}
+
+      {/* 좌우 2컬럼: 좌(카피), 우(미디어) */}
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
         {/* 왼쪽 칼럼 */}
         <div>
@@ -201,9 +202,8 @@ function Hero() {
             26년 상반기까지 임가공 장비와 라인 구축을 준비중에 있습니다.
           </p>
 
-          {/* CTA 버튼들 */}
+          {/* CTA */}
           <div className="mt-6 flex flex-wrap gap-3">
-            {/* 견적 문의하기: 부드러운 스크롤 */}
             <a
               href="#inquiry"
               onClick={(e) => {
@@ -215,8 +215,6 @@ function Hero() {
             >
               <Send className="h-4 w-4" /> 견적 문의하기
             </a>
-
-            {/* 제품 바로보기: 부드러운 스크롤 */}
             <a
               href="#products"
               onClick={(e) => {
@@ -229,81 +227,67 @@ function Hero() {
               <ArrowRight className="h-4 w-4" /> 제품 바로보기
             </a>
           </div>
+        </div>
 
-          {/* 기능 3컬럼 */}
-          <div className="mt-8 grid grid-cols-3 gap-4 text-sm text-zinc-300">
-            <div className="rounded-2xl border border-white/10 p-4">
-              <Factory className="mb-2 h-5 w-5 text-emerald-300" /> 세라믹/투명재 가공
+        {/* 오른쪽: 동영상 1/3, 이미지 2/3 (이미지 더 큼) */}
+        <div className="relative w-full md:h-[560px]">
+          <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
+            {/* 동영상: 왼쪽 1칸 */}
+            <div className="relative md:col-span-1">
+              <video
+                ref={videoRef}
+                className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
+                loop
+                playsInline
+                preload="metadata"
+                poster="/images/hero-poster.jpg"
+              >
+                <source src="/videos/hero.mp4" type="video/mp4" />
+                <source src="/videos/hero.webm" type="video/webm" />
+                브라우저가 HTML5 동영상을 지원하지 않습니다.
+              </video>
+
+              {/* ▶ 재생 버튼 오버레이 */}
+              {!isPlaying && ready && (
+                <button
+                  type="button"
+                  onClick={handlePlay}
+                  className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
+                  aria-label="동영상 재생"
+                >
+                  <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
+                    ▶ 재생
+                  </span>
+                </button>
+              )}
             </div>
-            <div className="rounded-2xl border border-white/10 p-4">
-              <Wrench className="mb-2 h-5 w-5 text-cyan-300" /> 장비 호환 부품 제작
-            </div>
-            <div className="rounded-2xl border border-white/10 p-4">
-              <Shield className="mb-2 h-5 w-5 text-sky-300" /> 품질·보안 관리
+
+            {/* 이미지: 오른쪽 2칸 세로 2장 */}
+            <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
+              <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
+                <img
+                  src="/images/hero-1.png"
+                  alt="LuminoChip sample 1"
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
+                <img
+                  src="/images/hero-2.png"
+                  alt="LuminoChip sample 2"
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </div>
-
-        {/* 오른쪽 패널: 동영상 1/3 + 이미지 2/3 */}
-<div className="relative w-full md:h-[560px]">
-  <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
-    {/* 동영상: 왼쪽 1칸(1/3) */}
-    <div className="relative md:col-span-1">
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
-        loop
-        playsInline
-        preload="metadata"
-        poster="/images/hero-poster.jpg"
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-        <source src="/videos/hero.webm" type="video/webm" />
-        브라우저가 HTML5 동영상을 지원하지 않습니다.
-      </video>
-
-      {/* ▶ 재생 버튼 오버레이 */}
-      {!isPlaying && ready && (
-        <button
-          type="button"
-          onClick={handlePlay}
-          className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
-          aria-label="동영상 재생"
-        >
-          <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
-            ▶ 재생
-          </span>
-        </button>
-      )}
-    </div>
-
-    {/* 이미지: 오른쪽 2칸(2/3) — 세로로 2장 */}
-    <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
-      {/* PNG 이미지 #1 */}
-      <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
-        <img
-          src="/images/hero-1.png"
-          alt="LuminoChip sample 1"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          loading="lazy"
-        />
       </div>
-
-      {/* PNG 이미지 #2 */}
-      <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
-        <img
-          src="/images/hero-2.png"
-          alt="LuminoChip sample 2"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          loading="lazy"
-        />
-      </div>
-    </div>
-  </div>
-</div>
     </section>
   );
 }
+
 
 function Section({ id, icon: Icon, title, subtitle, children }) {
   return (
