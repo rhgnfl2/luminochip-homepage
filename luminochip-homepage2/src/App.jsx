@@ -22,26 +22,20 @@ const NAV_ITEMS = [
 
 const PRODUCTS = [
   {
-    name: "초미세 HOLE(≤50µm)",
-    mat: "Al₂O₃ (Alumina) / Porus",
-    img: "/images/ESC PLATE MICRO HOLE.png",
+    name: "Quartz 미세홀 가공",
+    img: "/images/Quartz미세홀가공.png",
   },
   {
-    name: "SAPPHIRE WINDOW",
-    mat: "SAPPHIRE / QUARTZ",
-    desc: "VIEW PORT, LASER MARKING",
-    img: "/images/SAPPHIRE WINDOW.jpg",
+    name: "SiC 미세홀(40x40) 2400EA",
+    img: "/images/SiC미세홀(40x40)2400EA.png",
   },
   {
-    name: "SAPPHIRE LIFT PIN",
-    mat: "SAPPHIRE",
-    img: "/images/SAPPHIRE LIFT PIN.jpg",
+    name: "UV코팅, AR 코팅, 일반 SAPPHIRE, Quartz Polishing & Laser marking",
+    img: "/images/UV코팅,AR코팅,일반SAPPHIRE쿼츠폴리싱&레이저마킹.png",
   },
   {
-    name: "SAPPHIRE NOZZLE",
-    mat: "SAPPHIRE",
-    desc: "ACCESSORIES NOZZLE",
-    img: "/images/SAPPHIRE NOZZLE.png",
+    name: "원형 Si3N4",
+    img: "/images/원형Si3N4.png",
   },
 ];
 
