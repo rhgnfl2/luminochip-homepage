@@ -19,28 +19,14 @@ const NAV_ITEMS = [
   { id: "map", label: "오시는 길" },
 ];
 
-
 const PRODUCTS = [
-  {
-    name: "Quartz 미세홀 가공",
-    img: "/images/Quartz미세홀가공.png",
-  },
-  {
-    name: "SiC 미세홀(40x40) 2400EA",
-    img: "/images/SiC미세홀(40x40)2400EA.png",
-  },
-  {
-    name: "UV코팅, AR 코팅, 일반 SAPPHIRE, Quartz Polishing & Laser marking",
-    img: "/images/UV코팅,AR코팅,일반SAPPHIRE쿼츠폴리싱&레이저마킹.png",
-  },
-  {
-    name: "원형 Si3N4",
-    img: "/images/원형Si3N4.png",
-  },
+  { name: "Quartz 미세홀 가공", img: "/images/Quartz미세홀가공.png" },
+  { name: "SiC 미세홀(40x40) 2400EA", img: "/images/SiC미세홀(40x40)2400EA.png" },
+  { name: "UV코팅, AR 코팅, 일반 SAPPHIRE, Quartz Polishing & Laser marking", img: "/images/UV코팅,AR코팅,일반SAPPHIRE쿼츠폴리싱&레이저마킹.png" },
+  { name: "원형 Si3N4", img: "/images/원형Si3N4.png" },
 ];
 
 const PLACEHOLDER = "/images/placeholder.png";
-
 
 const MATERIALS = [
   { name: "Quartz(쿼츠)", cte: "~0.55 ppm/K", temp: "20–400°C", note: "열변형 낮음, 고온 투명 재료" },
@@ -65,16 +51,14 @@ const CERTS = [
     no: "QMS-XXXX",
     issuer: "KAB",
     status: "현재 컨설팅 중 입니다",
-    img: "/images/ISO9001.png" // 여기에 이미지 경로 추가
-  }
-
-  
+    img: "/images/ISO9001.png",
+  },
 ];
 
 const COMPANY = {
   name: "루미노칩 (LuminoChip)",
   tagline_ko: "투명하고 정밀한 가공으로 신뢰받는 파트너",
-  tagline_en: "Trusted micro‑machining partner for semiconductors",
+  tagline_en: "Trusted micro-machining partner for semiconductors",
   regno: "사업자등록번호: 329-01-03642",
   tel: "010-4698-9493",
   email: "luminochip@naver.com",
@@ -101,7 +85,7 @@ function Header() {
         {/* 로고 + 회사명 */}
         <a href="#top" className="flex items-center gap-3">
           <img
-            src="/images/logo.png"         // public/images/logo.png 경로에 로고 파일 넣기
+            src="/images/logo.png"
             alt="Luminochip Logo"
             className="h-14 w-14 rounded-2xl object-cover"
           />
@@ -188,7 +172,7 @@ function Hero() {
       v.controls = true;
     }
   };
-  
+
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
       {/* 배경: 클릭 막지 않도록 pointer-events-none */}
@@ -217,35 +201,35 @@ function Hero() {
             26년 상반기까지 임가공 장비와 라인 구축을 준비중에 있습니다.
           </p>
 
-{/* CTA 버튼들 */}
-<div className="mt-6 flex flex-wrap gap-3">
-  {/* 견적 문의하기: 부드러운 스크롤 */}
-  <a
-    href="#inquiry"
-    onClick={(e) => {
-      e.preventDefault();
-      const el = document.getElementById("inquiry");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }}
-    className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20"
-  >
-    <Send className="h-4 w-4" /> 견적 문의하기
-  </a>
+          {/* CTA 버튼들 */}
+          <div className="mt-6 flex flex-wrap gap-3">
+            {/* 견적 문의하기: 부드러운 스크롤 */}
+            <a
+              href="#inquiry"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("inquiry");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20"
+            >
+              <Send className="h-4 w-4" /> 견적 문의하기
+            </a>
 
-  {/* 제품 바로보기: 부드러운 스크롤 */}
-  <a
-    href="#products"
-    onClick={(e) => {
-      e.preventDefault();
-      const el = document.getElementById("products");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }}
-    className="inline-flex items-center gap-2 rounded-2xl border border-white/10 px-4 py-2 text-zinc-200 hover:bg-white/5"
-  >
-    <ArrowRight className="h-4 w-4" /> 제품 바로보기
-  </a>
-</div>
-          
+            {/* 제품 바로보기: 부드러운 스크롤 */}
+            <a
+              href="#products"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("products");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="inline-flex items-center gap-2 rounded-2xl border border-white/10 px-4 py-2 text-zinc-200 hover:bg-white/5"
+            >
+              <ArrowRight className="h-4 w-4" /> 제품 바로보기
+            </a>
+          </div>
+
           {/* 기능 3컬럼 */}
           <div className="mt-8 grid grid-cols-3 gap-4 text-sm text-zinc-300">
             <div className="rounded-2xl border border-white/10 p-4">
@@ -260,132 +244,66 @@ function Hero() {
           </div>
         </div>
 
-
- {/* 오른쪽 패널: 동영상 1/2 + 이미지 1/2 */}
-<div className="relative w-full aspect-video md:h-[560px]">
-  <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
-    {/* 동영상: 좌측 전체 */}
-    <div className="relative md:row-span-2">
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
-        loop
-        playsInline
-        preload="metadata"
-        poster="/images/hero-poster.jpg"
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-        <source src="/videos/hero.webm" type="video/webm" />
-        브라우저가 HTML5 동영상을 지원하지 않습니다.
-      </video>
-
-      {/* ▶ 재생 버튼 오버레이 */}
-      {!isPlaying && ready && (
-        <button
-          type="button"
-          onClick={handlePlay}
-          className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
-          aria-label="동영상 재생"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              handlePlay();
-            }
-          }}
-        >
-          <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
-            ▶ 재생
-          </span>
-        </button>
-      )}
-    </div>       
-
-  return (
-    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
-      {/* 왼쪽 설명부는 기존 그대로 */}
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
-        <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
-            <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
-          </div>
-          <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
-            초정밀 LASER·SAPPHIRE 가공으로{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-              공정 신뢰성
-            </span>
-            을 높입니다.
-          </h1>
-          <p className="mt-4 max-w-prose text-zinc-300">
-            초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#inquiry" className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20">
-              <Send className="h-4 w-4" /> 견적 문의하기
-            </a>
-            <a href="#products" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 px-4 py-2 text-zinc-200 hover:bg-white/5">
-              <ArrowRight className="h-4 w-4" /> 제품 바로보기
-            </a>
-          </div>
-        </div>
-
-        {/* 🔽 오른쪽 비디오 부분 */}
+        {/* 오른쪽 패널: 동영상 1/2 + 이미지 1/2 */}
         <div className="relative w-full aspect-video md:h-[560px]">
-          <div className="relative h-full w-full">
-            <video
-              ref={videoRef}
-              className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
-              // ✅ 자동재생 제거
-              loop
-              playsInline
-              preload="metadata"
-              poster="/images/hero-poster.jpg"
-            >
-              <source src="/videos/hero.mp4" type="video/mp4" />
-              <source src="/videos/hero.webm" type="video/webm" />
-              브라우저가 HTML5 동영상을 지원하지 않습니다.
-            </video>
-
-            {/* ▶ 재생 버튼 오버레이 */}
-            {!isPlaying && ready && (
-              <button
-                onClick={handlePlay}
-                className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
+          <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
+            {/* 동영상: 좌측 전체 */}
+            <div className="relative md:row-span-2">
+              <video
+                ref={videoRef}
+                className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
+                loop
+                playsInline
+                preload="metadata"
+                poster="/images/hero-poster.jpg"
               >
-                <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
-                  ▶ 재생
-                </span>
-              </button>
-            )}
+                <source src="/videos/hero.mp4" type="video/mp4" />
+                <source src="/videos/hero.webm" type="video/webm" />
+                브라우저가 HTML5 동영상을 지원하지 않습니다.
+              </video>
+
+              {/* ▶ 재생 버튼 오버레이 */}
+              {!isPlaying && ready && (
+                <button
+                  type="button"
+                  onClick={handlePlay}
+                  className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
+                  aria-label="동영상 재생"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handlePlay();
+                    }
+                  }}
+                >
+                  <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
+                    ▶ 재생
+                  </span>
+                </button>
+              )}
+            </div>
+
+            {/* PNG 이미지 #1 */}
+            <img
+              src="/images/hero-1.png"
+              alt="LuminoChip sample 1"
+              className="h-64 w-full rounded-2xl border border-white/10 object-cover md:h-full"
+              loading="lazy"
+            />
+
+            {/* PNG 이미지 #2 */}
+            <img
+              src="/images/hero-2.png"
+              alt="LuminoChip sample 2"
+              className="h-64 w-full rounded-2xl border border-white/10 object-cover md:h-full"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-    </div>
-
-    {/* PNG 이미지 #1 */}
-    <img
-      src="/images/hero-1.png"
-      alt="LuminoChip sample 1"
-      className="h-64 w-full rounded-2xl border border-white/10 object-cover md:h-full"
-    />
-
-    {/* PNG 이미지 #2 */}
-    <img
-      src="/images/hero-2.png"
-      alt="LuminoChip sample 2"
-      className="h-64 w-full rounded-2xl border border-white/10 object-cover md:h-full"
-    />
-  </div>
-</div>
-        
-</div>
-</section>
-  );
-}
-
 
 function Section({ id, icon: Icon, title, subtitle, children }) {
   return (
@@ -473,7 +391,6 @@ function Products() {
     </Section>
   );
 }
-
 
 function About() {
   return (
@@ -681,17 +598,16 @@ function MapSection() {
         </div>
         <div className="lg:col-span-2">
           <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10">
-            
-{/* ✅ 핵심: w/h 고정 삭제 + 꽉 채우기 */}
-<iframe
-  title="map"
-  className="block h-full w-full"
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.664049524649!2d128.38167247443442!3d36.1016766332434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565c14f3c98f86f%3A0x7d86ec9530bbd04a!2z7ZWc65287Iuc6re466eI67C466as7KeA7Iud7IKw7JeF7IS87YSw!5e0!3m2!1sko!2skr!4v1758028726441!5m2!1sko!2skr"
-  style={{ border: 0 }}
-  loading="lazy"
-  referrerPolicy="no-referrer-when-downgrade"
-  allowFullScreen
-/>
+            {/* ✅ 핵심: w/h 고정 삭제 + 꽉 채우기 */}
+            <iframe
+              title="map"
+              className="block h-full w-full"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.664049524649!2d128.38167247443442!3d36.1016766332434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565c14f3c98f86f%3A0x7d86ec9530bbd04a!2z7ZWc65287Iuc6re466eI67C466as7KeA7Iud7IKw7JeF7IS87YSw!5e0!3m2!1sko!2skr!4v1758028726441!5m2!1sko!2skr"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
         </div>
       </div>
@@ -718,8 +634,8 @@ function Footer() {
 
 export default function App() {
   const showTop = useScrollTop();
-   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 overflow-x-hidden"> {/* ✅ 추가 */}
+  return (
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 overflow-x-hidden">
       <Header />
       <Hero />
       <About />
@@ -732,7 +648,11 @@ export default function App() {
       <Footer />
 
       {showTop && (
-        <a href="#top" className="fixed bottom-6 right-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-zinc-900/80 px-4 py-2 text-sm text-zinc-200 shadow-2xl backdrop-blur hover:bg-zinc-900" aria-label="맨 위로">
+        <a
+          href="#top"
+          className="fixed bottom-6 right-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-zinc-900/80 px-4 py-2 text-sm text-zinc-200 shadow-2xl backdrop-blur hover:bg-zinc-900"
+          aria-label="맨 위로"
+        >
           <ChevronUp className="h-4 w-4" /> 맨 위로
         </a>
       )}
