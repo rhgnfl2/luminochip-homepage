@@ -246,7 +246,7 @@ function Hero() {
 
         {/* 오른쪽 패널: 동영상 1/2 + 이미지 1/2 */}
         <div className="relative w-full aspect-video md:h-[560px]">
-          <div className="grid h-full grid-cols-1 gap-3 md:[grid-template-columns:2fr_1fr] md:grid-rows-2 items-start">
+          <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
             {/* 동영상: 좌측 전체 */}
             <div className="relative md:row-span-2">
               <video
@@ -287,7 +287,7 @@ function Hero() {
   <img
     src="/images/hero-1.png"
     alt="LuminoChip sample 1"
-    className="w-full rounded-2xl border border-white/10 object-cover h-44 md:h-[220px]"
+    className="h-64 w-full rounded-2xl border border-white/10 object-cover md:h-full"
     loading="lazy"
   />
 
@@ -295,7 +295,7 @@ function Hero() {
   <img
     src="/images/hero-2.png"
     alt="LuminoChip sample 2"
-    className="w-full rounded-2xl border border-white/10 object-cover h-44 md:h-[220px]"
+    className="h-64 w-full rounded-2xl border border-white/10 object-cover md:h-full"
     loading="lazy"
   />
 </div>
