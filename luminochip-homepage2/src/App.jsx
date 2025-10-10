@@ -174,7 +174,12 @@ function Hero() {
   };
 
   return (
-    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950">
+    <section
+  id="top"
+  className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950
+             min-h-[100svh]"
+>
+
       {/* 배경 */}
       <div
         className="absolute inset-0 -z-10 opacity-30 pointer-events-none"
@@ -233,34 +238,40 @@ function Hero() {
         <div className="relative w-full md:h-[560px]">
           <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
             {/* 동영상: 왼쪽 1칸 */}
-            <div className="relative md:col-span-1">
-              <video
-                ref={videoRef}
-                className="absolute inset-0 h-full w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
-                loop
-                playsInline
-                preload="metadata"
-                poster="/images/hero-poster.jpg"
-              >
-                <source src="/videos/hero.mp4" type="video/mp4" />
-                <source src="/videos/hero.webm" type="video/webm" />
-                브라우저가 HTML5 동영상을 지원하지 않습니다.
-              </video>
+<div className="relative md:col-span-1">
+  {/* 모바일: 16:9 공간 확보 / 데스크톱: 타일 높이 채움 */}
+  <div className="aspect-video md:aspect-auto md:h-full">
+    <video
+      ref={videoRef}
+      className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
+                 object-contain md:object-cover"
+      loop
+      playsInline
+      webkit-playsinline="true"
+      preload="metadata"
+      poster="/images/hero-poster.jpg"
+    >
+      <source src="/videos/hero.mp4" type="video/mp4" />
+      <source src="/videos/hero.webm" type="video/webm" />
+      브라우저가 HTML5 동영상을 지원하지 않습니다.
+    </video>
+  </div>
 
-              {/* ▶ 재생 버튼 오버레이 */}
-              {!isPlaying && ready && (
-                <button
-                  type="button"
-                  onClick={handlePlay}
-                  className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
-                  aria-label="동영상 재생"
-                >
-                  <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
-                    ▶ 재생
-                  </span>
-                </button>
-              )}
-            </div>
+  {/* ▶ 재생 버튼 오버레이 */}
+  {!isPlaying && ready && (
+    <button
+      type="button"
+      onClick={handlePlay}
+      className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
+      aria-label="동영상 재생"
+    >
+      <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
+        ▶ 재생
+      </span>
+    </button>
+  )}
+</div>
+
 
             {/* 이미지: 오른쪽 2칸 세로 2장 */}
             <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
