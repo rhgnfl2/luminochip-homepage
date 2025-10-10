@@ -160,26 +160,8 @@ function Hero() {
     };
   }, []);
 
-  const handlePlay = async () => {
-    const v = videoRef.current;
-    if (!v) return;
-    try {
-      v.muted = false;       // 소리 켬
-      v.controls = true;     // 컨트롤 표시
-      await v.play();        // 클릭 시 재생
-    } catch (err) {
-      console.warn("play failed:", err);
-      v.controls = true;
-    }
-  };
-
   return (
-    <section
-  id="top"
-  className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950
-             min-h-[100svh]"
->
-
+    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 min-h-[100svh]">
       {/* 배경 */}
       <div
         className="absolute inset-0 -z-10 opacity-30 pointer-events-none"
@@ -234,32 +216,31 @@ function Hero() {
           </div>
         </div>
 
-        {/* 오른쪽: 동영상 1/3, 이미지 2/3 (이미지 더 큼) */}
+        {/* 오른쪽: 동영상 1/3, 이미지 2/3 */}
         <div className="relative w-full md:h-[560px]">
           <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
             {/* 동영상: 왼쪽 1칸 */}
-<div className="relative md:col-span-1">
-  {/* 모바일: 16:9 공간 확보 / 데스크톱: 타일 높이 채움 */}
-  <div className="aspect-video md:aspect-auto md:h-full">
- <video
-  ref={videoRef}
-  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
-             object-contain md:object-cover"
-  autoPlay
-  muted
-  loop
-  playsInline
-  webkit-playsinline="true"
-  preload="metadata"
-  poster="/images/hero-poster.jpg"
->
-  <source src="/videos/hero.mp4" type="video/mp4" />
-  <source src="/videos/hero.webm" type="video/webm" />
-  브라우저가 HTML5 동영상을 지원하지 않습니다.
-</video>
-
-</div>
-
+            <div className="relative md:col-span-1">
+              {/* 모바일: 비율 유지 / 데스크톱: 타일 높이 채움 */}
+              <div className="aspect-video md:aspect-auto md:h-full">
+                <video
+                  ref={videoRef}
+                  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
+                             object-contain md:object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  webkit-playsinline="true"
+                  preload="metadata"
+                  poster="/images/hero-poster.jpg"
+                >
+                  <source src="/videos/hero.mp4" type="video/mp4" />
+                  <source src="/videos/hero.webm" type="video/webm" />
+                  브라우저가 HTML5 동영상을 지원하지 않습니다.
+                </video>
+              </div>
+            </div>
 
             {/* 이미지: 오른쪽 2칸 세로 2장 */}
             <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
@@ -286,6 +267,7 @@ function Hero() {
     </section>
   );
 }
+
 
 
 function Section({ id, icon: Icon, title, subtitle, children }) {
