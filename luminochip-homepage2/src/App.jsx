@@ -241,35 +241,23 @@ function Hero() {
 <div className="relative md:col-span-1">
   {/* 모바일: 16:9 공간 확보 / 데스크톱: 타일 높이 채움 */}
   <div className="aspect-video md:aspect-auto md:h-full">
-    <video
-      ref={videoRef}
-      className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
-                 object-contain md:object-cover"
-      loop
-      playsInline
-      webkit-playsinline="true"
-      preload="metadata"
-      poster="/images/hero-poster.jpg"
-    >
-      <source src="/videos/hero.mp4" type="video/mp4" />
-      <source src="/videos/hero.webm" type="video/webm" />
-      브라우저가 HTML5 동영상을 지원하지 않습니다.
-    </video>
-  </div>
+ <video
+  ref={videoRef}
+  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
+             object-contain md:object-cover"
+  autoPlay
+  muted
+  loop
+  playsInline
+  webkit-playsinline="true"
+  preload="metadata"
+  poster="/images/hero-poster.jpg"
+>
+  <source src="/videos/hero.mp4" type="video/mp4" />
+  <source src="/videos/hero.webm" type="video/webm" />
+  브라우저가 HTML5 동영상을 지원하지 않습니다.
+</video>
 
-  {/* ▶ 재생 버튼 오버레이 */}
-  {!isPlaying && ready && (
-    <button
-      type="button"
-      onClick={handlePlay}
-      className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-black/30 backdrop-blur-sm"
-      aria-label="동영상 재생"
-    >
-      <span className="rounded-full border border-white/30 bg-black/50 px-5 py-2 text-sm text-white">
-        ▶ 재생
-      </span>
-    </button>
-  )}
 </div>
 
 
