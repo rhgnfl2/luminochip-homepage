@@ -1,5 +1,8 @@
 import React, { useMemo, useState, useEffect, useRef } from "react";
-import { Menu, X, Mail, MapPin, Phone, Factory, Boxes, Shield, FileText, Building2, Wrench, ArrowRight, Send, ChevronUp, CheckCircle } from "lucide-react";
+import {
+  Menu, X, Mail, MapPin, Phone, Factory, Boxes, Shield, FileText, Building2,
+  Wrench, ArrowRight, Send, ChevronUp, CheckCircle
+} from "lucide-react";
 
 /**
  * 루미노칩(사용자 회사)용 원페이지 기업 사이트 템플릿
@@ -143,6 +146,7 @@ function Hero() {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [ready, setReady] = useState(false);
+  const [muted, setMuted] = useState(true); // 🔊 음소거 상태
 
   useEffect(() => {
     const v = videoRef.current;
@@ -153,12 +157,25 @@ function Hero() {
     v.addEventListener("canplay", onCanPlay);
     v.addEventListener("play", onPlay);
     v.addEventListener("pause", onPause);
+
+    // 자동재생 정책 대응: 초기 무음
+    v.muted = true;
+
     return () => {
       v.removeEventListener("canplay", onCanPlay);
       v.removeEventListener("play", onPlay);
       v.removeEventListener("pause", onPause);
     };
   }, []);
+
+  const toggleMute = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    const next = !muted;
+    v.muted = next;
+    setMuted(next);
+    if (!next) v.play().catch(() => {});
+  };
 
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 min-h-[100svh]">
@@ -219,80 +236,39 @@ function Hero() {
         {/* 오른쪽: 동영상 1/3, 이미지 2/3 */}
         <div className="relative w-full md:h-[560px]">
           <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
-           function Hero() {
-  const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [ready, setReady] = useState(false);
+            {/* 동영상: 왼쪽 1칸 */}
+            <div className="relative md:col-span-1">
+              {/* 모바일: 비율 유지 / 데스크톱: 타일 높이 채움 */}
+              <div className="aspect-video md:aspect-auto md:h-full">
+                <video
+                  ref={videoRef}
+                  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
+                             object-contain md:object-cover"
+                  autoPlay
+                  muted={muted}
+                  loop
+                  playsInline
+                  webkit-playsinline="true"
+                  preload="metadata"
+                  poster="/images/hero-poster.jpg"
+                >
+                  <source src="/videos/hero.mp4" type="video/mp4" />
+                  <source src="/videos/hero.webm" type="video/webm" />
+                  브라우저가 HTML5 동영상을 지원하지 않습니다.
+                </video>
+              </div>
 
-  // 🔊 추가: 음소거 상태
-  const [muted, setMuted] = useState(true);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    const onCanPlay = () => setReady(true);
-    const onPlay = () => setIsPlaying(true);
-    const onPause = () => setIsPlaying(false);
-    v.addEventListener("canplay", onCanPlay);
-    v.addEventListener("play", onPlay);
-    v.addEventListener("pause", onPause);
-
-    // 초기 자동재생 정책 통과용(무음)
-    v.muted = true;
-
-    return () => {
-      v.removeEventListener("canplay", onCanPlay);
-      v.removeEventListener("play", onPlay);
-      v.removeEventListener("pause", onPause);
-    };
-  }, []);
-
-  // 🔊 추가: 음소거 토글
-  const toggleMute = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    const next = !muted;
-    v.muted = next;
-    setMuted(next);
-    if (!next) {
-      // 사용자 상호작용 이후 사운드 재생 보장
-      v.play().catch(() => {});
-    }
-  };
-{/* 동영상: 왼쪽 1칸 */}
-<div className="relative md:col-span-1">
-  {/* 모바일: 비율 유지 / 데스크톱: 타일 높이 채움 */}
-  <div className="aspect-video md:aspect-auto md:h-full">
-    <video
-      ref={videoRef}
-      className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
-                 object-contain md:object-cover"
-      autoPlay
-      muted={muted}               // ✅ 상태로 연결
-      loop
-      playsInline
-      webkit-playsinline="true"
-      preload="metadata"
-      poster="/images/hero-poster.jpg"
-    >
-      <source src="/videos/hero.mp4" type="video/mp4" />
-      <source src="/videos/hero.webm" type="video/webm" />
-      브라우저가 HTML5 동영상을 지원하지 않습니다.
-    </video>
-  </div>
-
-  {/* ✅ 추가: 음소거/해제 버튼 (우하단) */}
-  <button
-    type="button"
-    onClick={toggleMute}
-    className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20
-               bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
-    aria-label={muted ? "음소거 해제" : "음소거"}
-  >
-    {muted ? "🔇 음소거 해제" : "🔊 음소거"}
-  </button>
-</div>
-
+              {/* 🔊 음소거/해제 버튼 */}
+              <button
+                type="button"
+                onClick={toggleMute}
+                className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20
+                           bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
+                aria-label={muted ? "음소거 해제" : "음소거"}
+              >
+                {muted ? "🔇 음소거 해제" : "🔊 음소거"}
+              </button>
+            </div>
 
             {/* 이미지: 오른쪽 2칸 세로 2장 */}
             <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
@@ -319,8 +295,6 @@ function Hero() {
     </section>
   );
 }
-
-
 
 function Section({ id, icon: Icon, title, subtitle, children }) {
   return (
@@ -411,11 +385,18 @@ function Products() {
 
 function About() {
   return (
-    <Section id="about" icon={Building2} title="회사소개" subtitle="루미노칩은 반도체 및 디스플레이 공정용 정밀 부품을 공급하는 제조/가공 전문 기업입니다. 투명하고 깨끗한 경영과 데이터 기반 공정 관리로 고객 신뢰를 쌓아갑니다.">
+    <Section
+      id="about"
+      icon={Building2}
+      title="회사소개"
+      subtitle="루미노칩은 반도체 및 디스플레이 공정용 정밀 부품을 공급하는 제조/가공 전문 기업입니다. 투명하고 깨끗한 경영과 데이터 기반 공정 관리로 고객 신뢰를 쌓아갑니다."
+    >
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
           <h4 className="mb-2 font-semibold text-white">비전</h4>
-          <p className="text-zinc-300">정밀 가공으로 공정 신뢰성 향상에 기여하여, 글로벌 파운드리/디바이스 고객에게 사랑받는 파트너가 됩니다.</p>
+          <p className="text-zinc-300">
+            정밀 가공으로 공정 신뢰성 향상에 기여하여, 글로벌 파운드리/디바이스 고객에게 사랑받는 파트너가 됩니다.
+          </p>
         </div>
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
           <h4 className="mb-2 font-semibold text-white">핵심역량</h4>
@@ -435,7 +416,12 @@ function About() {
 
 function Materials() {
   return (
-    <Section id="materials" icon={FileText} title="물성표" subtitle="대표 소재의 열팽창계수(참고치). 실제 사양은 공급사·로트에 따라 달라질 수 있습니다.">
+    <Section
+      id="materials"
+      icon={FileText}
+      title="물성표"
+      subtitle="대표 소재의 열팽창계수(참고치). 실제 사양은 공급사·로트에 따라 달라질 수 있습니다."
+    >
       <div className="overflow-x-auto rounded-2xl border border-white/10">
         <table className="min-w-full divide-y divide-white/10">
           <thead className="bg-zinc-900/60">
@@ -458,7 +444,9 @@ function Materials() {
           </tbody>
         </table>
       </div>
-      <p className="mt-3 text-sm text-zinc-400">※ 자료는 레퍼런스 값이며 설계 시 고객 사양과 공정 조건에 맞춰 재검증합니다.</p>
+      <p className="mt-3 text-sm text-zinc-400">
+        ※ 자료는 레퍼런스 값이며 설계 시 고객 사양과 공정 조건에 맞춰 재검증합니다.
+      </p>
     </Section>
   );
 }
@@ -554,7 +542,12 @@ function Inquiry() {
   }, [form]);
 
   return (
-    <Section id="inquiry" icon={Mail} title="견적문의" subtitle="도면(도면번호/규격), 수량, 요구 납기, 적용 장비/공정을 함께 알려주시면 빠르게 드립니다.">
+    <Section
+      id="inquiry"
+      icon={Mail}
+      title="견적문의"
+      subtitle="도면(도면번호/규격), 수량, 요구 납기, 적용 장비/공정을 함께 알려주시면 빠르게 드립니다."
+    >
       <div className="grid gap-6 lg:grid-cols-2">
         <form
           onSubmit={(e) => {
@@ -566,25 +559,51 @@ function Inquiry() {
           <div className="grid gap-4">
             <div>
               <label className="mb-1 block text-sm text-zinc-300">성함/회사</label>
-              <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400" required />
+              <input
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
+                required
+              />
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-1 block text-sm text-zinc-300">이메일</label>
-                <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400" required />
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
+                  required
+                />
               </div>
               <div>
                 <label className="mb-1 block text-sm text-zinc-300">연락처</label>
-                <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400" />
+                <input
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
+                />
               </div>
             </div>
             <div>
               <label className="mb-1 block text-sm text-zinc-300">문의 내용</label>
-              <textarea rows={6} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400" placeholder="예) AMAT 0200-xxxx 노즐 10ea, 납기 2주, 재질: Al₂O₃, 표면: Ra≤0.2µm" />
+              <textarea
+                rows={6}
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
+                placeholder="예) AMAT 0200-xxxx 노즐 10ea, 납기 2주, 재질: Al₂O₃, 표면: Ra≤0.2µm"
+              />
             </div>
             <div className="flex items-center justify-between">
-              <a href={mailto} className="text-sm text-zinc-400 hover:underline">메일 앱으로 열기</a>
-              <button type="submit" className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20">
+              <a href={mailto} className="text-sm text-zinc-400 hover:underline">
+                메일 앱으로 열기
+              </a>
+              <button
+                type="submit"
+                className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20"
+              >
                 <Send className="h-4 w-4" /> 보내기
               </button>
             </div>
@@ -592,10 +611,18 @@ function Inquiry() {
         </form>
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
           <h4 className="mb-2 font-semibold text-white">연락처</h4>
-          <div className="mt-2 flex items-center gap-3 text-zinc-300"><Phone className="h-4 w-4 text-emerald-300" /> {COMPANY.tel}</div>
-          <div className="mt-1 flex items-center gap-3 text-zinc-300"><Mail className="h-4 w-4 text-emerald-300" /> {COMPANY.email}</div>
-          <div className="mt-1 flex items-center gap-3 text-zinc-300"><MapPin className="h-4 w-4 text-emerald-300" /> {COMPANY.address_ko}</div>
-          <p className="mt-4 text-sm text-zinc-400">※ 도면(PDF/DWG/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.</p>
+          <div className="mt-2 flex items-center gap-3 text-zinc-300">
+            <Phone className="h-4 w-4 text-emerald-300" /> {COMPANY.tel}
+          </div>
+          <div className="mt-1 flex items-center gap-3 text-zinc-300">
+            <Mail className="h-4 w-4 text-emerald-300" /> {COMPANY.email}
+          </div>
+          <div className="mt-1 flex items-center gap-3 text-zinc-300">
+            <MapPin className="h-4 w-4 text-emerald-300" /> {COMPANY.address_ko}
+          </div>
+          <p className="mt-4 text-sm text-zinc-400">
+            ※ 도면(PDF/DWG/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.
+          </p>
         </div>
       </div>
     </Section>
@@ -615,7 +642,6 @@ function MapSection() {
         </div>
         <div className="lg:col-span-2">
           <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10">
-            {/* ✅ 핵심: w/h 고정 삭제 + 꽉 채우기 */}
             <iframe
               title="map"
               className="block h-full w-full"
@@ -642,7 +668,9 @@ function Footer() {
           <div className="mt-2 text-sm text-zinc-400">{COMPANY.regno}</div>
         </div>
         <div className="md:text-right">
-          <div className="text-sm text-zinc-400">© {new Date().getFullYear()} LuminoChip. All rights reserved.</div>
+          <div className="text-sm text-zinc-400">
+            © {new Date().getFullYear()} LuminoChip. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>
