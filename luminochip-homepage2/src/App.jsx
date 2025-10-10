@@ -219,28 +219,80 @@ function Hero() {
         {/* 오른쪽: 동영상 1/3, 이미지 2/3 */}
         <div className="relative w-full md:h-[560px]">
           <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
-            {/* 동영상: 왼쪽 1칸 */}
-            <div className="relative md:col-span-1">
-              {/* 모바일: 비율 유지 / 데스크톱: 타일 높이 채움 */}
-              <div className="aspect-video md:aspect-auto md:h-full">
-                <video
-                  ref={videoRef}
-                  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
-                             object-contain md:object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  webkit-playsinline="true"
-                  preload="metadata"
-                  poster="/images/hero-poster.jpg"
-                >
-                  <source src="/videos/hero.mp4" type="video/mp4" />
-                  <source src="/videos/hero.webm" type="video/webm" />
-                  브라우저가 HTML5 동영상을 지원하지 않습니다.
-                </video>
-              </div>
-            </div>
+           function Hero() {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  // 🔊 추가: 음소거 상태
+  const [muted, setMuted] = useState(true);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const onCanPlay = () => setReady(true);
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    v.addEventListener("canplay", onCanPlay);
+    v.addEventListener("play", onPlay);
+    v.addEventListener("pause", onPause);
+
+    // 초기 자동재생 정책 통과용(무음)
+    v.muted = true;
+
+    return () => {
+      v.removeEventListener("canplay", onCanPlay);
+      v.removeEventListener("play", onPlay);
+      v.removeEventListener("pause", onPause);
+    };
+  }, []);
+
+  // 🔊 추가: 음소거 토글
+  const toggleMute = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    const next = !muted;
+    v.muted = next;
+    setMuted(next);
+    if (!next) {
+      // 사용자 상호작용 이후 사운드 재생 보장
+      v.play().catch(() => {});
+    }
+  };
+{/* 동영상: 왼쪽 1칸 */}
+<div className="relative md:col-span-1">
+  {/* 모바일: 비율 유지 / 데스크톱: 타일 높이 채움 */}
+  <div className="aspect-video md:aspect-auto md:h-full">
+    <video
+      ref={videoRef}
+      className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
+                 object-contain md:object-cover"
+      autoPlay
+      muted={muted}               // ✅ 상태로 연결
+      loop
+      playsInline
+      webkit-playsinline="true"
+      preload="metadata"
+      poster="/images/hero-poster.jpg"
+    >
+      <source src="/videos/hero.mp4" type="video/mp4" />
+      <source src="/videos/hero.webm" type="video/webm" />
+      브라우저가 HTML5 동영상을 지원하지 않습니다.
+    </video>
+  </div>
+
+  {/* ✅ 추가: 음소거/해제 버튼 (우하단) */}
+  <button
+    type="button"
+    onClick={toggleMute}
+    className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20
+               bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
+    aria-label={muted ? "음소거 해제" : "음소거"}
+  >
+    {muted ? "🔇 음소거 해제" : "🔊 음소거"}
+  </button>
+</div>
+
 
             {/* 이미지: 오른쪽 2칸 세로 2장 */}
             <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
