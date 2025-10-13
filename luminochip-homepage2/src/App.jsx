@@ -27,6 +27,8 @@ const PRODUCTS = [
   { name: "SiC 미세홀(40x40) 2400EA", img: "/images/SiC미세홀(40x40)2400EA.png" },
   { name: "UV코팅, AR 코팅, 일반 SAPPHIRE, Quartz Polishing & Laser marking", img: "/images/UV코팅,AR코팅,일반SAPPHIRE쿼츠폴리싱&레이저마킹.png" },
   { name: "원형 Si3N4", img: "/images/원형Si3N4.png" },
+  { name: "Al2O3 Hot Press 미세홀", img: "/images/Al2O3 Hot Press 미세홀.png" },
+  { name: "Al2O3 Hot Press 미세홀 내측", img: "/images/Al2O3 Hot Press 미세홀 내측.png" },
 ];
 
 const PLACEHOLDER = "/images/placeholder.png";
