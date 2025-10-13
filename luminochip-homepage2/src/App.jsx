@@ -71,6 +71,9 @@ const COMPANY = {
   email: "luminochip@naver.com",
   address_ko: "경상북도 구미시 공단동 260-10 한라시그마벨리 9층 919호 (기술 영업사무소)",
   address_en: "212, 1gongdan-ro, Gumi-si, Gyeongsangbuk-do, Republic of Korea",
+
+  // ✅ 추가
+  ceo: "김윤성",
 };
 
 function useScrollTop(threshold = 240) {
@@ -620,21 +623,27 @@ function Inquiry() {
             </div>
           </div>
         </form>
-        <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
-          <h4 className="mb-2 font-semibold text-white">연락처</h4>
-          <div className="mt-2 flex items-center gap-3 text-zinc-300">
-            <Phone className="h-4 w-4 text-emerald-300" /> {COMPANY.tel}
-          </div>
-          <div className="mt-1 flex items-center gap-3 text-zinc-300">
-            <Mail className="h-4 w-4 text-emerald-300" /> {COMPANY.email}
-          </div>
-          <div className="mt-1 flex items-center gap-3 text-zinc-300">
-            <MapPin className="h-4 w-4 text-emerald-300" /> {COMPANY.address_ko}
-          </div>
-          <p className="mt-4 text-sm text-zinc-400">
-            ※ 도면(PDF/DWG/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.
-          </p>
-        </div>
+       <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
+  <h4 className="mb-2 font-semibold text-white">연락처</h4>
+
+  {/* ✅ 대표자 표시 추가 */}
+  <div className="mt-1 flex items-center gap-3 text-zinc-300">
+    <Building2 className="h-4 w-4 text-emerald-300" /> 대표 : {COMPANY.ceo}
+  </div>
+
+  <div className="mt-2 flex items-center gap-3 text-zinc-300">
+    <Phone className="h-4 w-4 text-emerald-300" /> {COMPANY.tel}
+  </div>
+  <div className="mt-1 flex items-center gap-3 text-zinc-300">
+    <Mail className="h-4 w-4 text-emerald-300" /> {COMPANY.email}
+  </div>
+  <div className="mt-1 flex items-center gap-3 text-zinc-300">
+    <MapPin className="h-4 w-4 text-emerald-300" /> {COMPANY.address_ko}
+  </div>
+  <p className="mt-4 text-sm text-zinc-400">
+    ※ 도면(PDF/DWG/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.
+  </p>
+</div>
       </div>
     </Section>
   );
