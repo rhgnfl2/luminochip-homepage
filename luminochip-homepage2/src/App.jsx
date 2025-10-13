@@ -26,9 +26,11 @@ const PRODUCTS = [
   { name: "Quartz 미세홀 가공", img: "/images/Quartz미세홀가공.png" },
   { name: "SiC 미세홀(40x40) 2400EA", img: "/images/SiC미세홀(40x40)2400EA.png" },
   { name: "UV코팅, AR 코팅, 일반 SAPPHIRE, Quartz Polishing & Laser marking", img: "/images/UV코팅,AR코팅,일반SAPPHIRE쿼츠폴리싱&레이저마킹.png" },
-  { name: "원형 Si3N4", img: "/images/원형Si3N4.png" },
-  { name: "Al2O3 Hot Press 미세홀", img: "/images/Al2O3 Hot Press 미세홀.png" },
-  { name: "Al2O3 Hot Press 미세홀 내측", img: "/images/Al2O3 Hot Press 미세홀 내측.png" },
+
+  // 🔧 위쪽이 잘리던 3개만 'contain + top'으로 지정
+  { name: "원형 Si3N4", img: "/images/원형Si3N4.png", fit: "contain", pos: "top" },
+  { name: "Al2O3 Hot Press 미세홀", img: "/images/Al2O3 Hot Press 미세홀.png", fit: "contain", pos: "top" },
+  { name: "Al2O3 Hot Press 미세홀 내측", img: "/images/Al2O3 Hot Press 미세홀 내측.png", fit: "contain", pos: "top" },
 ];
 
 const PLACEHOLDER = "/images/placeholder.png";
@@ -334,13 +336,20 @@ function Products() {
               className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800 cursor-pointer"
               onClick={() => setSelectedImg(p.img)}
             >
-              <img
-                src={p.img || PLACEHOLDER}
-                alt={p.name}
-                loading="lazy"
-                onError={handleImgError}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
+             <img
+  src={p.img || PLACEHOLDER}
+  alt={p.name}
+  loading="lazy"
+  onError={handleImgError}
+  className={[
+    "h-full w-full",
+    p?.fit === "contain" ? "object-contain" : "object-cover",
+    p?.pos === "top" ? "object-top" : "object-center",
+    "transition-transform duration-300",
+    // contain일 땐 확대 호버 제거(여백이 있어 확대하면 보기 안 좋음)
+    p?.fit === "contain" ? "" : "group-hover:scale-105",
+  ].join(" ").trim()}
+/>
             </div>
 
             <h3 className="text-lg font-medium text-white">{p.name}</h3>
