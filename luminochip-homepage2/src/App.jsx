@@ -73,7 +73,7 @@ const COMPANY = {
   address_en: "212, 1gongdan-ro, Gumi-si, Gyeongsangbuk-do, Republic of Korea",
 
   // ✅ 추가
-  ceo: "김윤성 (YunSeong KIM)",
+  ceo: "김윤성 (YunSeong Kim)",
 };
 
 function useScrollTop(threshold = 240) {
