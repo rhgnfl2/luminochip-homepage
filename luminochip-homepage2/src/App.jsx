@@ -185,7 +185,7 @@ function Hero() {
   };
 
   return (
-    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 min-h-[100svh]">
+    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 min-h-[88svh] md:min-h-[72svh]">
       {/* 배경 */}
       <div
         className="absolute inset-0 -z-10 opacity-30 pointer-events-none"
@@ -196,7 +196,7 @@ function Hero() {
       />
 
       {/* 좌우 2컬럼: 좌(카피), 우(미디어) */}
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 md:grid-cols-2 md:px-6 md:py-14">
         {/* 왼쪽 칼럼 */}
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
@@ -302,10 +302,11 @@ function Hero() {
   );
 }
 
-function Section({ id, icon: Icon, title, subtitle, children }) {
+function Section({ id, icon: Icon, title, subtitle, children, pad = "normal" }) {
+  const padY = pad === "compact" ? "py-10" : "py-14";
   return (
     <section id={id} className="border-t border-white/10 bg-zinc-950 scroll-mt-24">
-      <div className="mx-auto max-w-7xl px-4 py-14 md:px-6">
+      <div className={`mx-auto max-w-7xl px-4 ${padY} md:px-6`}>
         <div className="mb-8 flex items-center gap-3">
           {Icon && <Icon className="h-6 w-6 text-emerald-300" />}
           <h2 className="text-2xl font-semibold text-white md:text-3xl">{title}</h2>
@@ -403,6 +404,7 @@ function About() {
       icon={Building2}
       title="회사소개"
       subtitle="루미노칩은 반도체 및 디스플레이 공정용 정밀 부품을 공급하는 제조/가공 전문 기업입니다. 투명하고 깨끗한 경영과 데이터 기반 공정 관리로 고객 신뢰를 쌓아갑니다."
+      pad="compact"   // ⬅️ 추가
     >
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
