@@ -354,7 +354,7 @@ function Products() {
 />
             </div>
 
-            <h3 className="text-lg font-medium text-white">{p.name}</h3>
+            <h3 className="text-lg font-medium text-white text-center">{p.name}</h3>
             <div className="mt-1 text-sm text-emerald-300">{p.mat}</div>
             {p.desc && (
               <p className="mt-2 text-sm leading-relaxed text-zinc-300">
@@ -494,7 +494,7 @@ function Clients() {
                 onError={handleImgError}
               />
             </div>
-            <h3 className="text-lg font-medium text-white">{c.name}</h3>
+            <h3 className="text-lg font-medium text-white text-center">{c.name}</h3>
           </div>
         ))}
       </div>
