@@ -210,7 +210,6 @@ function Hero() {
           <p className="mt-4 max-w-prose text-zinc-300">
             초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
             회사는 현재 경북 구미시로 이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과 초정밀 레이저 가공 위주로 재편중에 있습니다.
-            26년 상반기까지 임가공 장비와 라인 구축을 준비중에 있습니다.
           </p>
 
           {/* CTA */}
