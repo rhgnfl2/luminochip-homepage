@@ -55,6 +55,7 @@ const CLIENTS = [
 const CERTS = [
   {
     title: "분석자료 (PDF)",
+    no: "Sapphire",
     status: "샘플 리포트",
     href: "/docs/analysis.pdf",
     img: "/images/pdf-thumb.png",
@@ -65,6 +66,8 @@ const CERTS = [
     no: "QMS-XXXX",
     issuer: "KAB",
     status: "현재 컨설팅 중 입니다",
+    img: "/images/ISO9001.png", 
+    type: "image",
   },
 ];
 
