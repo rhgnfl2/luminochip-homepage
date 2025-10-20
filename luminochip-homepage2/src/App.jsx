@@ -566,25 +566,22 @@ function Certs() {
             </>
           );
 
-          // PDF 타입은 카드 전체를 클릭 → 새 탭에서 열기
-          return c.type === "pdf" && c.href ? (
-            <a
-              key={c.title}
-              href={c.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 hover:bg-zinc-900 transition cursor-pointer"
-            >
-              {content}
-            </a>
-          ) : (
-            <div
-              key={c.title}
-              className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5"
-            >
-              {content}
-            </div>
-          );
+// PDF 카드일 때만 viewer.html로 보냄 (쿼리스트링에 src 전달)
+return c.type === "pdf" && c.href ? (
+  <a
+    key={c.title}
+    href={`/viewer.html?src=${encodeURIComponent(c.href)}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 hover:bg-zinc-900 transition cursor-pointer"
+  >
+    {content}
+  </a>
+) : (
+  <div key={c.title} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
+    {content}
+  </div>
+);
         })}
       </div>
 
