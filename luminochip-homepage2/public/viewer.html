@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <title>PDF Viewer - LuminoChip</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #0a0a0a;
+      color: #d1d5db;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto;
+    }
+    .wrap { position: fixed; inset: 0; }
+    .fallback {
+      padding: 20px;
+      text-align: center;
+      color: #ccc;
+    }
+    object {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #111;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="wrap">
+    <object id="pdfObj" type="application/pdf"></object>
+  </div>
+
+  <script>
+    // URL 예시: /viewer.html?src=/docs/analysis.pdf
+    const params = new URLSearchParams(location.search);
+    const src = params.get('src') || '/docs/analysis.pdf';
+    const pdfObj = document.getElementById('pdfObj');
+    pdfObj.setAttribute('data', src);
+
+    // 폴백 (브라우저가 PDF 미지원 시)
+    setTimeout(() => {
+      if (!pdfObj.contentDocument) {
+        document.getElementById('wrap').innerHTML = `
+          <div class="fallback">
+            PDF를 표시할 수 없습니다.<br />
+            <a href="${src}" target="_blank" rel="noopener" style="color:#34d399;">여기를 눌러 직접 열기</a>
+          </div>`;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
