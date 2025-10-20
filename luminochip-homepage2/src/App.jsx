@@ -54,11 +54,21 @@ const CLIENTS = [
 
 const CERTS = [
   {
+    title: "분석자료 (PDF)",
+    no: "Report-001",
+    issuer: "LuminoChip",
+    status: "샘플 리포트",
+    href: "/docs/analysis.pdf",
+    img: "/images/pdf-thumb.png",
+    type: "pdf",
+  },
+  {
     title: "ISO 9001",
     no: "QMS-XXXX",
     issuer: "KAB",
     status: "현재 컨설팅 중 입니다",
     img: "/images/ISO9001.png",
+    type: "image",
   },
 ];
 
@@ -528,8 +538,25 @@ function Certs() {
     <Section id="certs" icon={Shield} title="인증서">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {CERTS.map((c) => (
-          <div key={c.title} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
-            <div className="mb-3 aspect-[4/3] rounded-xl border border-white/10 bg-zinc-800/60" />
+          <div
+            key={c.title}
+            className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5"
+          >
+            {/* 썸네일/프리뷰 영역 */}
+            <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60 flex items-center justify-center">
+              {c.img ? (
+                <img
+                  src={c.img}
+                  alt={c.title}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <div className="text-zinc-400 text-sm">No Preview</div>
+              )}
+            </div>
+
+            {/* 텍스트 메타 */}
             <div className="text-white">{c.title}</div>
             <div className="text-sm text-zinc-300">{c.no} · {c.issuer}</div>
             {c.status && (
@@ -537,10 +564,36 @@ function Certs() {
                 {c.status}
               </div>
             )}
+
+            {/* PDF일 때만 버튼 노출 */}
+            {c.type === "pdf" && c.href && (
+              <div className="mt-4 flex items-center gap-2">
+                <a
+                  href={c.href}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-3 py-1.5 text-sm text-zinc-200 hover:bg-white/5"
+                >
+                  <FileText className="h-4 w-4" />
+                  미리보기
+                </a>
+                <a
+                  href={c.href}
+                  download
+                  className="inline-flex items-center gap-2 rounded-xl border border-emerald-300/40 bg-emerald-300/10 px-3 py-1.5 text-sm text-emerald-200 hover:bg-emerald-300/20"
+                >
+                  <ArrowRight className="h-4 w-4" />
+                  다운로드
+                </a>
+              </div>
+            )}
           </div>
         ))}
       </div>
-      <p className="mt-4 text-sm text-zinc-400">원본 스캔본(이미지/PDF)을 여기 섹션에 교체 업로드하면 됩니다.</p>
+
+      <p className="mt-4 text-sm text-zinc-400">
+        원본 스캔본(이미지/PDF)을 여기 섹션에 교체 업로드하면 됩니다.
+      </p>
     </Section>
   );
 }
