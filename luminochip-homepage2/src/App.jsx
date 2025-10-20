@@ -536,50 +536,56 @@ function Certs() {
   return (
     <Section id="certs" icon={Shield} title="인증서">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {CERTS.map((c) => (
-          <div
-            key={c.title}
-            className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5"
-          >
-            {/* 썸네일/프리뷰 영역 */}
-            <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60 flex items-center justify-center">
-              {c.img ? (
-                <img
-                  src={c.img}
-                  alt={c.title}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                />
-              ) : (
-                <div className="text-zinc-400 text-sm">No Preview</div>
-              )}
-            </div>
-
-            {/* 텍스트 메타 */}
-            <div className="text-white">{c.title}</div>
-            <div className="text-sm text-zinc-300">{c.no} · {c.issuer}</div>
-            {c.status && (
-              <div className="mt-1 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1 text-xs text-emerald-300">
-                {c.status}
+        {CERTS.map((c) => {
+          const content = (
+            <>
+              {/* 썸네일/프리뷰 영역 */}
+              <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60 flex items-center justify-center">
+                {c.img ? (
+                  <img
+                    src={c.img}
+                    alt={c.title}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="text-zinc-400 text-sm">No Preview</div>
+                )}
               </div>
-            )}
 
-            {/* PDF일 때만 버튼 노출 */}
-{c.type === "pdf" && c.href && (
-  <div className="mt-4">
-    <a
-      href={c.href}
-      target="_blank"
-      rel="noopener"
-      className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-3 py-1.5 text-sm text-zinc-200 hover:bg-white/5"
-    >
-      <FileText className="h-4 w-4" />
-      미리보기
-    </a>
-  </div>
-)}
-          </div>
-        ))}
+              {/* 텍스트 메타 */}
+              <div className="text-white">{c.title}</div>
+              <div className="text-sm text-zinc-300">
+                {c.no} · {c.issuer}
+              </div>
+              {c.status && (
+                <div className="mt-1 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1 text-xs text-emerald-300">
+                  {c.status}
+                </div>
+              )}
+            </>
+          );
+
+          // PDF 타입은 카드 전체를 클릭 → 새 탭에서 열기
+          return c.type === "pdf" && c.href ? (
+            <a
+              key={c.title}
+              href={c.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 hover:bg-zinc-900 transition cursor-pointer"
+            >
+              {content}
+            </a>
+          ) : (
+            <div
+              key={c.title}
+              className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5"
+            >
+              {content}
+            </div>
+          );
+        })}
       </div>
 
       <p className="mt-4 text-sm text-zinc-400">
