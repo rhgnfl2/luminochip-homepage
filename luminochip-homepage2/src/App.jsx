@@ -65,8 +65,6 @@ const CERTS = [
     no: "QMS-XXXX",
     issuer: "KAB",
     status: "현재 컨설팅 중 입니다",
-    img: "/images/ISO9001.png",
-    type: "image",
   },
 ];
 
@@ -564,27 +562,19 @@ function Certs() {
             )}
 
             {/* PDF일 때만 버튼 노출 */}
-            {c.type === "pdf" && c.href && (
-              <div className="mt-4 flex items-center gap-2">
-                <a
-                  href={c.href}
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-3 py-1.5 text-sm text-zinc-200 hover:bg-white/5"
-                >
-                  <FileText className="h-4 w-4" />
-                  미리보기
-                </a>
-                <a
-                  href={c.href}
-                  download
-                  className="inline-flex items-center gap-2 rounded-xl border border-emerald-300/40 bg-emerald-300/10 px-3 py-1.5 text-sm text-emerald-200 hover:bg-emerald-300/20"
-                >
-                  <ArrowRight className="h-4 w-4" />
-                  다운로드
-                </a>
-              </div>
-            )}
+{c.type === "pdf" && c.href && (
+  <div className="mt-4">
+    <a
+      href={c.href}
+      target="_blank"
+      rel="noopener"
+      className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-3 py-1.5 text-sm text-zinc-200 hover:bg-white/5"
+    >
+      <FileText className="h-4 w-4" />
+      미리보기
+    </a>
+  </div>
+)}
           </div>
         ))}
       </div>
