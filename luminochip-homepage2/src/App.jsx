@@ -547,7 +547,7 @@ function Certs() {
   onClick={() => setSelectedImg("/certs/analysis-1.png")}
   className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 p-3 text-left transition hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
 >
-  <div className="grid gap-2">
+  <div className="grid grid-cols-2 gap-2">
     {/* 상단 이미지 */}
     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
       <img
