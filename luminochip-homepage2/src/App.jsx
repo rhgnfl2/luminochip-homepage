@@ -537,7 +537,7 @@ function Certs() {
   };
 
   return (
-    <Section id="certs" icon={Shield} title="인증서 / 분석자료">
+    <Section id="certs" icon={Shield} title="인증서">
       {/* ✅ 분석자료 + ISO 한 그리드로 통합 */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {/* 분석자료 이미지 카드들 */}
