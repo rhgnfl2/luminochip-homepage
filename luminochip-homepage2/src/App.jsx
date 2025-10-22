@@ -541,28 +541,39 @@ function Certs() {
       {/* ✅ 분석자료 + ISO 한 그리드로 통합 */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {/* 분석자료 이미지 카드들 */}
-        {CERT_IMAGES.map((img) => (
-          <button
-            key={img.src}
-            type="button"
-            onClick={() => setSelectedImg(img.src)}
-            className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 p-3 text-left transition hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-          >
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
-              <img
-                src={img.src}
-                alt={img.alt}
-                loading="lazy"
-                onError={onError}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-              />
-              <div className="pointer-events-none absolute bottom-2 right-2 rounded-md bg-black/40 px-2 py-1 text-[11px] text-white backdrop-blur">
-                클릭하면 확대
-              </div>
-            </div>
-            <div className="mt-2 text-sm text-zinc-300">{img.alt}</div>
-          </button>
-        ))}
+        {/* 분석자료 카드 — 2장을 한 칸에 표시 */}
+<button
+  type="button"
+  onClick={() => setSelectedImg("/certs/analysis-1.png")}
+  className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 p-3 text-left transition hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+>
+  <div className="grid gap-2">
+    {/* 상단 이미지 */}
+    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
+      <img
+        src="/certs/analysis-1.png"
+        alt="분석자료 1"
+        loading="lazy"
+        onError={onError}
+        className="h-full w-full object-cover"
+      />
+    </div>
+
+    {/* 하단 이미지 */}
+    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
+      <img
+        src="/certs/analysis-2.png"
+        alt="분석자료 2"
+        loading="lazy"
+        onError={onError}
+        className="h-full w-full object-cover"
+      />
+    </div>
+  </div>
+
+  <div className="mt-2 text-sm text-zinc-300 text-center">분석자료 (1–2)</div>
+</button>
+
 
         {/* ISO 등 기타 인증 카드들 */}
         {CERT_MISC?.map((c) => (
