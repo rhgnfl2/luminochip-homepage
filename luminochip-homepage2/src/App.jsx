@@ -52,22 +52,20 @@ const CLIENTS = [
   { name: "Micro Vickers Tester", img: "/images/마이크로 비커스.png" },
 ];
 
-const CERTS = [
-  {
-    title: "분석자료 (PDF)",
-    no: "SAPPHIRE",
-    status: "샘플 리포트",
-    href: "/docs/analysis.pdf",
-    img: "/images/pdf-thumb.png",
-    type: "pdf",
-  },
+// 분석자료를 PNG 4장으로 노출 (public/certs/* 에 파일 배치)
+const CERT_IMAGES = [
+  { src: "/certs/analysis-1.png", alt: "분석자료 1" },
+  { src: "/certs/analysis-2.png", alt: "분석자료 2" },
+  { src: "/certs/analysis-3.png", alt: "분석자료 3" },
+  { src: "/certs/analysis-4.png", alt: "분석자료 4" },
+];
+
+// (선택) ISO 9001 같은 이미지는 따로 카드로 보여주고 싶다면 여기에 추가 배열을 둬도 됨
+const CERT_MISC = [
   {
     title: "ISO 9001",
-    no: "QMS-XXXX",
-    issuer: "KAB",
-    status: "현재 컨설팅 중 입니다",
-    img: "/images/ISO9001.png", 
-    type: "image",
+    note: "현재 컨설팅 중 입니다",
+    img: "/images/ISO9001.png",
   },
 ];
 
@@ -533,60 +531,95 @@ function Clients() {
 }
 
 function Certs() {
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+
+  const onError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    (e.currentTarget as HTMLImageElement).src = "/images/placeholder.png";
+  };
+
   return (
-    <Section id="certs" icon={Shield} title="인증서">
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {CERTS.map((c) => {
-          const content = (
-            <>
-              {/* 썸네일/프리뷰 영역 */}
-              <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60 flex items-center justify-center">
-                {c.img ? (
+    <Section id="certs" icon={Shield} title="인증서 / 분석자료">
+      {/* PNG 4장 갤러리 */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {CERT_IMAGES.map((img) => (
+          <button
+            key={img.src}
+            type="button"
+            onClick={() => setSelectedImg(img.src)}
+            className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 p-3 text-left transition hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+          >
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
+              <img
+                src={img.src}
+                alt={img.alt}
+                loading="lazy"
+                onError={onError}
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+              <div className="pointer-events-none absolute bottom-2 right-2 rounded-md bg-black/40 px-2 py-1 text-[11px] text-white backdrop-blur">
+                클릭하면 확대
+              </div>
+            </div>
+            <div className="mt-2 text-sm text-zinc-300">{img.alt}</div>
+          </button>
+        ))}
+      </div>
+
+      {/* (선택) ISO 같은 기타 인증 이미지 카드 */}
+      {CERT_MISC?.length ? (
+        <>
+          <h3 className="sr-only">기타 인증</h3>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {CERT_MISC.map((c) => (
+              <div key={c.title} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
+                <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
                   <img
                     src={c.img}
                     alt={c.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
+                    onError={onError}
+                    className="h-full w-full object-contain"
                   />
-                ) : (
-                  <div className="text-zinc-400 text-sm">No Preview</div>
-                )}
-              </div>
-
-              {/* 텍스트 메타 */}
-              <div className="text-white">{c.title}</div>
-              <div className="text-sm text-zinc-300">
-                {c.no} · {c.issuer}
-              </div>
-              {c.status && (
-                <div className="mt-1 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1 text-xs text-emerald-300">
-                  {c.status}
                 </div>
-              )}
-            </>
-          );
+                <div className="text-white">{c.title}</div>
+                {c.note && <div className="text-sm text-zinc-300">{c.note}</div>}
+              </div>
+            ))}
+          </div>
+        </>
+      ) : null}
 
-// PDF 카드일 때만 viewer.html로 보냄 (쿼리스트링에 src 전달)
-return c.type === "pdf" && c.href ? (
-  <a
-    key={c.title}
-    href={`/viewer.html?src=${encodeURIComponent(c.href)}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 hover:bg-zinc-900 transition cursor-pointer"
-  >
-    {content}
-  </a>
-) : (
-  <div key={c.title} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
-    {content}
-  </div>
-);
-        })}
-      </div>
+      {/* 확대 모달 */}
+      {selectedImg && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setSelectedImg(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="relative max-h-[90vh] w-full max-w-5xl">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImg(null);
+              }}
+              className="absolute -top-10 right-0 text-white hover:text-emerald-300"
+              aria-label="닫기"
+            >
+              <X className="h-8 w-8" />
+            </button>
+            <img
+              src={selectedImg}
+              alt="분석자료 확대 이미지"
+              className="max-h-[90vh] w-auto rounded-xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
 
       <p className="mt-4 text-sm text-zinc-400">
-        원본 스캔본(이미지/PDF)을 여기 섹션에 교체 업로드하면 됩니다.
+        원본 스캔 PNG 이미지를 <code>/public/certs</code> 폴더에 교체 업로드하면 자동 반영됩니다.
       </p>
     </Section>
   );
