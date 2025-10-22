@@ -52,7 +52,7 @@ const CLIENTS = [
   { name: "Micro Vickers Tester", img: "/images/마이크로 비커스.png" },
 ];
 
-// 분석자료를 PNG 4장으로 노출 (public/certs/* 에 파일 배치)
+// 분석자료를 PNG 2장으로 노출 (public/certs/* 에 파일 배치)
 const CERT_IMAGES = [
   { src: "/certs/analysis-1.png", alt: "분석자료 1" },
   { src: "/certs/analysis-2.png", alt: "분석자료 2" },
@@ -537,7 +537,7 @@ function Certs() {
 };
 
   return (
-    <Section id="certs" icon={Shield} title="인증서 / 분석자료">
+    <Section id="certs" icon={Shield} title="인증서">
       {/* PNG 4장 갤러리 */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {CERT_IMAGES.map((img) => (
