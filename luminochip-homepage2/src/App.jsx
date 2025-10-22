@@ -532,14 +532,15 @@ function Certs() {
   const [selectedImg, setSelectedImg] = useState(null);
 
   const onError = (e) => {
-  e.currentTarget.onerror = null; // 무한 루프 방지
-  e.currentTarget.src = "/images/placeholder.png";
-};
+    e.currentTarget.onerror = null; // 무한 루프 방지
+    e.currentTarget.src = "/images/placeholder.png";
+  };
 
   return (
-    <Section id="certs" icon={Shield} title="인증서">
-      {/* PNG 4장 갤러리 */}
+    <Section id="certs" icon={Shield} title="인증서 / 분석자료">
+      {/* ✅ 분석자료 + ISO 한 그리드로 통합 */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* 분석자료 이미지 카드들 */}
         {CERT_IMAGES.map((img) => (
           <button
             key={img.src}
@@ -562,40 +563,35 @@ function Certs() {
             <div className="mt-2 text-sm text-zinc-300">{img.alt}</div>
           </button>
         ))}
-      </div>
 
-      {/* (선택) ISO 같은 기타 인증 이미지 카드 */}
-      {CERT_MISC?.length ? (
-        <>
-          <h3 className="sr-only">기타 인증</h3>
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {CERT_MISC.map((c) => (
-              <div key={c.title} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
-                <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
-                  <img
-                    src={c.img}
-                    alt={c.title}
-                    loading="lazy"
-                    onError={onError}
-                    className="h-full w-full object-contain"
-                  />
-                </div>
-                <div className="text-white">{c.title}</div>
-                {c.note && c.note.includes("컨설팅") && (
-  <div
-    className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber-400/30
-               bg-amber-400/10 px-2.5 py-1 text-xs text-amber-300"
-    title="현재 컨설팅 중"
-  >
-    <Wrench className="h-3.5 w-3.5" />
-    현재 컨설팅 중
-  </div>
-)}
+        {/* ISO 등 기타 인증 카드들 */}
+        {CERT_MISC?.map((c) => (
+          <div key={c.title} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
+            <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
+              <img
+                src={c.img}
+                alt={c.title}
+                loading="lazy"
+                onError={onError}
+                className="h-full w-full object-contain"
+              />
+            </div>
+            <div className="text-white">{c.title}</div>
+
+            {/* 컨설팅 아이콘 뱃지 */}
+            {c.note && c.note.includes("컨설팅") && (
+              <div
+                className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber-400/30
+                           bg-amber-400/10 px-2.5 py-1 text-xs text-amber-300"
+                title="현재 컨설팅 중"
+              >
+                <Wrench className="h-3.5 w-3.5" />
+                현재 컨설팅 중
               </div>
-            ))}
+            )}
           </div>
-        </>
-      ) : null}
+        ))}
+      </div>
 
       {/* 확대 모달 */}
       {selectedImg && (
