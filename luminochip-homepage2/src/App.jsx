@@ -622,9 +622,7 @@ function Certs() {
         </div>
       )}
 
-      <p className="mt-4 text-sm text-zinc-400">
-        원본 스캔 PNG 이미지를 <code>/public/certs</code> 폴더에 교체 업로드하면 자동 반영됩니다.
-      </p>
+
     </Section>
   );
 }
