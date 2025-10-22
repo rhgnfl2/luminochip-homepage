@@ -545,10 +545,11 @@ function Certs() {
 <button
   type="button"
   onClick={() => setSelectedImg("/certs/analysis-1.png")}
-  className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 p-3 text-left transition hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+  className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 p-3 text-left transition hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400
+             sm:col-span-2 lg:col-span-2"
 >
+  {/* 가로로 나란히 보고 싶으면 grid-cols-2, 세로면 기본 grid */}
   <div className="grid grid-cols-2 gap-2">
-    {/* 상단 이미지 */}
     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
       <img
         src="/certs/analysis-1.png"
@@ -558,8 +559,6 @@ function Certs() {
         className="h-full w-full object-cover"
       />
     </div>
-
-    {/* 하단 이미지 */}
     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
       <img
         src="/certs/analysis-2.png"
@@ -570,7 +569,6 @@ function Certs() {
       />
     </div>
   </div>
-
   <div className="mt-2 text-sm text-zinc-300 text-center">분석자료 (1–2)</div>
 </button>
 
