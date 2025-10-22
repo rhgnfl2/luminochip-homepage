@@ -581,7 +581,16 @@ function Certs() {
                   />
                 </div>
                 <div className="text-white">{c.title}</div>
-                {c.note && <div className="text-sm text-zinc-300">{c.note}</div>}
+                {c.note && c.note.includes("컨설팅") && (
+  <div
+    className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber-400/30
+               bg-amber-400/10 px-2.5 py-1 text-xs text-amber-300"
+    title="현재 컨설팅 중"
+  >
+    <Wrench className="h-3.5 w-3.5" />
+    현재 컨설팅 중
+  </div>
+)}
               </div>
             ))}
           </div>
