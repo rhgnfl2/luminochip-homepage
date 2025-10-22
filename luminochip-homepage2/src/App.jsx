@@ -531,11 +531,12 @@ function Clients() {
 }
 
 function Certs() {
-  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [selectedImg, setSelectedImg] = useState(null);
 
-  const onError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    (e.currentTarget as HTMLImageElement).src = "/images/placeholder.png";
-  };
+  const onError = (e) => {
+  e.currentTarget.onerror = null; // 무한 루프 방지
+  e.currentTarget.src = "/images/placeholder.png";
+};
 
   return (
     <Section id="certs" icon={Shield} title="인증서 / 분석자료">
