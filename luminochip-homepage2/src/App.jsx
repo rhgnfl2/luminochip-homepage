@@ -52,10 +52,12 @@ const CLIENTS = [
   { name: "Micro Vickers Tester", img: "/images/마이크로 비커스.png" },
 ];
 
-// 분석자료를 PNG 2장으로 노출 (public/certs/* 에 파일 배치)
+// 분석자료를 PNG 4장으로 노출 (public/certs/* 에 파일 배치)
 const CERT_IMAGES = [
   { src: "/certs/analysis-1.png", alt: "분석자료 1" },
   { src: "/certs/analysis-2.png", alt: "분석자료 2" },
+  { src: "/certs/analysis-3.png", alt: "분석자료 3" },
+  { src: "/certs/analysis-4.png", alt: "분석자료 4" },
 ];
 
 // (선택) ISO 9001 같은 이미지는 따로 카드로 보여주고 싶다면 여기에 추가 배열을 둬도 됨
