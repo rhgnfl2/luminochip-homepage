@@ -542,38 +542,30 @@ function Certs() {
     <Section id="certs" icon={Shield} title="인증서">
       {/* ✅ 분석자료 + ISO 한 그리드로 통합 */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {/* 분석자료 이미지 카드들 */}
-        {/* 분석자료 카드 — 2장을 한 칸에 표시 */}
-<button
-  type="button"
-  onClick={() => setSelectedImg("/certs/analysis-1.png")}
-  className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 p-3 text-left transition hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400
-             sm:col-span-2 lg:col-span-2"
->
-  {/* 가로로 나란히 보고 싶으면 grid-cols-2, 세로면 기본 grid */}
-  <div className="grid grid-cols-2 gap-2">
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
-      <img
-        src="/certs/analysis-1.png"
-        alt="분석자료 1"
-        loading="lazy"
-        onError={onError}
-        className="h-full w-full object-cover"
-      />
-    </div>
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
-      <img
-        src="/certs/analysis-2.png"
-        alt="분석자료 2"
-        loading="lazy"
-        onError={onError}
-        className="h-full w-full object-cover"
-      />
-    </div>
-  </div>
-  <div className="mt-2 text-sm text-zinc-300 text-center">분석자료 (1–2)</div>
-</button>
-
+        {/* 📄 분석자료 카드 (CERT_IMAGES 전체 사용) */}
+        <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-3 sm:col-span-2 lg:col-span-2">
+          <div className="grid grid-cols-2 gap-2">
+            {CERT_IMAGES.map((img) => (
+              <button
+                key={img.src}
+                type="button"
+                onClick={() => setSelectedImg(img.src)}
+                className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60 group"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  onError={onError}
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </button>
+            ))}
+          </div>
+          <div className="mt-2 text-sm text-zinc-300 text-center">
+            분석자료 (1–{CERT_IMAGES.length})
+          </div>
+        </div>
 
         {/* ISO 등 기타 인증 카드들 */}
         {CERT_MISC?.map((c) => (
@@ -632,8 +624,6 @@ function Certs() {
           </div>
         </div>
       )}
-
-
     </Section>
   );
 }
