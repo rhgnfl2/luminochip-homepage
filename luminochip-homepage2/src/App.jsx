@@ -33,7 +33,7 @@ const NAV_ITEMS = [
   { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
   { id: "inquiry", label: "견적문의" },          // ✅ 견적문의 먼저
-  { id: "guestbook", label: "공개 방명록" },     // ✅ 공개 방명록으로 변경
+  { id: "guestbook", label: "방명록" },     // ✅ 방명록으로 변경
   { id: "map", label: "오시는 길" },
 ];
 
@@ -640,7 +640,7 @@ function maskName(raw) {
   return visible + masked;
 }
 
-/* ✅ 공개 방명록 (내용 공개 + 이름/회사명 부분 마스킹 + 비밀번호 삭제) */
+/* ✅ 방명록 (내용 공개 + 이름/회사명 부분 마스킹 + 비밀번호 삭제) */
 function Guestbook() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
@@ -692,13 +692,13 @@ function Guestbook() {
     <Section
       id="guestbook"
       icon={MessageCircle}
-      title="공개 방명록"
+      title="방명록"
       subtitle="이름/회사명은 일부만 마스킹되어 노출되며, 작성하신 글은 공개됩니다. 작성 시 입력한 비밀번호로만 삭제할 수 있습니다."
     >
       <div className="grid gap-8 md:grid-cols-2">
         {/* 왼쪽: 입력 폼 */}
         <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-white">공개 방명록 남기기 ✍️</h3>
+          <h3 className="mb-4 text-lg font-semibold text-white">방명록 남기기 ✍️</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="mb-1 block text-sm text-zinc-300">이름 / 회사명</label>
@@ -958,7 +958,7 @@ export default function App() {
       <Clients />
       <Certs />
       <Inquiry />    {/* ✅ 견적문의 먼저 */}
-      <Guestbook />  {/* ✅ 그 다음 공개 방명록 */}
+      <Guestbook />  {/* ✅ 그 다음 방명록 */}
       <MapSection />
       <Footer />
 
