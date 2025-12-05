@@ -1,7 +1,21 @@
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import {
-  Menu, X, Mail, MapPin, Phone, Factory, Boxes, Shield, FileText, Building2,
-  Wrench, ArrowRight, Send, ChevronUp, CheckCircle
+  Menu,
+  X,
+  Mail,
+  MapPin,
+  Phone,
+  Factory,
+  Boxes,
+  Shield,
+  FileText,
+  Building2,
+  Wrench,
+  ArrowRight,
+  Send,
+  ChevronUp,
+  CheckCircle,
+  MessageCircle, // ✅ 추가
 } from "lucide-react";
 
 /**
@@ -18,6 +32,7 @@ const NAV_ITEMS = [
   { id: "materials", label: "물성표" },
   { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
+  { id: "guestbook", label: "방명록" }, // ✅ 방명록 메뉴 추가
   { id: "inquiry", label: "견적문의" },
   { id: "map", label: "오시는 길" },
 ];
@@ -25,7 +40,10 @@ const NAV_ITEMS = [
 const PRODUCTS = [
   { name: "Quartz 미세홀 가공", img: "/images/Quartz미세홀가공.png" },
   { name: "SiC 미세홀(40x40) 2400EA", img: "/images/SiC미세홀(40x40)2400EA.png" },
-  { name: "UV코팅, AR 코팅, 일반 SAPPHIRE, Quartz Polishing & Laser marking", img: "/images/UV코팅,AR코팅,일반SAPPHIRE쿼츠폴리싱&레이저마킹.png" },
+  {
+    name: "UV코팅, AR 코팅, 일반 SAPPHIRE, Quartz Polishing & Laser marking",
+    img: "/images/UV코팅,AR코팅,일반SAPPHIRE쿼츠폴리싱&레이저마킹.png",
+  },
 
   // 🔧 위쪽이 잘리던 3개만 'contain + top'으로 지정
   { name: "원형 Si3N4", img: "/images/원형Si3N4.png", fit: "contain", pos: "top" },
@@ -101,11 +119,7 @@ function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         {/* 로고 + 회사명 */}
         <a href="#top" className="flex items-center gap-3">
-          <img
-            src="/images/logo.png"
-            alt="Luminochip Logo"
-            className="h-14 w-14 rounded-2xl object-cover"
-          />
+          <img src="/images/logo.png" alt="Luminochip Logo" className="h-14 w-14 rounded-2xl object-cover" />
           <div>
             <div className="text-sm tracking-wider text-zinc-300">{COMPANY.tagline_en}</div>
             <div className="text-lg font-semibold text-white">{COMPANY.name}</div>
@@ -115,22 +129,14 @@ function Header() {
         {/* 데스크탑 네비게이션 */}
         <nav className="hidden gap-6 md:flex">
           {NAV_ITEMS.map((n) => (
-            <a
-              key={n.id}
-              href={`#${n.id}`}
-              className="text-2g text-zinc-200 hover:text-white"
-            >
+            <a key={n.id} href={`#${n.id}`} className="text-2g text-zinc-200 hover:text-white">
               {n.label}
             </a>
           ))}
         </nav>
 
         {/* 모바일 메뉴 버튼 */}
-        <button
-          className="md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="toggle menu"
-        >
+        <button className="md:hidden" onClick={() => setOpen((v) => !v)} aria-label="toggle menu">
           {open ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
         </button>
       </div>
@@ -163,7 +169,7 @@ function Hero() {
   const [muted, setMuted] = useState(true); // 🔊 음소거 상태
 
   useEffect(() => {
-    const v = videoRef.current;
+    const v: any = videoRef.current;
     if (!v) return;
     const onCanPlay = () => setReady(true);
     const onPlay = () => setIsPlaying(true);
@@ -183,7 +189,7 @@ function Hero() {
   }, []);
 
   const toggleMute = () => {
-    const v = videoRef.current;
+    const v: any = videoRef.current;
     if (!v) return;
     const next = !muted;
     v.muted = next;
@@ -192,10 +198,13 @@ function Hero() {
   };
 
   return (
-    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 min-h-[88svh] md:min-h-[72svh]">
+    <section
+      id="top"
+      className="relative min-h-[88svh] overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 md:min-h-[72svh]"
+    >
       {/* 배경 */}
       <div
-        className="absolute inset-0 -z-10 opacity-30 pointer-events-none"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-30"
         style={{
           backgroundImage:
             "radial-gradient(600px 200px at 10% 10%, rgba(16,185,129,0.25), transparent), radial-gradient(600px 200px at 90% 0%, rgba(34,211,238,0.2), transparent)",
@@ -211,12 +220,15 @@ function Hero() {
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
             초정밀 LASER·SAPPHIRE 가공으로{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              공정 신뢰성
+            </span>
             을 높입니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
-            초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
-            회사는 현재 경북 구미시로 이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과 초정밀 레이저 가공 위주로 재편중에 있습니다.
+            초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다. 회사는 현재 경북 구미시로
+            이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과 초정밀 레이저 가공 위주로 재편중에
+            있습니다.
           </p>
 
           {/* CTA */}
@@ -248,15 +260,14 @@ function Hero() {
 
         {/* 오른쪽: 동영상 1/3, 이미지 2/3 */}
         <div className="relative w-full md:h-[560px]">
-          <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
+          <div className="grid h-full grid-cols-1 items-stretch gap-3 md:grid-cols-3">
             {/* 동영상: 왼쪽 1칸 */}
             <div className="relative md:col-span-1">
               {/* 모바일: 비율 유지 / 데스크톱: 타일 높이 채움 */}
               <div className="aspect-video md:aspect-auto md:h-full">
                 <video
                   ref={videoRef}
-                  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
-                             object-contain md:object-cover"
+                  className="h-full w-full rounded-2xl border border-white/10 object-contain shadow-2xl md:object-cover"
                   autoPlay
                   muted={muted}
                   loop
@@ -275,8 +286,7 @@ function Hero() {
               <button
                 type="button"
                 onClick={toggleMute}
-                className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20
-                           bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
+                className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20 bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
                 aria-label={muted ? "음소거 해제" : "음소거"}
               >
                 {muted ? "🔇 음소거 해제" : "🔊 음소거"}
@@ -285,7 +295,7 @@ function Hero() {
 
             {/* 이미지: 오른쪽 2칸 세로 2장 */}
             <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
-              <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
+              <div className="relative h-64 overflow-hidden rounded-2xl border border-white/10 md:h-full">
                 <img
                   src="/images/hero-1.png"
                   alt="LuminoChip sample 1"
@@ -293,7 +303,7 @@ function Hero() {
                   loading="lazy"
                 />
               </div>
-              <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
+              <div className="relative h-64 overflow-hidden rounded-2xl border border-white/10 md:h-full">
                 <img
                   src="/images/hero-2.png"
                   alt="LuminoChip sample 2"
@@ -326,9 +336,9 @@ function Section({ id, icon: Icon, title, subtitle, children, pad = "normal" }) 
 }
 
 function Products() {
-  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
-  const handleImgError = (e) => {
+  const handleImgError = (e: any) => {
     e.currentTarget.onerror = null;
     e.currentTarget.src = PLACEHOLDER;
   };
@@ -343,41 +353,35 @@ function Products() {
           >
             {/* 이미지 영역 */}
             <div
-              className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800 cursor-pointer"
+              className="mb-3 aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-xl border border-white/10 bg-zinc-800"
               onClick={() => setSelectedImg(p.img)}
             >
-             <img
-  src={p.img || PLACEHOLDER}
-  alt={p.name}
-  loading="lazy"
-  onError={handleImgError}
-  className={[
-    "h-full w-full",
-    p?.fit === "contain" ? "object-contain" : "object-cover",
-    p?.pos === "top" ? "object-top" : "object-center",
-    "transition-transform duration-300",
-    // contain일 땐 확대 호버 제거(여백이 있어 확대하면 보기 안 좋음)
-    p?.fit === "contain" ? "" : "group-hover:scale-105",
-  ].join(" ").trim()}
-/>
+              <img
+                src={p.img || PLACEHOLDER}
+                alt={p.name}
+                loading="lazy"
+                onError={handleImgError}
+                className={[
+                  "h-full w-full",
+                  p?.fit === "contain" ? "object-contain" : "object-cover",
+                  p?.pos === "top" ? "object-top" : "object-center",
+                  "transition-transform duration-300",
+                  p?.fit === "contain" ? "" : "group-hover:scale-105",
+                ]
+                  .join(" ")
+                  .trim()}
+              />
             </div>
 
-            <h3 className="text-lg font-medium text-white text-center">{p.name}</h3>
+            <h3 className="text-center text-lg font-medium text-white">{p.name}</h3>
             <div className="mt-1 text-sm text-emerald-300">{p.mat}</div>
-            {p.desc && (
-              <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-                {p.desc}
-              </p>
-            )}
+            {p.desc && <p className="mt-2 text-sm leading-relaxed text-zinc-300">{p.desc}</p>}
           </div>
         ))}
       </div>
 
       <div className="mt-6 text-right">
-        <a
-          href="#inquiry"
-          className="inline-flex items-center gap-2 text-sm text-emerald-300 hover:underline"
-        >
+        <a href="#inquiry" className="inline-flex items-center gap-2 text-sm text-emerald-300 hover:underline">
           필요한 품목 리스트 보내기 <ArrowRight className="h-4 w-4" />
         </a>
       </div>
@@ -385,18 +389,14 @@ function Products() {
       {/* 모달 (팝업) */}
       {selectedImg && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-          <div className="relative max-w-4xl max-h-[90vh]">
+          <div className="relative max-h-[90vh] max-w-4xl">
             <button
               onClick={() => setSelectedImg(null)}
               className="absolute -top-10 right-0 text-white hover:text-emerald-300"
             >
               <X className="h-8 w-8" />
             </button>
-            <img
-              src={selectedImg}
-              alt="제품 이미지"
-              className="max-h-[90vh] w-auto rounded-lg shadow-lg"
-            />
+            <img src={selectedImg} alt="제품 이미지" className="max-h-[90vh] w-auto rounded-lg shadow-lg" />
           </div>
         </div>
       )}
@@ -411,7 +411,7 @@ function About() {
       icon={Building2}
       title="회사소개"
       subtitle="루미노칩은 반도체 및 디스플레이 공정용 정밀 부품을 공급하는 제조/가공 전문 기업입니다. 투명하고 깨끗한 경영과 데이터 기반 공정 관리로 고객 신뢰를 쌓아갑니다."
-      pad="compact"   // ⬅️ 추가
+      pad="compact"
     >
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
@@ -466,17 +466,15 @@ function Materials() {
           </tbody>
         </table>
       </div>
-      <p className="mt-3 text-sm text-zinc-400">
-        ※ 자료는 레퍼런스 값이며 설계 시 고객 사양과 공정 조건에 맞춰 재검증합니다.
-      </p>
+      <p className="mt-3 text-sm text-zinc-400">※ 자료는 레퍼런스 값이며 설계 시 고객 사양과 공정 조건에 맞춰 재검증합니다.</p>
     </Section>
   );
 }
 
 function Clients() {
-  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
-  const handleImgError = (e) => {
+  const handleImgError = (e: any) => {
     e.currentTarget.onerror = null;
     e.currentTarget.src = PLACEHOLDER;
   };
@@ -492,7 +490,7 @@ function Clients() {
         {CLIENTS.map((c) => (
           <div
             key={c.name}
-            className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 cursor-pointer hover:bg-zinc-900"
+            className="group cursor-pointer rounded-2xl border border-white/10 bg-zinc-900/50 p-5 hover:bg-zinc-900"
             onClick={() => setSelectedImg(c.img)}
           >
             <div className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800">
@@ -503,7 +501,7 @@ function Clients() {
                 onError={handleImgError}
               />
             </div>
-            <h3 className="text-lg font-medium text-white text-center">{c.name}</h3>
+            <h3 className="text-center text-lg font-medium text-white">{c.name}</h3>
           </div>
         ))}
       </div>
@@ -511,18 +509,14 @@ function Clients() {
       {/* 모달 */}
       {selectedImg && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-          <div className="relative max-w-4xl max-h-[90vh]">
+          <div className="relative max-h-[90vh] max-w-4xl">
             <button
               onClick={() => setSelectedImg(null)}
               className="absolute -top-10 right-0 text-white hover:text-emerald-300"
             >
               <X className="h-8 w-8" />
             </button>
-            <img
-              src={selectedImg}
-              alt="장비 이미지"
-              className="max-h-[90vh] w-auto rounded-lg shadow-lg"
-            />
+            <img src={selectedImg} alt="장비 이미지" className="max-h-[90vh] w-auto rounded-lg shadow-lg" />
           </div>
         </div>
       )}
@@ -531,9 +525,9 @@ function Clients() {
 }
 
 function Certs() {
-  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
-  const onError = (e) => {
+  const onError = (e: any) => {
     e.currentTarget.onerror = null; // 무한 루프 방지
     e.currentTarget.src = "/images/placeholder.png";
   };
@@ -550,7 +544,7 @@ function Certs() {
                 key={img.src}
                 type="button"
                 onClick={() => setSelectedImg(img.src)}
-                className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60 group"
+                className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60"
               >
                 <img
                   src={img.src}
@@ -562,22 +556,14 @@ function Certs() {
               </button>
             ))}
           </div>
-          <div className="mt-2 text-sm text-zinc-300 text-center">
-            분석자료 (1–{CERT_IMAGES.length})
-          </div>
+          <div className="mt-2 text-center text-sm text-zinc-300">분석자료 (1–{CERT_IMAGES.length})</div>
         </div>
 
         {/* ISO 등 기타 인증 카드들 */}
         {CERT_MISC?.map((c) => (
           <div key={c.title} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
             <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
-              <img
-                src={c.img}
-                alt={c.title}
-                loading="lazy"
-                onError={onError}
-                className="h-full w-full object-contain"
-              />
+              <img src={c.img} alt={c.title} loading="lazy" onError={onError} className="h-full w-full object-contain" />
             </div>
             <div className="text-white">{c.title}</div>
 
@@ -604,7 +590,7 @@ function Certs() {
           role="dialog"
           aria-modal="true"
         >
-          <div className="relative max-h-[90vh] w-full max-w-5xl">
+          <div className="relative w-full max-w-5xl max-h-[90vh]">
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -618,12 +604,109 @@ function Certs() {
             <img
               src={selectedImg}
               alt="분석자료 확대 이미지"
-              className="max-h-[90vh] w-auto rounded-xl shadow-2xl"
+              className="w-auto max-h-[90vh] rounded-xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
           </div>
         </div>
       )}
+    </Section>
+  );
+}
+
+/* ✅ 방명록 섹션 추가 */
+function Guestbook() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [entries, setEntries] = useState<
+    { id: number; name: string; message: string; createdAt: string }[]
+  >([]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!name.trim() || !message.trim()) {
+      alert("이름과 내용을 입력해 주세요.");
+      return;
+    }
+
+    const newEntry = {
+      id: Date.now(),
+      name: name.trim(),
+      message: message.trim(),
+      createdAt: new Date().toLocaleString(),
+    };
+
+    setEntries((prev) => [newEntry, ...prev]);
+    setName("");
+    setMessage("");
+  };
+
+  return (
+    <Section
+      id="guestbook"
+      icon={MessageCircle}
+      title="방명록"
+      subtitle="루미노칩 홈페이지를 방문해 주셔서 감사합니다. 간단한 한마디 남겨 주세요."
+    >
+      <div className="grid gap-8 md:grid-cols-2">
+        {/* 왼쪽: 입력 폼 */}
+        <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-6">
+          <h3 className="mb-4 text-lg font-semibold text-white">한 줄 메시지 남기기 ✍️</h3>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="mb-1 block text-sm text-zinc-300">이름 / 회사명</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
+                placeholder="예) 홍길동 / ○○전자"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm text-zinc-300">메시지</label>
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="min-h-[100px] w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
+                placeholder="홈페이지, 제품, 서비스 등에 대해 자유롭게 남겨 주세요."
+              />
+            </div>
+            <button
+              type="submit"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 text-sm font-medium text-emerald-200 hover:bg-emerald-300/20 md:w-auto"
+            >
+              <MessageCircle className="h-4 w-4" />
+              방명록 남기기
+            </button>
+            <p className="text-xs text-zinc-400">
+              ※ 현재는 테스트용으로, 페이지를 새로고침하면 작성 내용이 삭제됩니다. (서버 미연동)
+            </p>
+          </form>
+        </div>
+
+        {/* 오른쪽: 방명록 리스트 */}
+        <div className="max-h-[340px] space-y-3 overflow-y-auto pr-1">
+          {entries.length === 0 && (
+            <div className="rounded-2xl border border-dashed border-white/20 bg-zinc-900/50 p-6 text-center text-sm text-zinc-400">
+              아직 남겨진 방명록이 없습니다.
+              <br />
+              첫 번째 메시지를 남겨 주세요 🙂
+            </div>
+          )}
+
+          {entries.map((entry) => (
+            <div key={entry.id} className="rounded-2xl border border-white/10 bg-zinc-900/70 p-4">
+              <div className="mb-1 flex items-center justify-between">
+                <span className="text-sm font-semibold text-emerald-200">{entry.name}</span>
+                <span className="text-[11px] text-zinc-400">{entry.createdAt}</span>
+              </div>
+              <p className="whitespace-pre-line text-sm text-zinc-100">{entry.message}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </Section>
   );
 }
@@ -707,27 +790,25 @@ function Inquiry() {
             </div>
           </div>
         </form>
-       <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
-  <h4 className="mb-2 font-semibold text-white">연락처</h4>
+        <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
+          <h4 className="mb-2 font-semibold text-white">연락처</h4>
 
-  {/* ✅ 대표자 표시 추가 */}
-  <div className="mt-1 flex items-center gap-3 text-zinc-300">
-    <Building2 className="h-4 w-4 text-emerald-300" /> 대표 : {COMPANY.ceo}
-  </div>
+          {/* ✅ 대표자 표시 추가 */}
+          <div className="mt-1 flex items-center gap-3 text-zinc-300">
+            <Building2 className="h-4 w-4 text-emerald-300" /> 대표 : {COMPANY.ceo}
+          </div>
 
-  <div className="mt-2 flex items-center gap-3 text-zinc-300">
-    <Phone className="h-4 w-4 text-emerald-300" /> {COMPANY.tel}
-  </div>
-  <div className="mt-1 flex items-center gap-3 text-zinc-300">
-    <Mail className="h-4 w-4 text-emerald-300" /> {COMPANY.email}
-  </div>
-  <div className="mt-1 flex items-center gap-3 text-zinc-300">
-    <MapPin className="h-4 w-4 text-emerald-300" /> {COMPANY.address_ko}
-  </div>
-  <p className="mt-4 text-sm text-zinc-400">
-    ※ 도면(PDF/DWG/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.
-  </p>
-</div>
+          <div className="mt-2 flex items-center gap-3 text-zinc-300">
+            <Phone className="h-4 w-4 text-emerald-300" /> {COMPANY.tel}
+          </div>
+          <div className="mt-1 flex items-center gap-3 text-zinc-300">
+            <Mail className="h-4 w-4 text-emerald-300" /> {COMPANY.email}
+          </div>
+          <div className="mt-1 flex items-center gap-3 text-zinc-300">
+            <MapPin className="h-4 w-4 text-emerald-300" /> {COMPANY.address_ko}
+          </div>
+          <p className="mt-4 text-sm text-zinc-400">※ 도면(PDF/DWG/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.</p>
+        </div>
       </div>
     </Section>
   );
@@ -755,7 +836,6 @@ function MapSection() {
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
             />
-
           </div>
         </div>
       </div>
@@ -773,9 +853,7 @@ function Footer() {
           <div className="mt-2 text-sm text-zinc-400">{COMPANY.regno}</div>
         </div>
         <div className="md:text-right">
-          <div className="text-sm text-zinc-400">
-            © {new Date().getFullYear()} LuminoChip. All rights reserved.
-          </div>
+          <div className="text-sm text-zinc-400">© {new Date().getFullYear()} LuminoChip. All rights reserved.</div>
         </div>
       </div>
     </footer>
@@ -785,7 +863,7 @@ function Footer() {
 export default function App() {
   const showTop = useScrollTop();
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-zinc-950 text-zinc-100">
       <Header />
       <Hero />
       <About />
@@ -793,6 +871,7 @@ export default function App() {
       <Materials />
       <Clients />
       <Certs />
+      <Guestbook /> {/* ✅ 방명록 섹션 추가 */}
       <Inquiry />
       <MapSection />
       <Footer />
