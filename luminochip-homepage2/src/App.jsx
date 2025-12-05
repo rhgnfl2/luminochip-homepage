@@ -15,12 +15,12 @@ import {
   Send,
   ChevronUp,
   CheckCircle,
-  MessageCircle, // ✅ 방명록 아이콘 추가
+  MessageCircle,
 } from "lucide-react";
 
 /**
  * 루미노칩(사용자 회사)용 원페이지 기업 사이트 템플릿
- * - 참고 사이트 구조 반영: 회사소개 / 제품소개 / 물성표 / 보유장비 / 인증서 / 견적문의 / 오시는 길
+ * - 참고 사이트 구조 반영: 회사소개 / 제품소개 / 물성표 / 보유장비 / 인증서 / 견적문의 / 오시는 길 / 방명록
  * - 기술스택: React + TailwindCSS
  * - 아이콘: lucide-react
  * - 정적 배포형(HTML로 빌드 가능). 폼은 mailto 기반.
@@ -33,7 +33,7 @@ const NAV_ITEMS = [
   { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
   { id: "inquiry", label: "견적문의" },          // ✅ 견적문의 먼저
-  { id: "guestbook", label: "비공개 방명록" },   // ✅ 그 다음 비공개 방명록
+  { id: "guestbook", label: "공개 방명록" },     // ✅ 공개 방명록으로 변경
   { id: "map", label: "오시는 길" },
 ];
 
@@ -44,8 +44,6 @@ const PRODUCTS = [
     name: "UV코팅, AR 코팅, 일반 SAPPHIRE, Quartz Polishing & Laser marking",
     img: "/images/UV코팅,AR코팅,일반SAPPHIRE쿼츠폴리싱&레이저마킹.png",
   },
-
-  // 🔧 위쪽이 잘리던 3개만 'contain + top'으로 지정
   { name: "원형 Si3N4", img: "/images/원형Si3N4.png", fit: "contain", pos: "top" },
   { name: "Al2O3 Hot Press 미세홀", img: "/images/Al2O3 Hot Press 미세홀.png", fit: "contain", pos: "top" },
   { name: "Al2O3 Hot Press 미세홀 내측", img: "/images/Al2O3 Hot Press 미세홀 내측.png", fit: "contain", pos: "top" },
@@ -78,7 +76,6 @@ const CERT_IMAGES = [
   { src: "/certs/analysis-4.png", alt: "분석자료 4" },
 ];
 
-// (선택) ISO 9001 같은 이미지는 따로 카드로 보여주고 싶다면 여기에 추가 배열을 둬도 됨
 const CERT_MISC = [
   {
     title: "ISO 9001",
@@ -176,7 +173,7 @@ function Hero() {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [ready, setReady] = useState(false);
-  const [muted, setMuted] = useState(true); // 🔊 음소거 상태
+  const [muted, setMuted] = useState(true);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -188,7 +185,6 @@ function Hero() {
     v.addEventListener("play", onPlay);
     v.addEventListener("pause", onPause);
 
-    // 자동재생 정책 대응: 초기 무음
     v.muted = true;
 
     return () => {
@@ -209,7 +205,6 @@ function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 min-h-[88svh] md:min-h-[72svh]">
-      {/* 배경 */}
       <div
         className="absolute inset-0 -z-10 opacity-30 pointer-events-none"
         style={{
@@ -218,7 +213,6 @@ function Hero() {
         }}
       />
 
-      {/* 좌우 2컬럼: 좌(카피), 우(미디어) */}
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 md:grid-cols-2 md:px-6 md:py-14">
         {/* 왼쪽 칼럼 */}
         <div>
@@ -235,7 +229,6 @@ function Hero() {
             회사는 현재 경북 구미시로 이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과 초정밀 레이저 가공 위주로 재편중에 있습니다.
           </p>
 
-          {/* CTA */}
           <div className="mt-6 flex flex-wrap gap-3">
             <a
               href="#inquiry"
@@ -262,17 +255,14 @@ function Hero() {
           </div>
         </div>
 
-        {/* 오른쪽: 동영상 1/3, 이미지 2/3 */}
+        {/* 오른쪽: 동영상 + 이미지 */}
         <div className="relative w-full md:h-[560px]">
           <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
-            {/* 동영상: 왼쪽 1칸 */}
             <div className="relative md:col-span-1">
-              {/* 모바일: 비율 유지 / 데스크톱: 타일 높이 채움 */}
               <div className="aspect-video md:aspect-auto md:h-full">
                 <video
                   ref={videoRef}
-                  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
-                             object-contain md:object-cover"
+                  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl object-contain md:object-cover"
                   autoPlay
                   muted={muted}
                   loop
@@ -287,19 +277,16 @@ function Hero() {
                 </video>
               </div>
 
-              {/* 🔊 음소거/해제 버튼 */}
               <button
                 type="button"
                 onClick={toggleMute}
-                className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20
-                           bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
+                className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20 bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
                 aria-label={muted ? "음소거 해제" : "음소거"}
               >
                 {muted ? "🔇 음소거 해제" : "🔊 음소거"}
               </button>
             </div>
 
-            {/* 이미지: 오른쪽 2칸 세로 2장 */}
             <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
               <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
                 <img
@@ -357,7 +344,6 @@ function Products() {
             key={p.name}
             className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 transition hover:bg-zinc-900"
           >
-            {/* 이미지 영역 */}
             <div
               className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800 cursor-pointer"
               onClick={() => setSelectedImg(p.img)}
@@ -397,7 +383,6 @@ function Products() {
         </a>
       </div>
 
-      {/* 모달 (팝업) */}
       {selectedImg && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
           <div className="relative max-w-4xl max-h-[90vh]">
@@ -523,7 +508,6 @@ function Clients() {
         ))}
       </div>
 
-      {/* 모달 */}
       {selectedImg && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
           <div className="relative max-w-4xl max-h-[90vh]">
@@ -549,15 +533,13 @@ function Certs() {
   const [selectedImg, setSelectedImg] = useState(null);
 
   const onError = (e) => {
-    e.currentTarget.onerror = null; // 무한 루프 방지
+    e.currentTarget.onerror = null;
     e.currentTarget.src = "/images/placeholder.png";
   };
 
   return (
     <Section id="certs" icon={Shield} title="인증서">
-      {/* ✅ 분석자료 + ISO 한 그리드로 통합 */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {/* 📄 분석자료 카드 (CERT_IMAGES 전체 사용) */}
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-3 sm:col-span-2 lg:col-span-2">
           <div className="grid grid-cols-2 gap-2">
             {CERT_IMAGES.map((img) => (
@@ -582,7 +564,6 @@ function Certs() {
           </div>
         </div>
 
-        {/* ISO 등 기타 인증 카드들 */}
         {CERT_MISC?.map((c) => (
           <div key={c.title} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
             <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
@@ -596,7 +577,6 @@ function Certs() {
             </div>
             <div className="text-white">{c.title}</div>
 
-            {/* 컨설팅 아이콘 뱃지 */}
             {c.note && c.note.includes("컨설팅") && (
               <div
                 className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber-400/30
@@ -611,7 +591,6 @@ function Certs() {
         ))}
       </div>
 
-      {/* 확대 모달 */}
       {selectedImg && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
@@ -643,7 +622,25 @@ function Certs() {
   );
 }
 
-/* ✅ 비공개 방명록 + 비밀번호 삭제 기능 */
+/* ===== 이름/회사명 마스킹 함수 =====
+   - 전체 문자열 기준
+   - 1글자: "＊"
+   - 2글자: "앞글자 + ＊"
+   - 3글자 이상: "앞 2글자 + 나머지 전부 ＊"
+*/
+function maskName(raw) {
+  if (!raw) return "";
+  const trimmed = raw.trim();
+  const len = trimmed.length;
+  if (len <= 0) return "";
+  if (len === 1) return "＊";
+  if (len === 2) return trimmed[0] + "＊";
+  const visible = trimmed.slice(0, 2);
+  const masked = "＊".repeat(len - 2);
+  return visible + masked;
+}
+
+/* ✅ 공개 방명록 (내용 공개 + 이름/회사명 부분 마스킹 + 비밀번호 삭제) */
 function Guestbook() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
@@ -654,15 +651,15 @@ function Guestbook() {
     e.preventDefault();
 
     if (!name.trim() || !message.trim() || !password.trim()) {
-      alert("이름, 비밀번호, 내용을 모두 입력해 주세요.");
+      alert("이름/회사명, 비밀번호, 내용을 모두 입력해 주세요.");
       return;
     }
 
     const newEntry = {
       id: Date.now(),
       name: name.trim(),
-      message: message.trim(),      // 실제 내용은 저장
-      password: password.trim(),    // 삭제용 비밀번호
+      message: message.trim(),
+      password: password.trim(), // 삭제용 비밀번호 (로컬 상태에만 저장)
       createdAt: new Date().toLocaleString(),
     };
 
@@ -683,7 +680,7 @@ function Guestbook() {
         alert("해당 방명록을 찾을 수 없습니다.");
         return prev;
       }
-      if (target.password !== pwd) {
+      if (target.password !== pwd.trim()) {
         alert("비밀번호가 일치하지 않습니다.");
         return prev;
       }
@@ -695,13 +692,13 @@ function Guestbook() {
     <Section
       id="guestbook"
       icon={MessageCircle}
-      title="비공개 방명록"
-      subtitle="작성자만 비밀번호로 삭제할 수 있는 비공개 방명록입니다. 내용은 공개되지 않습니다."
+      title="공개 방명록"
+      subtitle="이름/회사명은 일부만 마스킹되어 노출되며, 작성하신 글은 공개됩니다. 작성 시 입력한 비밀번호로만 삭제할 수 있습니다."
     >
       <div className="grid gap-8 md:grid-cols-2">
         {/* 왼쪽: 입력 폼 */}
         <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-white">비공개 방명록 남기기 ✍️</h3>
+          <h3 className="mb-4 text-lg font-semibold text-white">공개 방명록 남기기 ✍️</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="mb-1 block text-sm text-zinc-300">이름 / 회사명</label>
@@ -712,6 +709,9 @@ function Guestbook() {
                 className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
                 placeholder="예) 홍길동 / ○○전자"
               />
+              <p className="mt-1 text-xs text-zinc-400">
+                ※ 방명록에는 &quot;{maskName("홍길동 / ○○전자")}&quot; 처럼 일부만 마스킹되어 표시됩니다.
+              </p>
             </div>
 
             <div>
@@ -724,7 +724,7 @@ function Guestbook() {
                 placeholder="글 삭제할 때 사용할 비밀번호"
               />
               <p className="mt-1 text-xs text-zinc-400">
-                ※ 비밀번호는 서버에 저장되지 않고, 이 페이지에서만 사용됩니다.
+                ※ 비밀번호는 서버에 저장되지 않고, 현재 페이지 내에서만 삭제 검증용으로 사용됩니다.
               </p>
             </div>
 
@@ -734,7 +734,7 @@ function Guestbook() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className="min-h-[100px] w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
-                placeholder="고객사·서비스에 대한 의견, 요청사항 등을 자유롭게 남겨 주세요. 내용은 공개되지 않습니다."
+                placeholder="고객사·서비스에 대한 의견, 요청사항 등을 자유롭게 남겨 주세요."
               />
             </div>
 
@@ -743,7 +743,7 @@ function Guestbook() {
               className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 text-sm font-medium text-emerald-200 hover:bg-emerald-300/20 md:w-auto"
             >
               <MessageCircle className="h-4 w-4" />
-              비공개 방명록 남기기
+              방명록 등록하기
             </button>
             <p className="text-xs text-zinc-400">
               ※ 현재는 테스트용으로, 페이지를 새로고침하면 작성 내용이 모두 삭제됩니다. (서버 미연동)
@@ -751,11 +751,11 @@ function Guestbook() {
           </form>
         </div>
 
-        {/* 오른쪽: 방명록 리스트 (내용 비공개 표시) */}
+        {/* 오른쪽: 방명록 리스트 (내용 공개) */}
         <div className="max-h-[340px] space-y-3 overflow-y-auto pr-1">
           {entries.length === 0 && (
             <div className="rounded-2xl border border-dashed border-white/20 bg-zinc-900/50 p-6 text-center text-sm text-zinc-400">
-              아직 등록된 비공개 방명록이 없습니다.
+              아직 등록된 방명록이 없습니다.
               <br />
               첫 번째 메시지를 남겨 주세요 🙂
             </div>
@@ -768,14 +768,14 @@ function Guestbook() {
             >
               <div className="mb-1 flex items-center justify-between">
                 <span className="text-sm font-semibold text-emerald-200">
-                  {entry.name}
+                  {maskName(entry.name)}
                 </span>
                 <span className="text-[11px] text-zinc-400">
                   {entry.createdAt}
                 </span>
               </div>
-              <p className="text-sm text-zinc-300">
-                🔒 비공개 메시지입니다. 작성자만 비밀번호로 삭제할 수 있습니다.
+              <p className="mt-1 text-sm text-zinc-300 whitespace-pre-wrap">
+                {entry.message}
               </p>
               <div className="mt-2 text-right">
                 <button
@@ -876,7 +876,6 @@ function Inquiry() {
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
           <h4 className="mb-2 font-semibold text-white">연락처</h4>
 
-          {/* ✅ 대표자 표시 추가 */}
           <div className="mt-1 flex items-center gap-3 text-zinc-300">
             <Building2 className="h-4 w-4 text-emerald-300" /> 대표 : {COMPANY.ceo}
           </div>
@@ -921,7 +920,6 @@ function MapSection() {
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
             />
-
           </div>
         </div>
       </div>
@@ -960,7 +958,7 @@ export default function App() {
       <Clients />
       <Certs />
       <Inquiry />    {/* ✅ 견적문의 먼저 */}
-      <Guestbook />  {/* ✅ 그 다음 비공개 방명록 */}
+      <Guestbook />  {/* ✅ 그 다음 공개 방명록 */}
       <MapSection />
       <Footer />
 
