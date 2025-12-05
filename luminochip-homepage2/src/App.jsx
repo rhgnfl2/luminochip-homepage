@@ -32,8 +32,8 @@ const NAV_ITEMS = [
   { id: "materials", label: "물성표" },
   { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
-  { id: "guestbook", label: "방명록" }, // ✅ 방명록 메뉴 추가
-  { id: "inquiry", label: "견적문의" },
+  { id: "inquiry", label: "견적문의" },          // ✅ 견적문의 먼저
+  { id: "guestbook", label: "비공개 방명록" },   // ✅ 그 다음 비공개 방명록
   { id: "map", label: "오시는 길" },
 ];
 
@@ -643,46 +643,65 @@ function Certs() {
   );
 }
 
-/* ✅ 방명록 섹션 (JS 버전) */
+/* ✅ 비공개 방명록 + 비밀번호 삭제 기능 */
 function Guestbook() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [password, setPassword] = useState("");
   const [entries, setEntries] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name.trim() || !message.trim()) {
-      alert("이름과 내용을 입력해 주세요.");
+    if (!name.trim() || !message.trim() || !password.trim()) {
+      alert("이름, 비밀번호, 내용을 모두 입력해 주세요.");
       return;
     }
 
     const newEntry = {
       id: Date.now(),
       name: name.trim(),
-      message: message.trim(),
+      message: message.trim(),      // 실제 내용은 저장
+      password: password.trim(),    // 삭제용 비밀번호
       createdAt: new Date().toLocaleString(),
     };
 
-    // 새 글을 위에 보이게
     setEntries((prev) => [newEntry, ...prev]);
 
-    // 입력창 초기화
     setName("");
     setMessage("");
+    setPassword("");
+  };
+
+  const handleDelete = (id) => {
+    const pwd = window.prompt("작성 시 입력한 비밀번호를 입력해 주세요.");
+    if (!pwd) return;
+
+    setEntries((prev) => {
+      const target = prev.find((e) => e.id === id);
+      if (!target) {
+        alert("해당 방명록을 찾을 수 없습니다.");
+        return prev;
+      }
+      if (target.password !== pwd) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return prev;
+      }
+      return prev.filter((e) => e.id !== id);
+    });
   };
 
   return (
     <Section
       id="guestbook"
       icon={MessageCircle}
-      title="방명록"
-      subtitle="루미노칩 홈페이지를 방문해 주셔서 감사합니다. 간단한 한마디 남겨 주세요."
+      title="비공개 방명록"
+      subtitle="작성자만 비밀번호로 삭제할 수 있는 비공개 방명록입니다. 내용은 공개되지 않습니다."
     >
       <div className="grid gap-8 md:grid-cols-2">
         {/* 왼쪽: 입력 폼 */}
         <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-white">한 줄 메시지 남기기 ✍️</h3>
+          <h3 className="mb-4 text-lg font-semibold text-white">비공개 방명록 남기기 ✍️</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="mb-1 block text-sm text-zinc-300">이름 / 회사명</label>
@@ -694,45 +713,79 @@ function Guestbook() {
                 placeholder="예) 홍길동 / ○○전자"
               />
             </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-zinc-300">비밀번호 (삭제용)</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
+                placeholder="글 삭제할 때 사용할 비밀번호"
+              />
+              <p className="mt-1 text-xs text-zinc-400">
+                ※ 비밀번호는 서버에 저장되지 않고, 이 페이지에서만 사용됩니다.
+              </p>
+            </div>
+
             <div>
               <label className="mb-1 block text-sm text-zinc-300">메시지</label>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className="min-h-[100px] w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
-                placeholder="홈페이지, 제품, 서비스 등에 대해 자유롭게 남겨 주세요."
+                placeholder="고객사·서비스에 대한 의견, 요청사항 등을 자유롭게 남겨 주세요. 내용은 공개되지 않습니다."
               />
             </div>
+
             <button
               type="submit"
               className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 text-sm font-medium text-emerald-200 hover:bg-emerald-300/20 md:w-auto"
             >
               <MessageCircle className="h-4 w-4" />
-              방명록 남기기
+              비공개 방명록 남기기
             </button>
             <p className="text-xs text-zinc-400">
-              ※ 현재는 테스트용으로, 페이지를 새로고침하면 작성 내용이 삭제됩니다. (서버 미연동)
+              ※ 현재는 테스트용으로, 페이지를 새로고침하면 작성 내용이 모두 삭제됩니다. (서버 미연동)
             </p>
           </form>
         </div>
 
-        {/* 오른쪽: 방명록 리스트 */}
+        {/* 오른쪽: 방명록 리스트 (내용 비공개 표시) */}
         <div className="max-h-[340px] space-y-3 overflow-y-auto pr-1">
           {entries.length === 0 && (
             <div className="rounded-2xl border border-dashed border-white/20 bg-zinc-900/50 p-6 text-center text-sm text-zinc-400">
-              아직 남겨진 방명록이 없습니다.
+              아직 등록된 비공개 방명록이 없습니다.
               <br />
               첫 번째 메시지를 남겨 주세요 🙂
             </div>
           )}
 
           {entries.map((entry) => (
-            <div key={entry.id} className="rounded-2xl border border-white/10 bg-zinc-900/70 p-4">
+            <div
+              key={entry.id}
+              className="rounded-2xl border border-white/10 bg-zinc-900/70 p-4"
+            >
               <div className="mb-1 flex items-center justify-between">
-                <span className="text-sm font-semibold text-emerald-200">{entry.name}</span>
-                <span className="text-[11px] text-zinc-400">{entry.createdAt}</span>
+                <span className="text-sm font-semibold text-emerald-200">
+                  {entry.name}
+                </span>
+                <span className="text-[11px] text-zinc-400">
+                  {entry.createdAt}
+                </span>
               </div>
-              <p className="whitespace-pre-line text-sm text-zinc-100">{entry.message}</p>
+              <p className="text-sm text-zinc-300">
+                🔒 비공개 메시지입니다. 작성자만 비밀번호로 삭제할 수 있습니다.
+              </p>
+              <div className="mt-2 text-right">
+                <button
+                  type="button"
+                  onClick={() => handleDelete(entry.id)}
+                  className="text-xs text-red-300 hover:text-red-200 underline"
+                >
+                  내 방명록 삭제하기
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -906,8 +959,8 @@ export default function App() {
       <Materials />
       <Clients />
       <Certs />
-      <Guestbook /> {/* ✅ 방명록 섹션 추가 */}
-      <Inquiry />
+      <Inquiry />    {/* ✅ 견적문의 먼저 */}
+      <Guestbook />  {/* ✅ 그 다음 비공개 방명록 */}
       <MapSection />
       <Footer />
 
