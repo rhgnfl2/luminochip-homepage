@@ -20,7 +20,7 @@ import {
 
 /**
  * 루미노칩(사용자 회사)용 원페이지 기업 사이트 템플릿
- * - 참고 사이트 구조 반영: 회사소개 / 제품소개 / 물성표 / 보유장비 / 인증서 / 견적문의 / 오시는 길 / 방명록
+ * - 참고 사이트 구조 반영: 회사소개 / 제품소개 / 물성표 / 보유장비 / 인증서 / 제품/견적 문의 / 오시는 길 / 문의 직접 남기기
  * - 기술스택: React + TailwindCSS
  * - 아이콘: lucide-react
  * - 정적 배포형(HTML로 빌드 가능). 폼은 mailto 기반.
@@ -32,8 +32,8 @@ const NAV_ITEMS = [
   { id: "materials", label: "물성표" },
   { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
-  { id: "inquiry", label: "견적문의" },          // ✅ 견적문의 먼저
-  { id: "guestbook", label: "공개 방명록" },     // ✅ 공개 방명록으로 변경
+  { id: "inquiry", label: "제품/견적 문의(메일 보내기)" },   // ⬅️ 변경
+  { id: "guestbook", label: "제품/견적 문의 직접 남기기" },  // ⬅️ 변경
   { id: "map", label: "오시는 길" },
 ];
 
@@ -640,7 +640,7 @@ function maskName(raw) {
   return visible + masked;
 }
 
-/* ✅ 공개 방명록 (내용 공개 + 이름/회사명 부분 마스킹 + 비밀번호 삭제) */
+/* ✅ 공개 문의 게시판 (내용 공개 + 이름/회사명 부분 마스킹 + 비밀번호 삭제) */
 function Guestbook() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
@@ -677,7 +677,7 @@ function Guestbook() {
     setEntries((prev) => {
       const target = prev.find((e) => e.id === id);
       if (!target) {
-        alert("해당 방명록을 찾을 수 없습니다.");
+        alert("해당 글을 찾을 수 없습니다.");
         return prev;
       }
       if (target.password !== pwd.trim()) {
@@ -692,13 +692,13 @@ function Guestbook() {
     <Section
       id="guestbook"
       icon={MessageCircle}
-      title="공개 방명록"
+      title="제품/견적 문의 직접 남기기"
       subtitle="이름/회사명은 일부만 마스킹되어 노출되며, 작성하신 글은 공개됩니다. 작성 시 입력한 비밀번호로만 삭제할 수 있습니다."
     >
       <div className="grid gap-8 md:grid-cols-2">
         {/* 왼쪽: 입력 폼 */}
         <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-white">공개 방명록 남기기 ✍️</h3>
+          <h3 className="mb-4 text-lg font-semibold text-white">제품/견적 문의 직접 남기기 ✍️</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="mb-1 block text-sm text-zinc-300">이름 / 회사명</label>
@@ -710,7 +710,7 @@ function Guestbook() {
                 placeholder="예) 홍길동 / ○○전자"
               />
               <p className="mt-1 text-xs text-zinc-400">
-                ※ 방명록에는 &quot;{maskName("홍길동 / ○○전자")}&quot; 처럼 일부만 마스킹되어 표시됩니다.
+                ※ 화면에는 &quot;{maskName("홍길동 / ○○전자")}&quot; 처럼 일부만 마스킹되어 표시됩니다.
               </p>
             </div>
 
@@ -734,7 +734,7 @@ function Guestbook() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className="min-h-[100px] w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
-                placeholder="고객사·서비스에 대한 의견, 요청사항 등을 자유롭게 남겨 주세요."
+                placeholder="제품/가공 문의, 요청사항 등을 자유롭게 남겨 주세요."
               />
             </div>
 
@@ -743,7 +743,7 @@ function Guestbook() {
               className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 text-sm font-medium text-emerald-200 hover:bg-emerald-300/20 md:w-auto"
             >
               <MessageCircle className="h-4 w-4" />
-              방명록 등록하기
+              문의 등록하기
             </button>
             <p className="text-xs text-zinc-400">
               ※ 현재는 테스트용으로, 페이지를 새로고침하면 작성 내용이 모두 삭제됩니다. (서버 미연동)
@@ -751,13 +751,13 @@ function Guestbook() {
           </form>
         </div>
 
-        {/* 오른쪽: 방명록 리스트 (내용 공개) */}
+        {/* 오른쪽: 문의 리스트 (내용 공개) */}
         <div className="max-h-[340px] space-y-3 overflow-y-auto pr-1">
           {entries.length === 0 && (
             <div className="rounded-2xl border border-dashed border-white/20 bg-zinc-900/50 p-6 text-center text-sm text-zinc-400">
-              아직 등록된 방명록이 없습니다.
+              아직 등록된 문의가 없습니다.
               <br />
-              첫 번째 메시지를 남겨 주세요 🙂
+              첫 번째 문의를 남겨 주세요 🙂
             </div>
           )}
 
@@ -783,7 +783,7 @@ function Guestbook() {
                   onClick={() => handleDelete(entry.id)}
                   className="text-xs text-red-300 hover:text-red-200 underline"
                 >
-                  내 방명록 삭제하기
+                  내 글 삭제하기
                 </button>
               </div>
             </div>
@@ -809,8 +809,8 @@ function Inquiry() {
     <Section
       id="inquiry"
       icon={Mail}
-      title="견적문의"
-      subtitle="도면(도면번호/규격), 수량, 요구 납기, 적용 장비/공정을 함께 알려주시면 빠르게 드립니다."
+      title="제품/견적 문의(메일 보내기)"
+      subtitle="도면(도면번호/규격), 수량, 요구 납기, 적용 장비/공정을 함께 알려주시면 빠르게 안내드립니다."
     >
       <div className="grid gap-6 lg:grid-cols-2">
         <form
@@ -868,7 +868,7 @@ function Inquiry() {
                 type="submit"
                 className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20"
               >
-                <Send className="h-4 w-4" /> 보내기
+                <Send className="h-4 w-4" /> 메일 보내기
               </button>
             </div>
           </div>
@@ -957,8 +957,8 @@ export default function App() {
       <Materials />
       <Clients />
       <Certs />
-      <Inquiry />    {/* ✅ 견적문의 먼저 */}
-      <Guestbook />  {/* ✅ 그 다음 공개 방명록 */}
+      <Inquiry />    {/* 제품/견적 문의(메일 보내기) */}
+      <Guestbook />  {/* 제품/견적 문의 직접 남기기 */}
       <MapSection />
       <Footer />
 
