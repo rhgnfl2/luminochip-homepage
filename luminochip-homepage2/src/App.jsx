@@ -33,7 +33,7 @@ const NAV_ITEMS = [
   { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
   { id: "inquiry", label: "제품/견적 문의(메일 보내기)" },   // ⬅️ 변경
-  { id: "guestbook", label: "제품/견적 문의 직접 남기기" },  // ⬅️ 변경
+  { id: "guestbook", label: "제품/견적 문의 (직접 남기기)" },  // ⬅️ 변경
   { id: "map", label: "오시는 길" },
 ];
 
@@ -692,7 +692,7 @@ function Guestbook() {
     <Section
       id="guestbook"
       icon={MessageCircle}
-      title="제품/견적 문의 직접 남기기"
+      title="제품/견적 문의 (직접 남기기)"
       subtitle="이름/회사명은 일부만 마스킹되어 노출되며, 작성하신 글은 공개됩니다. 작성 시 입력한 비밀번호로만 삭제할 수 있습니다."
     >
       <div className="grid gap-8 md:grid-cols-2">
@@ -958,7 +958,7 @@ export default function App() {
       <Clients />
       <Certs />
       <Inquiry />    {/* 제품/견적 문의(메일 보내기) */}
-      <Guestbook />  {/* 제품/견적 문의 직접 남기기 */}
+      <Guestbook />  {/* 제품/견적 문의 (직접 남기기) */}
       <MapSection />
       <Footer />
 
