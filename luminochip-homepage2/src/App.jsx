@@ -15,7 +15,7 @@ import {
   Send,
   ChevronUp,
   CheckCircle,
-  MessageCircle, // ✅ 추가
+  MessageCircle, // ✅ 방명록 아이콘 추가
 } from "lucide-react";
 
 /**
@@ -96,8 +96,6 @@ const COMPANY = {
   email: "luminochip@naver.com",
   address_ko: "경상북도 구미시 공단동 260-10 한라시그마벨리 9층 919호",
   address_en: "212, 1gongdan-ro, Gumi-si, Gyeongsangbuk-do, Republic of Korea",
-
-  // ✅ 추가
   ceo: "김윤성 (YunSeong Kim)",
 };
 
@@ -119,7 +117,11 @@ function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         {/* 로고 + 회사명 */}
         <a href="#top" className="flex items-center gap-3">
-          <img src="/images/logo.png" alt="Luminochip Logo" className="h-14 w-14 rounded-2xl object-cover" />
+          <img
+            src="/images/logo.png"
+            alt="Luminochip Logo"
+            className="h-14 w-14 rounded-2xl object-cover"
+          />
           <div>
             <div className="text-sm tracking-wider text-zinc-300">{COMPANY.tagline_en}</div>
             <div className="text-lg font-semibold text-white">{COMPANY.name}</div>
@@ -129,14 +131,22 @@ function Header() {
         {/* 데스크탑 네비게이션 */}
         <nav className="hidden gap-6 md:flex">
           {NAV_ITEMS.map((n) => (
-            <a key={n.id} href={`#${n.id}`} className="text-2g text-zinc-200 hover:text-white">
+            <a
+              key={n.id}
+              href={`#${n.id}`}
+              className="text-2g text-zinc-200 hover:text-white"
+            >
               {n.label}
             </a>
           ))}
         </nav>
 
         {/* 모바일 메뉴 버튼 */}
-        <button className="md:hidden" onClick={() => setOpen((v) => !v)} aria-label="toggle menu">
+        <button
+          className="md:hidden"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="toggle menu"
+        >
           {open ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
         </button>
       </div>
@@ -169,7 +179,7 @@ function Hero() {
   const [muted, setMuted] = useState(true); // 🔊 음소거 상태
 
   useEffect(() => {
-    const v: any = videoRef.current;
+    const v = videoRef.current;
     if (!v) return;
     const onCanPlay = () => setReady(true);
     const onPlay = () => setIsPlaying(true);
@@ -189,7 +199,7 @@ function Hero() {
   }, []);
 
   const toggleMute = () => {
-    const v: any = videoRef.current;
+    const v = videoRef.current;
     if (!v) return;
     const next = !muted;
     v.muted = next;
@@ -198,13 +208,10 @@ function Hero() {
   };
 
   return (
-    <section
-      id="top"
-      className="relative min-h-[88svh] overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 md:min-h-[72svh]"
-    >
+    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 min-h-[88svh] md:min-h-[72svh]">
       {/* 배경 */}
       <div
-        className="pointer-events-none absolute inset-0 -z-10 opacity-30"
+        className="absolute inset-0 -z-10 opacity-30 pointer-events-none"
         style={{
           backgroundImage:
             "radial-gradient(600px 200px at 10% 10%, rgba(16,185,129,0.25), transparent), radial-gradient(600px 200px at 90% 0%, rgba(34,211,238,0.2), transparent)",
@@ -220,15 +227,12 @@ function Hero() {
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
             초정밀 LASER·SAPPHIRE 가공으로{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-              공정 신뢰성
-            </span>
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>
             을 높입니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
-            초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다. 회사는 현재 경북 구미시로
-            이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과 초정밀 레이저 가공 위주로 재편중에
-            있습니다.
+            초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
+            회사는 현재 경북 구미시로 이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과 초정밀 레이저 가공 위주로 재편중에 있습니다.
           </p>
 
           {/* CTA */}
@@ -260,14 +264,15 @@ function Hero() {
 
         {/* 오른쪽: 동영상 1/3, 이미지 2/3 */}
         <div className="relative w-full md:h-[560px]">
-          <div className="grid h-full grid-cols-1 items-stretch gap-3 md:grid-cols-3">
+          <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
             {/* 동영상: 왼쪽 1칸 */}
             <div className="relative md:col-span-1">
               {/* 모바일: 비율 유지 / 데스크톱: 타일 높이 채움 */}
               <div className="aspect-video md:aspect-auto md:h-full">
                 <video
                   ref={videoRef}
-                  className="h-full w-full rounded-2xl border border-white/10 object-contain shadow-2xl md:object-cover"
+                  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
+                             object-contain md:object-cover"
                   autoPlay
                   muted={muted}
                   loop
@@ -286,7 +291,8 @@ function Hero() {
               <button
                 type="button"
                 onClick={toggleMute}
-                className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20 bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
+                className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20
+                           bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
                 aria-label={muted ? "음소거 해제" : "음소거"}
               >
                 {muted ? "🔇 음소거 해제" : "🔊 음소거"}
@@ -295,7 +301,7 @@ function Hero() {
 
             {/* 이미지: 오른쪽 2칸 세로 2장 */}
             <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
-              <div className="relative h-64 overflow-hidden rounded-2xl border border-white/10 md:h-full">
+              <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
                 <img
                   src="/images/hero-1.png"
                   alt="LuminoChip sample 1"
@@ -303,7 +309,7 @@ function Hero() {
                   loading="lazy"
                 />
               </div>
-              <div className="relative h-64 overflow-hidden rounded-2xl border border-white/10 md:h-full">
+              <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
                 <img
                   src="/images/hero-2.png"
                   alt="LuminoChip sample 2"
@@ -336,9 +342,9 @@ function Section({ id, icon: Icon, title, subtitle, children, pad = "normal" }) 
 }
 
 function Products() {
-  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [selectedImg, setSelectedImg] = useState(null);
 
-  const handleImgError = (e: any) => {
+  const handleImgError = (e) => {
     e.currentTarget.onerror = null;
     e.currentTarget.src = PLACEHOLDER;
   };
@@ -353,7 +359,7 @@ function Products() {
           >
             {/* 이미지 영역 */}
             <div
-              className="mb-3 aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-xl border border-white/10 bg-zinc-800"
+              className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800 cursor-pointer"
               onClick={() => setSelectedImg(p.img)}
             >
               <img
@@ -367,21 +373,26 @@ function Products() {
                   p?.pos === "top" ? "object-top" : "object-center",
                   "transition-transform duration-300",
                   p?.fit === "contain" ? "" : "group-hover:scale-105",
-                ]
-                  .join(" ")
-                  .trim()}
+                ].join(" ").trim()}
               />
             </div>
 
-            <h3 className="text-center text-lg font-medium text-white">{p.name}</h3>
+            <h3 className="text-lg font-medium text-white text-center">{p.name}</h3>
             <div className="mt-1 text-sm text-emerald-300">{p.mat}</div>
-            {p.desc && <p className="mt-2 text-sm leading-relaxed text-zinc-300">{p.desc}</p>}
+            {p.desc && (
+              <p className="mt-2 text-sm leading-relaxed text-zinc-300">
+                {p.desc}
+              </p>
+            )}
           </div>
         ))}
       </div>
 
       <div className="mt-6 text-right">
-        <a href="#inquiry" className="inline-flex items-center gap-2 text-sm text-emerald-300 hover:underline">
+        <a
+          href="#inquiry"
+          className="inline-flex items-center gap-2 text-sm text-emerald-300 hover:underline"
+        >
           필요한 품목 리스트 보내기 <ArrowRight className="h-4 w-4" />
         </a>
       </div>
@@ -389,14 +400,18 @@ function Products() {
       {/* 모달 (팝업) */}
       {selectedImg && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-          <div className="relative max-h-[90vh] max-w-4xl">
+          <div className="relative max-w-4xl max-h-[90vh]">
             <button
               onClick={() => setSelectedImg(null)}
               className="absolute -top-10 right-0 text-white hover:text-emerald-300"
             >
               <X className="h-8 w-8" />
             </button>
-            <img src={selectedImg} alt="제품 이미지" className="max-h-[90vh] w-auto rounded-lg shadow-lg" />
+            <img
+              src={selectedImg}
+              alt="제품 이미지"
+              className="max-h-[90vh] w-auto rounded-lg shadow-lg"
+            />
           </div>
         </div>
       )}
@@ -466,15 +481,17 @@ function Materials() {
           </tbody>
         </table>
       </div>
-      <p className="mt-3 text-sm text-zinc-400">※ 자료는 레퍼런스 값이며 설계 시 고객 사양과 공정 조건에 맞춰 재검증합니다.</p>
+      <p className="mt-3 text-sm text-zinc-400">
+        ※ 자료는 레퍼런스 값이며 설계 시 고객 사양과 공정 조건에 맞춰 재검증합니다.
+      </p>
     </Section>
   );
 }
 
 function Clients() {
-  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [selectedImg, setSelectedImg] = useState(null);
 
-  const handleImgError = (e: any) => {
+  const handleImgError = (e) => {
     e.currentTarget.onerror = null;
     e.currentTarget.src = PLACEHOLDER;
   };
@@ -490,7 +507,7 @@ function Clients() {
         {CLIENTS.map((c) => (
           <div
             key={c.name}
-            className="group cursor-pointer rounded-2xl border border-white/10 bg-zinc-900/50 p-5 hover:bg-zinc-900"
+            className="group rounded-2xl border border-white/10 bg-zinc-900/50 p-5 cursor-pointer hover:bg-zinc-900"
             onClick={() => setSelectedImg(c.img)}
           >
             <div className="mb-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800">
@@ -501,7 +518,7 @@ function Clients() {
                 onError={handleImgError}
               />
             </div>
-            <h3 className="text-center text-lg font-medium text-white">{c.name}</h3>
+            <h3 className="text-lg font-medium text-white text-center">{c.name}</h3>
           </div>
         ))}
       </div>
@@ -509,14 +526,18 @@ function Clients() {
       {/* 모달 */}
       {selectedImg && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-          <div className="relative max-h-[90vh] max-w-4xl">
+          <div className="relative max-w-4xl max-h-[90vh]">
             <button
               onClick={() => setSelectedImg(null)}
               className="absolute -top-10 right-0 text-white hover:text-emerald-300"
             >
               <X className="h-8 w-8" />
             </button>
-            <img src={selectedImg} alt="장비 이미지" className="max-h-[90vh] w-auto rounded-lg shadow-lg" />
+            <img
+              src={selectedImg}
+              alt="장비 이미지"
+              className="max-h-[90vh] w-auto rounded-lg shadow-lg"
+            />
           </div>
         </div>
       )}
@@ -525,9 +546,9 @@ function Clients() {
 }
 
 function Certs() {
-  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [selectedImg, setSelectedImg] = useState(null);
 
-  const onError = (e: any) => {
+  const onError = (e) => {
     e.currentTarget.onerror = null; // 무한 루프 방지
     e.currentTarget.src = "/images/placeholder.png";
   };
@@ -544,7 +565,7 @@ function Certs() {
                 key={img.src}
                 type="button"
                 onClick={() => setSelectedImg(img.src)}
-                className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60"
+                className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60 group"
               >
                 <img
                   src={img.src}
@@ -556,14 +577,22 @@ function Certs() {
               </button>
             ))}
           </div>
-          <div className="mt-2 text-center text-sm text-zinc-300">분석자료 (1–{CERT_IMAGES.length})</div>
+          <div className="mt-2 text-sm text-zinc-300 text-center">
+            분석자료 (1–{CERT_IMAGES.length})
+          </div>
         </div>
 
         {/* ISO 등 기타 인증 카드들 */}
         {CERT_MISC?.map((c) => (
           <div key={c.title} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
             <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
-              <img src={c.img} alt={c.title} loading="lazy" onError={onError} className="h-full w-full object-contain" />
+              <img
+                src={c.img}
+                alt={c.title}
+                loading="lazy"
+                onError={onError}
+                className="h-full w-full object-contain"
+              />
             </div>
             <div className="text-white">{c.title}</div>
 
@@ -590,7 +619,7 @@ function Certs() {
           role="dialog"
           aria-modal="true"
         >
-          <div className="relative w-full max-w-5xl max-h-[90vh]">
+          <div className="relative max-h-[90vh] w-full max-w-5xl">
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -604,7 +633,7 @@ function Certs() {
             <img
               src={selectedImg}
               alt="분석자료 확대 이미지"
-              className="w-auto max-h-[90vh] rounded-xl shadow-2xl"
+              className="max-h-[90vh] w-auto rounded-xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
           </div>
@@ -614,15 +643,13 @@ function Certs() {
   );
 }
 
-/* ✅ 방명록 섹션 추가 */
+/* ✅ 방명록 섹션 (JS 버전) */
 function Guestbook() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const [entries, setEntries] = useState<
-    { id: number; name: string; message: string; createdAt: string }[]
-  >([]);
+  const [entries, setEntries] = useState([]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!name.trim() || !message.trim()) {
@@ -637,7 +664,10 @@ function Guestbook() {
       createdAt: new Date().toLocaleString(),
     };
 
+    // 새 글을 위에 보이게
     setEntries((prev) => [newEntry, ...prev]);
+
+    // 입력창 초기화
     setName("");
     setMessage("");
   };
@@ -807,7 +837,9 @@ function Inquiry() {
           <div className="mt-1 flex items-center gap-3 text-zinc-300">
             <MapPin className="h-4 w-4 text-emerald-300" /> {COMPANY.address_ko}
           </div>
-          <p className="mt-4 text-sm text-zinc-400">※ 도면(PDF/DWG/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.</p>
+          <p className="mt-4 text-sm text-zinc-400">
+            ※ 도면(PDF/DWG/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.
+          </p>
         </div>
       </div>
     </Section>
@@ -836,6 +868,7 @@ function MapSection() {
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
             />
+
           </div>
         </div>
       </div>
@@ -853,7 +886,9 @@ function Footer() {
           <div className="mt-2 text-sm text-zinc-400">{COMPANY.regno}</div>
         </div>
         <div className="md:text-right">
-          <div className="text-sm text-zinc-400">© {new Date().getFullYear()} LuminoChip. All rights reserved.</div>
+          <div className="text-sm text-zinc-400">
+            © {new Date().getFullYear()} LuminoChip. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>
@@ -863,7 +898,7 @@ function Footer() {
 export default function App() {
   const showTop = useScrollTop();
   return (
-    <div className="min-h-screen overflow-x-hidden bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 overflow-x-hidden">
       <Header />
       <Hero />
       <About />
