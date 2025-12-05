@@ -15,7 +15,7 @@ import {
   Send,
   ChevronUp,
   CheckCircle,
-  MessageCircle, // ✅ 방명록 아이콘 추가
+  MessageCircle, // ✅ 방명록 아이콘
 } from "lucide-react";
 
 /**
@@ -33,7 +33,7 @@ const NAV_ITEMS = [
   { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
   { id: "inquiry", label: "견적문의" },          // ✅ 견적문의 먼저
-  { id: "guestbook", label: "비공개 방명록" },   // ✅ 그 다음 비공개 방명록
+  { id: "guestbook", label: "방명록" },          // ✅ 디씨 댓글형 방명록
   { id: "map", label: "오시는 길" },
 ];
 
@@ -78,7 +78,7 @@ const CERT_IMAGES = [
   { src: "/certs/analysis-4.png", alt: "분석자료 4" },
 ];
 
-// (선택) ISO 9001 같은 이미지는 따로 카드로 보여주고 싶다면 여기에 추가 배열을 둬도 됨
+// ISO 등 기타 인증
 const CERT_MISC = [
   {
     title: "ISO 9001",
@@ -176,10 +176,10 @@ function Hero() {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [ready, setReady] = useState(false);
-  const [muted, setMuted] = useState(true); // 🔊 음소거 상태
+  const [muted, setMuted] = useState(true);
 
   useEffect(() => {
-    const v = videoRef.current;
+    const v: HTMLVideoElement | null = videoRef.current;
     if (!v) return;
     const onCanPlay = () => setReady(true);
     const onPlay = () => setIsPlaying(true);
@@ -188,7 +188,6 @@ function Hero() {
     v.addEventListener("play", onPlay);
     v.addEventListener("pause", onPause);
 
-    // 자동재생 정책 대응: 초기 무음
     v.muted = true;
 
     return () => {
@@ -199,7 +198,7 @@ function Hero() {
   }, []);
 
   const toggleMute = () => {
-    const v = videoRef.current;
+    const v: HTMLVideoElement | null = videoRef.current;
     if (!v) return;
     const next = !muted;
     v.muted = next;
@@ -218,7 +217,7 @@ function Hero() {
         }}
       />
 
-      {/* 좌우 2컬럼: 좌(카피), 우(미디어) */}
+      {/* 좌우 2컬럼 */}
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 md:grid-cols-2 md:px-6 md:py-14">
         {/* 왼쪽 칼럼 */}
         <div>
@@ -227,7 +226,9 @@ function Hero() {
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
             초정밀 LASER·SAPPHIRE 가공으로{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              공정 신뢰성
+            </span>
             을 높입니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
@@ -262,22 +263,19 @@ function Hero() {
           </div>
         </div>
 
-        {/* 오른쪽: 동영상 1/3, 이미지 2/3 */}
+        {/* 오른쪽: 동영상 + 이미지 */}
         <div className="relative w-full md:h-[560px]">
           <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
             {/* 동영상: 왼쪽 1칸 */}
             <div className="relative md:col-span-1">
-              {/* 모바일: 비율 유지 / 데스크톱: 타일 높이 채움 */}
               <div className="aspect-video md:aspect-auto md:h-full">
                 <video
                   ref={videoRef}
-                  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl
-                             object-contain md:object-cover"
+                  className="h-full w-full rounded-2xl border border-white/10 shadow-2xl object-contain md:object-cover"
                   autoPlay
                   muted={muted}
                   loop
                   playsInline
-                  webkit-playsinline="true"
                   preload="metadata"
                   poster="/images/hero-poster.jpg"
                 >
@@ -287,19 +285,18 @@ function Hero() {
                 </video>
               </div>
 
-              {/* 🔊 음소거/해제 버튼 */}
+              {/* 음소거/해제 버튼 */}
               <button
                 type="button"
                 onClick={toggleMute}
-                className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20
-                           bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
+                className="absolute bottom-3 right-3 z-10 rounded-full border border-white/20 bg-black/50 px-3 py-1.5 text-xs text-white backdrop-blur hover:bg-black/60"
                 aria-label={muted ? "음소거 해제" : "음소거"}
               >
                 {muted ? "🔇 음소거 해제" : "🔊 음소거"}
               </button>
             </div>
 
-            {/* 이미지: 오른쪽 2칸 세로 2장 */}
+            {/* 이미지: 오른쪽 2칸 */}
             <div className="grid gap-3 md:col-span-2 md:grid-rows-2">
               <div className="relative h-64 md:h-full overflow-hidden rounded-2xl border border-white/10">
                 <img
@@ -342,7 +339,7 @@ function Section({ id, icon: Icon, title, subtitle, children, pad = "normal" }) 
 }
 
 function Products() {
-  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
   const handleImgError = (e) => {
     e.currentTarget.onerror = null;
@@ -444,7 +441,9 @@ function About() {
         </div>
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
           <h4 className="mb-2 font-semibold text-white">품질정책</h4>
-          <p className="text-zinc-300">ISO 기반 표준 공정·전수 검사·추적성 관리로 납기와 품질을 보장합니다.</p>
+          <p className="text-zinc-300">
+            ISO 기반 표준 공정·전수 검사·추적성 관리로 납기와 품질을 보장합니다.
+          </p>
         </div>
       </div>
     </Section>
@@ -489,7 +488,7 @@ function Materials() {
 }
 
 function Clients() {
-  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
   const handleImgError = (e) => {
     e.currentTarget.onerror = null;
@@ -546,18 +545,18 @@ function Clients() {
 }
 
 function Certs() {
-  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
   const onError = (e) => {
-    e.currentTarget.onerror = null; // 무한 루프 방지
+    e.currentTarget.onerror = null;
     e.currentTarget.src = "/images/placeholder.png";
   };
 
   return (
     <Section id="certs" icon={Shield} title="인증서">
-      {/* ✅ 분석자료 + ISO 한 그리드로 통합 */}
+      {/* 분석자료 + ISO 한 그리드로 통합 */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {/* 📄 분석자료 카드 (CERT_IMAGES 전체 사용) */}
+        {/* 분석자료 카드 */}
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-3 sm:col-span-2 lg:col-span-2">
           <div className="grid grid-cols-2 gap-2">
             {CERT_IMAGES.map((img) => (
@@ -596,7 +595,6 @@ function Certs() {
             </div>
             <div className="text-white">{c.title}</div>
 
-            {/* 컨설팅 아이콘 뱃지 */}
             {c.note && c.note.includes("컨설팅") && (
               <div
                 className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber-400/30
@@ -643,29 +641,32 @@ function Certs() {
   );
 }
 
-/* ✅ 비공개 방명록 + 비밀번호 삭제 기능 */
+/* ✅ 디씨인사이드 댓글 형식 방명록 */
 function Guestbook() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [password, setPassword] = useState("");
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = useState<
+    { id: number; name: string; message: string; password: string; createdAt: string }[]
+  >([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!name.trim() || !message.trim() || !password.trim()) {
-      alert("이름, 비밀번호, 내용을 모두 입력해 주세요.");
+      alert("닉네임, 비밀번호, 내용을 모두 입력해 주세요.");
       return;
     }
 
     const newEntry = {
       id: Date.now(),
       name: name.trim(),
-      message: message.trim(),      // 실제 내용은 저장
-      password: password.trim(),    // 삭제용 비밀번호
+      message: message.trim(),
+      password: password.trim(), // 삭제용 비밀번호
       createdAt: new Date().toLocaleString(),
     };
 
+    // 최신 댓글을 위에 노출
     setEntries((prev) => [newEntry, ...prev]);
 
     setName("");
@@ -673,14 +674,14 @@ function Guestbook() {
     setPassword("");
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     const pwd = window.prompt("작성 시 입력한 비밀번호를 입력해 주세요.");
     if (!pwd) return;
 
     setEntries((prev) => {
       const target = prev.find((e) => e.id === id);
       if (!target) {
-        alert("해당 방명록을 찾을 수 없습니다.");
+        alert("해당 댓글을 찾을 수 없습니다.");
         return prev;
       }
       if (target.password !== pwd) {
@@ -695,99 +696,102 @@ function Guestbook() {
     <Section
       id="guestbook"
       icon={MessageCircle}
-      title="비공개 방명록"
-      subtitle="작성자만 비밀번호로 삭제할 수 있는 비공개 방명록입니다. 내용은 공개되지 않습니다."
+      title="방명록"
+      subtitle="디씨인사이드 댓글 형식으로 남기는 방명록입니다. 간단한 의견이나 문의사항을 자유롭게 남겨 주세요."
     >
-      <div className="grid gap-8 md:grid-cols-2">
-        {/* 왼쪽: 입력 폼 */}
-        <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-white">비공개 방명록 남기기 ✍️</h3>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="mb-1 block text-sm text-zinc-300">이름 / 회사명</label>
+      <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-6 space-y-6">
+        {/* 입력 폼 */}
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
+            <div className="flex-1">
+              <label className="mb-1 block text-xs text-zinc-400">닉네임 / 회사명</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
+                className="w-full rounded-lg border border-white/10 bg-zinc-800 px-3 py-1.5 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
                 placeholder="예) 홍길동 / ○○전자"
               />
             </div>
-
-            <div>
-              <label className="mb-1 block text-sm text-zinc-300">비밀번호 (삭제용)</label>
+            <div className="w-full md:w-48">
+              <label className="mb-1 block text-xs text-zinc-400">비밀번호 (삭제용)</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
-                placeholder="글 삭제할 때 사용할 비밀번호"
-              />
-              <p className="mt-1 text-xs text-zinc-400">
-                ※ 비밀번호는 서버에 저장되지 않고, 이 페이지에서만 사용됩니다.
-              </p>
-            </div>
-
-            <div>
-              <label className="mb-1 block text-sm text-zinc-300">메시지</label>
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="min-h-[100px] w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
-                placeholder="고객사·서비스에 대한 의견, 요청사항 등을 자유롭게 남겨 주세요. 내용은 공개되지 않습니다."
+                className="w-full rounded-lg border border-white/10 bg-zinc-800 px-3 py-1.5 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
+                placeholder="댓글 삭제용 비밀번호"
               />
             </div>
+          </div>
 
+          <div>
+            <label className="mb-1 block text-xs text-zinc-400">댓글 내용</label>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="min-h-[80px] w-full rounded-lg border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
+              placeholder="예) 견적 관련 문의 드렸습니다. 연락 부탁드립니다."
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <p className="text-xs text-zinc-400">
+              ※ 테스트용으로, 페이지를 새로고침하면 작성한 댓글은 모두 사라집니다. (서버 미연동)
+            </p>
             <button
               type="submit"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 text-sm font-medium text-emerald-200 hover:bg-emerald-300/20 md:w-auto"
+              className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-1.5 text-sm font-medium text-emerald-200 hover:bg-emerald-300/20"
             >
               <MessageCircle className="h-4 w-4" />
-              비공개 방명록 남기기
+              등록
             </button>
-            <p className="text-xs text-zinc-400">
-              ※ 현재는 테스트용으로, 페이지를 새로고침하면 작성 내용이 모두 삭제됩니다. (서버 미연동)
-            </p>
-          </form>
-        </div>
+          </div>
+        </form>
 
-        {/* 오른쪽: 방명록 리스트 (내용 비공개 표시) */}
-        <div className="max-h-[340px] space-y-3 overflow-y-auto pr-1">
+        {/* 댓글 리스트 */}
+        <div className="mt-4 rounded-2xl border border-white/10 bg-zinc-950/60">
+          <div className="flex items-center justify-between border-b border-white/10 px-4 py-2 text-xs text-zinc-400">
+            <span>댓글 {entries.length}개</span>
+          </div>
+
           {entries.length === 0 && (
-            <div className="rounded-2xl border border-dashed border-white/20 bg-zinc-900/50 p-6 text-center text-sm text-zinc-400">
-              아직 등록된 비공개 방명록이 없습니다.
+            <div className="px-4 py-6 text-center text-sm text-zinc-500">
+              아직 등록된 댓글이 없습니다.
               <br />
-              첫 번째 메시지를 남겨 주세요 🙂
+              첫 댓글을 남겨 주세요 🙂
             </div>
           )}
 
-          {entries.map((entry) => (
-            <div
-              key={entry.id}
-              className="rounded-2xl border border-white/10 bg-zinc-900/70 p-4"
-            >
-              <div className="mb-1 flex items-center justify-between">
-                <span className="text-sm font-semibold text-emerald-200">
-                  {entry.name}
-                </span>
-                <span className="text-[11px] text-zinc-400">
-                  {entry.createdAt}
-                </span>
-              </div>
-              <p className="text-sm text-zinc-300">
-                🔒 비공개 메시지입니다. 작성자만 비밀번호로 삭제할 수 있습니다.
-              </p>
-              <div className="mt-2 text-right">
-                <button
-                  type="button"
-                  onClick={() => handleDelete(entry.id)}
-                  className="text-xs text-red-300 hover:text-red-200 underline"
-                >
-                  내 방명록 삭제하기
-                </button>
-              </div>
-            </div>
-          ))}
+          {entries.length > 0 && (
+            <ul className="divide-y divide-white/10">
+              {entries.map((entry, index) => (
+                <li key={entry.id} className="px-4 py-3 text-sm">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="rounded bg-zinc-800 px-1.5 py-0.5 text-[11px] text-zinc-300">
+                        No.{entries.length - index}
+                      </span>
+                      <span className="font-medium text-emerald-200">{entry.name}</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-[11px] text-zinc-400">{entry.createdAt}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(entry.id)}
+                        className="text-[11px] text-red-300 hover:text-red-200"
+                      >
+                        삭제
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mt-1 whitespace-pre-wrap text-zinc-200">
+                    {entry.message}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </Section>
@@ -876,7 +880,7 @@ function Inquiry() {
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
           <h4 className="mb-2 font-semibold text-white">연락처</h4>
 
-          {/* ✅ 대표자 표시 추가 */}
+          {/* 대표자 표시 */}
           <div className="mt-1 flex items-center gap-3 text-zinc-300">
             <Building2 className="h-4 w-4 text-emerald-300" /> 대표 : {COMPANY.ceo}
           </div>
@@ -921,7 +925,6 @@ function MapSection() {
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
             />
-
           </div>
         </div>
       </div>
@@ -959,8 +962,8 @@ export default function App() {
       <Materials />
       <Clients />
       <Certs />
-      <Inquiry />    {/* ✅ 견적문의 먼저 */}
-      <Guestbook />  {/* ✅ 그 다음 비공개 방명록 */}
+      <Inquiry />    {/* 견적문의 */}
+      <Guestbook />  {/* 디씨형 방명록 */}
       <MapSection />
       <Footer />
 
