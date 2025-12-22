@@ -32,8 +32,8 @@ const NAV_ITEMS = [
   { id: "materials", label: "물성표" },
   { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
-  { id: "inquiry", label: "견적문의" }, // ✅ 견적문의 먼저
-  { id: "guestbook", label: "방명록" }, // ✅ 방명록으로 변경
+  { id: "inquiry", label: "견적문의" },
+  { id: "guestbook", label: "방명록" },
   { id: "map", label: "오시는 길" },
 ];
 
@@ -68,7 +68,6 @@ const CLIENTS = [
   { name: "Micro Vickers Tester", img: "/images/마이크로 비커스.png" },
 ];
 
-// 분석자료를 PNG 4장으로 노출 (public/certs/* 에 파일 배치)
 const CERT_IMAGES = [
   { src: "/certs/analysis-1.png", alt: "분석자료 1" },
   { src: "/certs/analysis-2.png", alt: "분석자료 2" },
@@ -112,7 +111,6 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-900/70 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
-        {/* 로고 + 회사명 */}
         <a href="#top" className="flex items-center gap-3">
           <img
             src="/images/logo.png"
@@ -125,7 +123,6 @@ function Header() {
           </div>
         </a>
 
-        {/* 데스크탑 네비게이션 */}
         <nav className="hidden gap-6 md:flex">
           {NAV_ITEMS.map((n) => (
             <a
@@ -138,7 +135,6 @@ function Header() {
           ))}
         </nav>
 
-        {/* 모바일 메뉴 버튼 */}
         <button
           className="md:hidden"
           onClick={() => setOpen((v) => !v)}
@@ -148,7 +144,6 @@ function Header() {
         </button>
       </div>
 
-      {/* 모바일 메뉴 */}
       {open && (
         <div className="border-t border-white/10 bg-zinc-900 md:hidden">
           <div className="mx-auto grid max-w-7xl gap-2 px-4 py-3">
@@ -214,7 +209,6 @@ function Hero() {
       />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 md:grid-cols-2 md:px-6 md:py-14">
-        {/* 왼쪽 칼럼 */}
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
             <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
@@ -255,7 +249,6 @@ function Hero() {
           </div>
         </div>
 
-        {/* 오른쪽: 동영상 + 이미지 */}
         <div className="relative w-full md:h-[560px]">
           <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
             <div className="relative md:col-span-1">
@@ -622,12 +615,7 @@ function Certs() {
   );
 }
 
-/* ===== 이름/회사명 마스킹 함수 =====
-   - 전체 문자열 기준
-   - 1글자: "＊"
-   - 2글자: "앞글자 + ＊"
-   - 3글자 이상: "앞 2글자 + 나머지 전부 ＊"
-*/
+/* ===== 이름/회사명 마스킹 함수 ===== */
 function maskName(raw) {
   if (!raw) return "";
   const trimmed = raw.trim();
@@ -640,18 +628,17 @@ function maskName(raw) {
   return visible + masked;
 }
 
-/* ✅ 방명록 (내용 공개 + 이름/회사명 부분 마스킹 + 비밀번호 삭제) */
+/* ✅ 방명록 (삭제 기능 제거 버전) */
 function Guestbook() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const [password, setPassword] = useState("");
   const [entries, setEntries] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name.trim() || !message.trim() || !password.trim()) {
-      alert("이름/회사명, 비밀번호, 내용을 모두 입력해 주세요.");
+    if (!name.trim() || !message.trim()) {
+      alert("이름/회사명, 내용을 모두 입력해 주세요.");
       return;
     }
 
@@ -659,7 +646,6 @@ function Guestbook() {
       id: Date.now(),
       name: name.trim(),
       message: message.trim(),
-      password: password.trim(), // 삭제용 비밀번호 (로컬 상태에만 저장)
       createdAt: new Date().toLocaleString(),
     };
 
@@ -667,25 +653,6 @@ function Guestbook() {
 
     setName("");
     setMessage("");
-    setPassword("");
-  };
-
-  const handleDelete = (id) => {
-    const pwd = window.prompt("작성 시 입력한 비밀번호를 입력해 주세요.");
-    if (!pwd) return;
-
-    setEntries((prev) => {
-      const target = prev.find((e) => e.id === id);
-      if (!target) {
-        alert("해당 방명록을 찾을 수 없습니다.");
-        return prev;
-      }
-      if (target.password !== pwd.trim()) {
-        alert("비밀번호가 일치하지 않습니다.");
-        return prev;
-      }
-      return prev.filter((e) => e.id !== id);
-    });
   };
 
   return (
@@ -693,7 +660,7 @@ function Guestbook() {
       id="guestbook"
       icon={MessageCircle}
       title="방명록"
-      subtitle="이름/회사명은 일부만 마스킹되어 노출되며, 작성하신 글은 공개됩니다. 작성 시 입력한 비밀번호로만 삭제할 수 있습니다."
+      subtitle="이름/회사명은 일부만 마스킹되어 노출되며, 작성하신 글은 공개됩니다."
     >
       <div className="grid gap-8 md:grid-cols-2">
         {/* 왼쪽: 입력 폼 */}
@@ -711,20 +678,6 @@ function Guestbook() {
               />
               <p className="mt-1 text-xs text-zinc-400">
                 ※ 방명록에는 &quot;{maskName("홍길동 / ○○전자")}&quot; 처럼 일부만 마스킹되어 표시됩니다.
-              </p>
-            </div>
-
-            <div>
-              <label className="mb-1 block text-sm text-zinc-300">비밀번호 (삭제용)</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
-                placeholder="글 삭제할 때 사용할 비밀번호"
-              />
-              <p className="mt-1 text-xs text-zinc-400">
-                ※ 비밀번호는 서버에 저장되지 않고, 현재 페이지 내에서만 삭제 검증용으로 사용됩니다.
               </p>
             </div>
 
@@ -777,15 +730,6 @@ function Guestbook() {
               <p className="mt-1 text-sm text-zinc-300 whitespace-pre-wrap">
                 {entry.message}
               </p>
-              <div className="mt-2 text-right">
-                <button
-                  type="button"
-                  onClick={() => handleDelete(entry.id)}
-                  className="text-xs text-red-300 hover:text-red-200 underline"
-                >
-                  내 방명록 삭제하기
-                </button>
-              </div>
             </div>
           ))}
         </div>
@@ -957,8 +901,8 @@ export default function App() {
       <Materials />
       <Clients />
       <Certs />
-      <Inquiry /> {/* ✅ 견적문의 먼저 */}
-      <Guestbook /> {/* ✅ 그 다음 방명록 */}
+      <Inquiry />
+      <Guestbook />
       <MapSection />
       <Footer />
 
