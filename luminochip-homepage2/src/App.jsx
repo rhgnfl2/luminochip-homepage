@@ -15,12 +15,11 @@ import {
   Send,
   ChevronUp,
   CheckCircle,
-  MessageCircle,
 } from "lucide-react";
 
 /**
  * 루미노칩(사용자 회사)용 원페이지 기업 사이트 템플릿
- * - 참고 사이트 구조 반영: 회사소개 / 제품소개 / 물성표 / 보유장비 / 인증서 / 견적문의 / 오시는 길 / 방명록
+ * - 참고 사이트 구조 반영: 회사소개 / 제품소개 / 물성표 / 보유장비 / 인증서 / 견적문의 / 오시는 길
  * - 기술스택: React + TailwindCSS
  * - 아이콘: lucide-react
  * - 정적 배포형(HTML로 빌드 가능). 폼은 mailto 기반.
@@ -33,7 +32,6 @@ const NAV_ITEMS = [
   { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
   { id: "inquiry", label: "견적문의" },
-  { id: "guestbook", label: "방명록" },
   { id: "map", label: "오시는 길" },
 ];
 
@@ -68,6 +66,7 @@ const CLIENTS = [
   { name: "Micro Vickers Tester", img: "/images/마이크로 비커스.png" },
 ];
 
+// 분석자료를 PNG 4장으로 노출 (public/certs/* 에 파일 배치)
 const CERT_IMAGES = [
   { src: "/certs/analysis-1.png", alt: "분석자료 1" },
   { src: "/certs/analysis-2.png", alt: "분석자료 2" },
@@ -111,6 +110,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-900/70 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
+        {/* 로고 + 회사명 */}
         <a href="#top" className="flex items-center gap-3">
           <img
             src="/images/logo.png"
@@ -123,27 +123,22 @@ function Header() {
           </div>
         </a>
 
+        {/* 데스크탑 네비게이션 */}
         <nav className="hidden gap-6 md:flex">
           {NAV_ITEMS.map((n) => (
-            <a
-              key={n.id}
-              href={`#${n.id}`}
-              className="text-2g text-zinc-200 hover:text-white"
-            >
+            <a key={n.id} href={`#${n.id}`} className="text-2g text-zinc-200 hover:text-white">
               {n.label}
             </a>
           ))}
         </nav>
 
-        <button
-          className="md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="toggle menu"
-        >
+        {/* 모바일 메뉴 버튼 */}
+        <button className="md:hidden" onClick={() => setOpen((v) => !v)} aria-label="toggle menu">
           {open ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
         </button>
       </div>
 
+      {/* 모바일 메뉴 */}
       {open && (
         <div className="border-t border-white/10 bg-zinc-900 md:hidden">
           <div className="mx-auto grid max-w-7xl gap-2 px-4 py-3">
@@ -199,7 +194,10 @@ function Hero() {
   };
 
   return (
-    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 min-h-[88svh] md:min-h-[72svh]">
+    <section
+      id="top"
+      className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 min-h-[88svh] md:min-h-[72svh]"
+    >
       <div
         className="absolute inset-0 -z-10 opacity-30 pointer-events-none"
         style={{
@@ -209,18 +207,22 @@ function Hero() {
       />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 md:grid-cols-2 md:px-6 md:py-14">
+        {/* 왼쪽 칼럼 */}
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
             <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
             초정밀 LASER·SAPPHIRE 가공으로{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              공정 신뢰성
+            </span>
             을 높입니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
             초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
-            회사는 현재 경북 구미시로 이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과 초정밀 레이저 가공 위주로 재편중에 있습니다.
+            회사는 현재 경북 구미시로 이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과
+            초정밀 레이저 가공 위주로 재편중에 있습니다.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -249,6 +251,7 @@ function Hero() {
           </div>
         </div>
 
+        {/* 오른쪽: 동영상 + 이미지 */}
         <div className="relative w-full md:h-[560px]">
           <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
             <div className="relative md:col-span-1">
@@ -358,20 +361,13 @@ function Products() {
 
             <h3 className="text-lg font-medium text-white text-center">{p.name}</h3>
             <div className="mt-1 text-sm text-emerald-300">{p.mat}</div>
-            {p.desc && (
-              <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-                {p.desc}
-              </p>
-            )}
+            {p.desc && <p className="mt-2 text-sm leading-relaxed text-zinc-300">{p.desc}</p>}
           </div>
         ))}
       </div>
 
       <div className="mt-6 text-right">
-        <a
-          href="#inquiry"
-          className="inline-flex items-center gap-2 text-sm text-emerald-300 hover:underline"
-        >
+        <a href="#inquiry" className="inline-flex items-center gap-2 text-sm text-emerald-300 hover:underline">
           필요한 품목 리스트 보내기 <ArrowRight className="h-4 w-4" />
         </a>
       </div>
@@ -385,11 +381,7 @@ function Products() {
             >
               <X className="h-8 w-8" />
             </button>
-            <img
-              src={selectedImg}
-              alt="제품 이미지"
-              className="max-h-[90vh] w-auto rounded-lg shadow-lg"
-            />
+            <img src={selectedImg} alt="제품 이미지" className="max-h-[90vh] w-auto rounded-lg shadow-lg" />
           </div>
         </div>
       )}
@@ -459,9 +451,7 @@ function Materials() {
           </tbody>
         </table>
       </div>
-      <p className="mt-3 text-sm text-zinc-400">
-        ※ 자료는 레퍼런스 값이며 설계 시 고객 사양과 공정 조건에 맞춰 재검증합니다.
-      </p>
+      <p className="mt-3 text-sm text-zinc-400">※ 자료는 레퍼런스 값이며 설계 시 고객 사양과 공정 조건에 맞춰 재검증합니다.</p>
     </Section>
   );
 }
@@ -510,11 +500,7 @@ function Clients() {
             >
               <X className="h-8 w-8" />
             </button>
-            <img
-              src={selectedImg}
-              alt="장비 이미지"
-              className="max-h-[90vh] w-auto rounded-lg shadow-lg"
-            />
+            <img src={selectedImg} alt="장비 이미지" className="max-h-[90vh] w-auto rounded-lg shadow-lg" />
           </div>
         </div>
       )}
@@ -552,28 +538,19 @@ function Certs() {
               </button>
             ))}
           </div>
-          <div className="mt-2 text-sm text-zinc-300 text-center">
-            분석자료 (1–{CERT_IMAGES.length})
-          </div>
+          <div className="mt-2 text-sm text-zinc-300 text-center">분석자료 (1–{CERT_IMAGES.length})</div>
         </div>
 
         {CERT_MISC?.map((c) => (
           <div key={c.title} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-5">
             <div className="mb-3 aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-zinc-800/60">
-              <img
-                src={c.img}
-                alt={c.title}
-                loading="lazy"
-                onError={onError}
-                className="h-full w-full object-contain"
-              />
+              <img src={c.img} alt={c.title} loading="lazy" onError={onError} className="h-full w-full object-contain" />
             </div>
             <div className="text-white">{c.title}</div>
 
             {c.note && c.note.includes("컨설팅") && (
               <div
-                className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber-400/30
-                           bg-amber-400/10 px-2.5 py-1 text-xs text-amber-300"
+                className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 text-xs text-amber-300"
                 title="현재 컨설팅 중"
               >
                 <Wrench className="h-3.5 w-3.5" />
@@ -611,129 +588,6 @@ function Certs() {
           </div>
         </div>
       )}
-    </Section>
-  );
-}
-
-/* ===== 이름/회사명 마스킹 함수 ===== */
-function maskName(raw) {
-  if (!raw) return "";
-  const trimmed = raw.trim();
-  const len = trimmed.length;
-  if (len <= 0) return "";
-  if (len === 1) return "＊";
-  if (len === 2) return trimmed[0] + "＊";
-  const visible = trimmed.slice(0, 2);
-  const masked = "＊".repeat(len - 2);
-  return visible + masked;
-}
-
-/* ✅ 방명록 (삭제 기능 제거 버전) */
-function Guestbook() {
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const [entries, setEntries] = useState([]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!name.trim() || !message.trim()) {
-      alert("이름/회사명, 내용을 모두 입력해 주세요.");
-      return;
-    }
-
-    const newEntry = {
-      id: Date.now(),
-      name: name.trim(),
-      message: message.trim(),
-      createdAt: new Date().toLocaleString(),
-    };
-
-    setEntries((prev) => [newEntry, ...prev]);
-
-    setName("");
-    setMessage("");
-  };
-
-  return (
-    <Section
-      id="guestbook"
-      icon={MessageCircle}
-      title="방명록"
-      subtitle="이름/회사명은 일부만 마스킹되어 노출되며, 작성하신 글은 공개됩니다."
-    >
-      <div className="grid gap-8 md:grid-cols-2">
-        {/* 왼쪽: 입력 폼 */}
-        <div className="rounded-2xl border border-white/10 bg-zinc-900/70 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-white">방명록 남기기 ✍️</h3>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="mb-1 block text-sm text-zinc-300">이름 / 회사명</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
-                placeholder="예) 홍길동 / ○○전자"
-              />
-              <p className="mt-1 text-xs text-zinc-400">
-                ※ 방명록에는 &quot;{maskName("홍길동 / ○○전자")}&quot; 처럼 일부만 마스킹되어 표시됩니다.
-              </p>
-            </div>
-
-            <div>
-              <label className="mb-1 block text-sm text-zinc-300">메시지</label>
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="min-h-[100px] w-full rounded-xl border border-white/10 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-400"
-                placeholder="고객사·서비스에 대한 의견, 요청사항 등을 자유롭게 남겨 주세요."
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 text-sm font-medium text-emerald-200 hover:bg-emerald-300/20 md:w-auto"
-            >
-              <MessageCircle className="h-4 w-4" />
-              방명록 등록하기
-            </button>
-            <p className="text-xs text-zinc-400">
-              ※ 현재는 테스트용으로, 페이지를 새로고침하면 작성 내용이 모두 삭제됩니다. (서버 미연동)
-            </p>
-          </form>
-        </div>
-
-        {/* 오른쪽: 방명록 리스트 (내용 공개) */}
-        <div className="max-h-[340px] space-y-3 overflow-y-auto pr-1">
-          {entries.length === 0 && (
-            <div className="rounded-2xl border border-dashed border-white/20 bg-zinc-900/50 p-6 text-center text-sm text-zinc-400">
-              아직 등록된 방명록이 없습니다.
-              <br />
-              첫 번째 메시지를 남겨 주세요 🙂
-            </div>
-          )}
-
-          {entries.map((entry) => (
-            <div
-              key={entry.id}
-              className="rounded-2xl border border-white/10 bg-zinc-900/70 p-4"
-            >
-              <div className="mb-1 flex items-center justify-between">
-                <span className="text-sm font-semibold text-emerald-200">
-                  {maskName(entry.name)}
-                </span>
-                <span className="text-[11px] text-zinc-400">
-                  {entry.createdAt}
-                </span>
-              </div>
-              <p className="mt-1 text-sm text-zinc-300 whitespace-pre-wrap">
-                {entry.message}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
     </Section>
   );
 }
@@ -817,6 +671,7 @@ function Inquiry() {
             </div>
           </div>
         </form>
+
         <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-6">
           <h4 className="mb-2 font-semibold text-white">연락처</h4>
 
@@ -833,9 +688,7 @@ function Inquiry() {
           <div className="mt-1 flex items-center gap-3 text-zinc-300">
             <MapPin className="h-4 w-4 text-emerald-300" /> {COMPANY.address_ko}
           </div>
-          <p className="mt-4 text-sm text-zinc-400">
-            ※ 도면(PDF/DWG/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.
-          </p>
+          <p className="mt-4 text-sm text-zinc-400">※ 도면(PDF/DWG/DXF)과 스펙을 함께 보내주시면 견적이 빨라집니다.</p>
         </div>
       </div>
     </Section>
@@ -881,9 +734,7 @@ function Footer() {
           <div className="mt-2 text-sm text-zinc-400">{COMPANY.regno}</div>
         </div>
         <div className="md:text-right">
-          <div className="text-sm text-zinc-400">
-            © {new Date().getFullYear()} LuminoChip. All rights reserved.
-          </div>
+          <div className="text-sm text-zinc-400">© {new Date().getFullYear()} LuminoChip. All rights reserved.</div>
         </div>
       </div>
     </footer>
@@ -902,7 +753,6 @@ export default function App() {
       <Clients />
       <Certs />
       <Inquiry />
-      <Guestbook />
       <MapSection />
       <Footer />
 
