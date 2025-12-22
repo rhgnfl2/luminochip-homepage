@@ -32,8 +32,8 @@ const NAV_ITEMS = [
   { id: "materials", label: "물성표" },
   { id: "clients", label: "보유장비" },
   { id: "certs", label: "인증서" },
-  { id: "inquiry", label: "견적문의" },          // ✅ 견적문의 먼저
-  { id: "guestbook", label: "방명록" },     // ✅ 방명록으로 변경
+  { id: "inquiry", label: "견적문의" }, // ✅ 견적문의 먼저
+  { id: "guestbook", label: "방명록" }, // ✅ 방명록으로 변경
   { id: "map", label: "오시는 길" },
 ];
 
@@ -957,8 +957,8 @@ export default function App() {
       <Materials />
       <Clients />
       <Certs />
-      <Inquiry />    {/* ✅ 견적문의 먼저 */}
-      <Guestbook />  {/* ✅ 그 다음 방명록 */}
+      <Inquiry /> {/* ✅ 견적문의 먼저 */}
+      <Guestbook /> {/* ✅ 그 다음 방명록 */}
       <MapSection />
       <Footer />
 
