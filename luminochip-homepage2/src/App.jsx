@@ -173,12 +173,12 @@ function Hero() {
             <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
-            초정밀 LASER·SAPPHIRE 가공으로 <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>을 높입니다.
+            세라믹, SiC, Y₂O₃, Sapphire 등 난삭재 기반의 가공 기술을 바탕으로 초미세 홀 가공(≤50μm)과 반도체·디스플레이 공정용 정밀 부품 가공을 수행하며, 고정밀·고품질 가공을 통해 안정적인 공정 품질과 신뢰성을 제공합니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
-            초미세 HOLE(≤50µm)/Sapphire/Quartz/Ceramic/SiC 정밀 가공 전문 회사 입니다.
-            회사는 현재 경북 구미시로 이전중이며, 공장이전으로 노후화된 장비를 매각 후 소형 사파이어 폴리싱과
-            초정밀 레이저 가공 위주로 재편중에 있습니다.
+            고속 CNC 가공 설비와 고강성 머시닝센터, 초정밀 연삭 공정을 기반으로
+            레이저 가공 및 정밀 측정·검사 설비까지 통합 구축하여
+            정밀 부품 생산의 전 공정을 대응하고 있습니다.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a href="#inquiry" className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/40 bg-emerald-300/10 px-4 py-2 font-medium text-emerald-200 hover:bg-emerald-300/20">
