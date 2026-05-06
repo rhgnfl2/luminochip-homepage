@@ -55,10 +55,10 @@ const MATERIALS = [
 
 // --- [수정 구간] CLIENTS 데이터에 신규 장비 4종 추가 ---
 const CLIENTS = [
-  { name: "MCT 장비 (1호)", img: "/images/1번MCT장비.png" },
-  { name: "MCT 장비 (2호)", img: "/images/2번MCT장비.png" },
-  { name: "평면 장비", img: "/images/3번평면장비.png" },
-  { name: "CNC 장비", img: "/images/4번CNC장비.png" },
+  { name: "중/대형 CNC 머시닝센터 (Mynx 시리즈)", img: "/images/1번MCT장비.png" },
+  { name: "CNC 머시닝센터 (DNC 8060)", img: "/images/2번MCT장비.png" },
+  { name: "초정밀 평면 연삭 설비 (YGS 시리즈)", img: "/images/3번평면장비.png" },
+  { name: "고속 CNC 탭핑센터 (HiT-400)", img: "/images/4번CNC장비.png" },
   { name: "Nanosecond Laser Marking Machine", img: "/images/Nanosecond.png" },
   { name: "Picosecond Laser Marking Machine", img: "/images/Picosecond.png" },
   { name: "1500x Optical Microscope", img: "/images/광학현미경.png" },
@@ -173,9 +173,10 @@ function Hero() {
             <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
-            초정밀 LASER·SAPPHIRE 가공으로 <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>을 높입니다.
+            세라믹, SiC, Y₂O₃, Sapphire 등 난삭재 가공으로 <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>을 높입니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
+            * 반도체·디스플레이 공정용 정밀 부품 가공을 수행
             고속 CNC 가공 설비와 고강성 머시닝센터, 초정밀 연삭 공정을 기반으로
             레이저 가공 및 정밀 측정·검사 설비까지 통합 구축하여
             정밀 부품 생산의 전 공정을 대응하고 있습니다.
