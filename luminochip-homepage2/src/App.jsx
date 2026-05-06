@@ -176,7 +176,7 @@ function Hero() {
             세라믹, SiC, Y₂O₃, Sapphire 등 난삭재 가공으로 <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>을 높입니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
-            * 반도체·디스플레이 공정용 정밀 부품 가공을 수행
+            반도체·디스플레이 공정용 정밀 부품 가공을 수행하며
             고속 CNC 가공 설비와 고강성 머시닝센터, 초정밀 연삭 공정을 기반으로
             레이저 가공 및 정밀 측정·검사 설비까지 통합 구축하여
             정밀 부품 생산의 전 공정을 대응하고 있습니다.
