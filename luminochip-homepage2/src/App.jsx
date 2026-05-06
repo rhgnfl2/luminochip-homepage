@@ -173,7 +173,7 @@ function Hero() {
             <CheckCircle className="h-4 w-4" /> ISO 기반 품질관리 · 반도체 부품 특화
           </div>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
-            세라믹, SiC, Y₂O₃, Sapphire 등 난삭재 기반의 가공 기술을 바탕으로 초미세 홀 가공(≤50μm)과 반도체·디스플레이 공정용 정밀 부품 가공을 수행하며, 고정밀·고품질 가공을 통해 안정적인 공정 품질과 신뢰성을 제공합니다.
+            초정밀 LASER·SAPPHIRE 가공으로 <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">공정 신뢰성</span>을 높입니다.
           </h1>
           <p className="mt-4 max-w-prose text-zinc-300">
             고속 CNC 가공 설비와 고강성 머시닝센터, 초정밀 연삭 공정을 기반으로
