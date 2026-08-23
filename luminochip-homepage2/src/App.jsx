@@ -393,7 +393,12 @@ function MapSection() {
   return (
     <Section id="map" icon={MapPin} title="오시는 길">
       <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10">
-        <iframe title="map" className="h-full w-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3224.2750379462!2d128.3752!3d36.11!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565e39669528f9d%3A0x8687009405f63d04!2z7ZWc65287Iuc6re466eI67Ko66as!5e0!3m2!1sko!2skr!4v1700000000000" loading="lazy" />
+        <iframe
+          title="map"
+          className="h-full w-full"
+          src="https://www.google.com/maps?q=경상북도+칠곡군+가산면+학하5길+10&output=embed"
+          loading="lazy"
+        />
       </div>
     </Section>
   );
