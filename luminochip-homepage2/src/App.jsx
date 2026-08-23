@@ -89,7 +89,7 @@ const COMPANY = {
   regno: "사업자등록번호: 329-01-03642",
   tel: "010-4698-9493",
   email: "luminochip@naver.com",
-  address_ko: "경상북도 구미시 공단동 260-10 한라시그마벨리 9층 919호",
+  address_ko: "경상북도 칠곡군 가산면 학하5길 10",
   address_en: "212, 1gongdan-ro, Gumi-si, Gyeongsangbuk-do, Republic of Korea",
   ceo: "김윤성 (YunSeong Kim)",
 };
