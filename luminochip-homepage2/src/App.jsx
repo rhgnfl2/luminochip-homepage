@@ -61,7 +61,7 @@ const CLIENTS = [
   { name: "고속 CNC 탭핑센터 (HiT-400)", img: "/images/4번CNC장비.png" },
   { name: "Nanosecond Laser Marking Machine", img: "/images/Nanosecond.png" },
   { name: "Picosecond Laser Marking Machine", img: "/images/Picosecond.png" },
-  { name: "미쓰도요 표준 CNC 3차원 측정기 CRYSTA-Apex V", img: "/images/3차원측정기.png" },
+  { name: "미쓰도요 CNC 3차원 측정기 CRYSTA-Apex V", img: "/images/3차원측정기.png" },
   { name: "1500x Optical Microscope", img: "/images/광학현미경.png" },
   { name: "Polishing Machine", img: "/images/POLISHING MACHINE2.png" },
   { name: "Surface Roughness Tester", img: "/images/표면조도기.png" },
@@ -77,7 +77,7 @@ const CERT_IMAGES = [
 
 const CERT_MISC = [
   {
-    title: "ISO 9001",
+    title: "ISO 9001 컨설팅 중",
     note: "현재 컨설팅 중 입니다",
     img: "/images/ISO9001.png",
   },
